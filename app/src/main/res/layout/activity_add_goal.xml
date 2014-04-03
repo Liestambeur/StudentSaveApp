@@ -6,13 +6,16 @@
     android:weightSum="1">
 
     <EditText
+        android:id="@+id/nameOfGoal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/nameOfGoal"
+        android:layout_weight="0.09"
         android:layout_row="0"
         android:layout_column="0"
         android:text="name of goal"
-        android:layout_weight="0.09"
+        android:singleLine="true"
+        android:maxLength="30"
+        android:selectAllOnFocus="true"
         android:textColor="#797979" />
 
     <EditText
@@ -23,7 +26,8 @@
         android:layout_column="0"
         android:text="amount to save"
         android:layout_weight="0.09"
-        android:textColor="#797979" />
+        android:textColor="#797979"
+        android:onClick="amoutToSave" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -49,26 +53,32 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton"
+            android:id="@+id/goalPicture1"
             android:layout_weight="0.33"
             android:src="@drawable/auto"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="auto"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton2"
+            android:id="@+id/goalPicture2"
             android:layout_weight="0.33"
             android:src="@drawable/shopping"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="shopping"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton3"
+            android:id="@+id/goalPicture3"
             android:layout_weight="0.33"
             android:src="@drawable/bier"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="bier"/>
     </LinearLayout>
 
     <LinearLayout
@@ -81,26 +91,32 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton4"
+            android:id="@+id/goalPicture4"
             android:layout_weight="0.33"
             android:src="@drawable/valies"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="valies"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton5"
+            android:id="@+id/goalPicture5"
             android:layout_weight="0.33"
             android:src="@drawable/spaarvarken"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="spaarvarken"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton6"
+            android:id="@+id/goalPicture6"
             android:layout_weight="0.33"
             android:src="@drawable/winkelkar"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="winkelkar"/>
     </LinearLayout>
 
     <LinearLayout
@@ -113,26 +129,32 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton7"
+            android:id="@+id/goalPicture7"
             android:layout_weight="0.33"
             android:src="@drawable/multimedia"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="multimedia"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton8"
+            android:id="@+id/goalPicture8"
             android:layout_weight="0.33"
             android:src="@drawable/gitaar"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="gitaar"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/imageButton9"
+            android:id="@+id/goalPicture9"
             android:layout_weight="0.33"
             android:src="@drawable/cadeaus"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="chooseGoalPicture"
+            android:contentDescription="cadeaus"/>
     </LinearLayout>
 
     <LinearLayout
@@ -146,7 +168,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:text="Ok"
-            android:id="@+id/ok"
+            android:id="@+id/okGoal"
             android:layout_weight="0.5"
             android:clickable="true" />
 
@@ -154,7 +176,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:text="Cancel"
-            android:id="@+id/cancel"
+            android:id="@+id/cancelGoal"
             android:layout_weight="0.5" />
     </LinearLayout>
 

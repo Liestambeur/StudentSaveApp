@@ -3,6 +3,7 @@ package be.kuleuven.chi.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.os.Build;
 
 public class AddGoalActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,24 @@ public class AddGoalActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void okButton(View view) {
+    public void okButton(View okButton) {
+        // if goal ok, than save goal, otherwise pop-up
 
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void chooseGoalPicture(View picture) {
+       int id = picture.getId();
+       System.out.println(id);
+    }
+
+    public void cancelButton(View cancelButton) {
+        // cancel goal
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
