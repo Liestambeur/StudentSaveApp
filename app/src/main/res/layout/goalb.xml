@@ -43,7 +43,7 @@
                 android:layout_height="0dip"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Skiing"
-                android:id="@+id/textView"
+                android:id="@+id/goalName"
                 android:layout_weight="0.2"
                 android:duplicateParentState="true"/>
 
@@ -52,7 +52,7 @@
                 android:layout_height="0dip"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="€ 100 to go"
-                android:id="@+id/textView2"
+                android:id="@+id/goalAmount"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.2"
                 android:duplicateParentState="true"/>
@@ -62,7 +62,7 @@
                 android:layout_height="0dip"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="€ 0 already saved"
-                android:id="@+id/textView3"
+                android:id="@+id/goalDone"
                 android:layout_weight="0.2"
                 android:duplicateParentState="true"/>
 
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0 %"
-            android:id="@+id/procent"
+            android:id="@+id/goalProcent"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:duplicateParentState="true"/>

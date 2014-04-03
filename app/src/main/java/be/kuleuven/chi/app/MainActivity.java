@@ -11,13 +11,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.Goal;
+import be.kuleuven.chi.backend.History;
 
 public class MainActivity extends Activity {
+
+    AppContent appContent = AppContent.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         setContentView(R.layout.activity_main);
+
+        if(appContent.hasGoal()){
+            Goal goal = appContent.getGoal();
+            View goalview = findViewById(R.id.goal);
+            goalview.setVisibility(1);
+            TextView goalName = (TextView) findViewById(R.id.goalName);
+            goalName.setText(goal.getName());
+            TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
+            goalAmount.setText("€ "+(goal.getAmount()- goal.getDone())+" to go.");
+            TextView goalDone = (TextView) findViewById(R.id.goalDone);
+            goalDone.setText("€ "+goal.getDone()+" done.");
+            TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
+            goalPercent.setText(goal.getPercent() + " %");
+            ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
+            progress.setProgress(goal.getPercent());
+        }else{
+            View addgoal = findViewById(R.id.addgoal);
+            addgoal.setVisibility(1);
+        }
 
 
     }
