@@ -1,9 +1,25 @@
-package be.kuleuven.chi.app;
+package be.kuleuven.chi.backend;
 
 /**
  * Created by Lies on 3/04/14.
  */
 public class Goal {
+
+    public String getName() {
+        return name;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getDone() {
+        return done;
+    }
+
+    public int getPercent() {
+        return percent;
+    }
 
     private String name;
     private double amount;
