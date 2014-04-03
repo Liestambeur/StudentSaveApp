@@ -25,6 +25,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+        setContentView(R.layout.activity_main);
+
         if(appContent.hasGoal()){
             Goal goal = appContent.getGoal();
             View goalview = findViewById(R.id.goal);
@@ -43,10 +49,6 @@ public class MainActivity extends Activity {
             View addgoal = findViewById(R.id.addgoal);
             addgoal.setVisibility(1);
         }
-
-
-
-        setContentView(R.layout.activity_main);
 
 
     }
