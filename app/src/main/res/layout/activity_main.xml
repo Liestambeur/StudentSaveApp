@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:id="@+id/LinearLayout01"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="1">
+
+
+    <FrameLayout
+        android:layout_weight="0.4"
+        android:id="@+id/FrameLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:background="#a8a8a8">
+
+
+        <include
+            android:id="@+id/addgoal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/goala"
+            android:layout_gravity="center" />
+
+        <include
+            android:id="@+id/goal"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/goalb"/>
+
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.25
+        ">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Income"
+            android:id="@+id/button_income"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.33" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Save"
+            android:id="@+id/button_save"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.33" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Expense"
+            android:id="@+id/button_expense"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.33" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.35"
+        android:background="#99ccff">
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/historya"
+            android:layout_gravity="center" />
+
+        <include
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/historyb"
+            android:layout_gravity="center" />
+
+
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/nameOfGoal"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:text="name of goal"
+        android:layout_weight="0.09"
+        android:textColor="#797979" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/amountToSave"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="amount to save"
+        android:layout_weight="0.09"
+        android:textColor="#797979" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="Choose a picture"
+        android:id="@+id/choosePicture"
+        android:autoLink="none"
+        android:autoText="false"
+        android:layout_weight="0.04"
+        android:textColor="#7dd4ff"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        android:typeface="normal"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.22"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton"
+            android:layout_weight="0.33"
+            android:src="@drawable/auto"
+            android:background="@null"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton2"
+            android:layout_weight="0.33"
+            android:src="@drawable/shopping"
+            android:background="@null"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton3"
+            android:layout_weight="0.33"
+            android:src="@drawable/bier"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.22"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton4"
+            android:layout_weight="0.33"
+            android:src="@drawable/valies"
+            android:background="@null"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton5"
+            android:layout_weight="0.33"
+            android:src="@drawable/spaarvarken"
+            android:background="@null"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton6"
+            android:layout_weight="0.33"
+            android:src="@drawable/winkelkar"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.22"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton7"
+            android:layout_weight="0.33"
+            android:src="@drawable/multimedia"
+            android:background="@null"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton8"
+            android:layout_weight="0.33"
+            android:src="@drawable/gitaar"
+            android:background="@null"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageButton9"
+            android:layout_weight="0.33"
+            android:src="@drawable/cadeaus"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.12"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Ok"
+            android:id="@+id/ok"
+            android:layout_weight="0.5"
+            android:clickable="true" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Cancel"
+            android:id="@+id/cancel"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
+</LinearLayout>
