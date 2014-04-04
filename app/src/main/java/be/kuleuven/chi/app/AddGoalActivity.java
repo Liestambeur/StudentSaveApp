@@ -61,4 +61,8 @@ public class AddGoalActivity extends Activity {
         startActivity(intent);
         finish();
     }
+
+    public void amountToSave(View amountToSave){
+
+    }
 }

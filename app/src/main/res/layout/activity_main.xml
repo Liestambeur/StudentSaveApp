@@ -46,7 +46,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Income"
+            android:text="@string/income_button"
             android:id="@+id/button_income"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.33" />
@@ -54,7 +54,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Save"
+            android:text="@string/save_button"
             android:id="@+id/button_save"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.33" />
@@ -62,7 +62,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Expense"
+            android:text="@string/expense_button"
             android:id="@+id/button_expense"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.33" />
