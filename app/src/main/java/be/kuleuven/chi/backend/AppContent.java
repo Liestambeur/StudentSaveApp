@@ -20,12 +20,12 @@ public class AppContent {
         return singleton;
     }
 
-    public void setGoal(Goal goal){
-        this.goal=goal;
-    }
-
     public Goal getGoal(){
         return goal;
+    }
+
+    public void addGoal(Goal goal){
+        this.goal=goal; // later a list of goals will be included
     }
 
     public boolean hasGoal(){

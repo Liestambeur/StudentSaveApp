@@ -1,29 +1,76 @@
 package be.kuleuven.chi.app;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.EditText;
+import android.widget.ImageButton;
+
+import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.Goal;
 
 public class AddGoalActivity extends Activity {
+
+    Goal newGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_goal);
+
+        View emptySpace = findViewById(R.id.emptySpace);
+
+        newGoal = new Goal();
+
+        EditText nameOfGoalText = (EditText) findViewById(R.id.nameOfGoal);
+        EditText amountOfGoalText = (EditText) findViewById(R.id.amountToSave);
+
+        TextWatcher nameOfGoalWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                // not used
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                newGoal.setName(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // not used
+            }
+        };
+        TextWatcher amountOfGoalWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                // not used
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                newGoal.setAmount(Double.parseDouble(charSequence.toString()));
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // not used
+            }
+        };
+
+        nameOfGoalText.addTextChangedListener(nameOfGoalWatcher);
+        amountOfGoalText.addTextChangedListener(amountOfGoalWatcher);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.add_goal, menu);
         return true;
@@ -41,21 +88,29 @@ public class AddGoalActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void chooseGoalPicture(View picture) {
+        picture.findFocus();
+        int id = picture.getId();
+        this.newGoal.setPictureId(id);
+
+        ((ImageButton) picture).
+
+        System.err.println(id);
+    }
+
     public void okButton(View okButton) {
-        // if goal ok, than save goal, otherwise pop-up
+        AppContent.getInstance().addGoal(this.newGoal);
+        System.err.println("goal naam: " + newGoal.getName());
+        System.err.println("goal amount: " + newGoal.getAmount());
+        System.err.println("goal picture: " + newGoal.getPictureId());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void chooseGoalPicture(View picture) {
-       int id = picture.getId();
-       System.out.println(id);
-    }
-
     public void cancelButton(View cancelButton) {
-        // cancel goal
+        // the goal is not stored in the AppContent
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

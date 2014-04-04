@@ -1,22 +1,16 @@
 package be.kuleuven.chi.app;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.Goal;
-import be.kuleuven.chi.backend.History;
 
 public class MainActivity extends Activity {
 
@@ -38,9 +32,9 @@ public class MainActivity extends Activity {
             TextView goalName = (TextView) findViewById(R.id.goalName);
             goalName.setText(goal.getName());
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
-            goalAmount.setText("€ "+(goal.getAmount()- goal.getDone())+" to go.");
+            goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go.");
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
-            goalDone.setText("€ "+goal.getDone()+" done.");
+            goalDone.setText("€ "+goal.getAmountSaved()+" done.");
             TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
             goalPercent.setText(goal.getPercent() + " %");
             ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
