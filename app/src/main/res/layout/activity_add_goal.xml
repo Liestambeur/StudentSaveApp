@@ -19,7 +19,7 @@
         android:layout_weight="0.08"
         android:layout_row="0"
         android:layout_column="0"
-        android:text="name of goal"
+        android:text="@string/goal_name_et"
         android:singleLine="true"
         android:maxLength="30"
         android:selectAllOnFocus="true"
@@ -32,7 +32,7 @@
         android:layout_weight="0.08"
         android:layout_row="0"
         android:layout_column="0"
-        android:text="amount to save"
+        android:text="@string/amount_et"
         android:singleLine="true"
         android:maxLength="30"
         android:selectAllOnFocus="true"
@@ -42,13 +42,12 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:text="Choose a picture"
+        android:text="@string/choose_picture_text"
         android:id="@+id/choosePicture"
         android:autoLink="none"
-        android:autoText="false"
         android:layout_weight="0.04"
         android:textColor="#7dd4ff"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="normal"
         android:typeface="normal"
         android:gravity="center"/>
@@ -69,7 +68,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="auto"/>
+            android:contentDescription="@string/car_picture_desc"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -80,7 +79,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="shopping"/>
+            android:contentDescription="@string/shopping_picture_desc"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -91,7 +90,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="bier"/>
+            android:contentDescription="@string/beer_picture_desc"/>
     </LinearLayout>
 
     <LinearLayout
@@ -110,7 +109,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="valies"/>
+            android:contentDescription="@string/suitcase_picture_desc"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -121,7 +120,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="spaarvarken"/>
+            android:contentDescription="@string/piggybank_picture_desc"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -132,7 +131,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="winkelkar"/>
+            android:contentDescription="@string/shoppingcart_picture_desc"/>
     </LinearLayout>
 
     <LinearLayout
@@ -151,7 +150,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="multimedia"/>
+            android:contentDescription="@string/multimedia_picture_desc"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -162,7 +161,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="gitaar"/>
+            android:contentDescription="@string/guitar_picture_desc"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -173,7 +172,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="cadeaus"/>
+            android:contentDescription="@string/gifts_picture_desc"/>
     </LinearLayout>
 
     <LinearLayout
@@ -186,7 +185,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:text="Ok"
+            android:text="@string/ok_button"
             android:id="@+id/okGoal"
             android:layout_weight="0.5"
             android:clickable="true"
@@ -195,7 +194,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:text="Cancel"
+            android:text="@string/cancel_button"
             android:id="@+id/cancelGoal"
             android:layout_weight="0.5"
             android:onClick="cancelButton"/>
