@@ -75,11 +75,10 @@ public class MainActivity extends Activity {
         finish();
     }
 
-    public void removeGoal(View view){
-        View a = findViewById(R.id.addgoal);
-        a.setVisibility(1);
-        View b = findViewById(R.id.goal);
-        b.setVisibility(0);
+    public void toHistory(View view) {
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

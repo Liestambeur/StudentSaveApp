@@ -17,4 +17,20 @@ public class History {
     public void addToHistory(HistoryElement element){
         this.history.add(element);
     }
+
+    public double getWalletTotal() {
+        double value = 0;
+        for(HistoryElement historyElement: this.history) {
+            value += historyElement.getAmount();
+        }
+        return value;
+    }
+
+    public int getNumberOfHistoryElements() {
+        return history.size();
+    }
+
+    public HistoryElement getHistoryElement(int index) {
+        return history.get(index);
+    }
 }

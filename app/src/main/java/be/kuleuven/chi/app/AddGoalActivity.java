@@ -23,7 +23,7 @@ public class AddGoalActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_goal);
 
-        View emptySpace = findViewById(R.id.emptySpace);
+        // TODO zorg dat focus niet op 'name of goal' ligt: tekst mag niet geselecteerd zijn bij opstarten
 
         newGoal = new Goal();
 
@@ -89,20 +89,14 @@ public class AddGoalActivity extends Activity {
     }
 
     public void chooseGoalPicture(View picture) {
-        picture.findFocus();
+        // TODO aangeven dat afbeelding geselecteerd werd
         int id = picture.getId();
         this.newGoal.setPictureId(id);
-
-        ((ImageButton) picture).
-
         System.err.println(id);
     }
 
     public void okButton(View okButton) {
         AppContent.getInstance().addGoal(this.newGoal);
-        System.err.println("goal naam: " + newGoal.getName());
-        System.err.println("goal amount: " + newGoal.getAmount());
-        System.err.println("goal picture: " + newGoal.getPictureId());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -115,9 +109,5 @@ public class AddGoalActivity extends Activity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    public void amountToSave(View amountToSave){
-
     }
 }
