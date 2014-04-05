@@ -1,9 +1,11 @@
-package be.kuleuven.chi.backend;
+package be.kuleuven.chi.backend.categories;
+
+import be.kuleuven.chi.backend.categories.Category;
 
 /**
  * Created by Lies on 3/04/14.
  */
-public class Goal {
+public class Goal implements Category {
 
     private String name;
     private double amount;

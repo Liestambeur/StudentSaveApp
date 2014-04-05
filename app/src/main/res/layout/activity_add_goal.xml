@@ -132,7 +132,7 @@
             android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/shoppingcart_picture_desc"/>
+            android:contentDescription="@string/gifts_picture_desc"/>
     </LinearLayout>
 
     <LinearLayout
@@ -169,11 +169,11 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture9"
             android:layout_weight="0.33"
-            android:src="@drawable/winkelkar"
+            android:src="@drawable/dotdotdot"
             android:background="@null"
             android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/gifts_picture_desc"/>
+            android:onClick="externalGoalPicture"
+            android:contentDescription="@string/dotdotdot_picture_desc"/>
     </LinearLayout>
 
     <LinearLayout

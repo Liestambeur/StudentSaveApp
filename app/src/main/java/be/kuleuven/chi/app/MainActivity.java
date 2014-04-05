@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
-import be.kuleuven.chi.backend.Goal;
+import be.kuleuven.chi.backend.categories.Goal;
 
 public class MainActivity extends Activity {
 

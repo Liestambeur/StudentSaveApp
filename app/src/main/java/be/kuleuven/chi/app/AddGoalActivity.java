@@ -9,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import be.kuleuven.chi.backend.AppContent;
-import be.kuleuven.chi.backend.Goal;
+import be.kuleuven.chi.backend.categories.Goal;
 
 public class AddGoalActivity extends Activity {
 
@@ -107,6 +106,12 @@ public class AddGoalActivity extends Activity {
         // the goal is not stored in the AppContent
 
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void externalGoalPicture(View dotdotdotPicture) {
+        Intent intent = new Intent(this, ExternalPicutureActivity.class);
         startActivity(intent);
         finish();
     }

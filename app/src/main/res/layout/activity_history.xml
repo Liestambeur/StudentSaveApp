@@ -20,6 +20,7 @@
         android:gravity="center_horizontal|fill_vertical" />
 
     <ListView
+        layout="@layout/history_row"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_vertical"

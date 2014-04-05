@@ -1,19 +1,30 @@
 package be.kuleuven.chi.app;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.History;
+import be.kuleuven.chi.backend.historyElements.HistoryElement;
 
 /**
  * Created by NeleR on 4/04/2014.
  */
 public class HistoryElementAdapter extends ArrayAdapter {
 
-    public HistoryElementAdapter(Context context, int resource) {
-        super(context, resource);
+    Context mContext;
+    int layoutResourceId;
+
+    public HistoryElementAdapter(Context mContext, int layoutResourceId) {
+        super(mContext, layoutResourceId);
+        this.mContext = mContext;
+        this.layoutResourceId = layoutResourceId;
     }
 
     @Override
@@ -22,9 +33,10 @@ public class HistoryElementAdapter extends ArrayAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public HistoryElement getItem(int index) {
         // fetches the history elements from new to old (they are stored from old to new)
-        return AppContent.getInstance().getHistoryElement(this.getCount() - i);
+        int totalNumberOfHistoryElements = AppContent.getInstance().getNumberOfHistoryElements();
+        return AppContent.getInstance().getHistoryElement(totalNumberOfHistoryElements - index - 1);
     }
 
     @Override
@@ -33,8 +45,30 @@ public class HistoryElementAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+    public View getView(int index, View convertView, ViewGroup parent) {
+
+        if(convertView==null){
+            // inflate the layout
+            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+            convertView = inflater.inflate(layoutResourceId, parent, false);
+        }
+
+
+        HistoryElement historyElement = getItem(index);
+
+        ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType);
+        historyType.setImageDrawable(historyElement.getTypePicture());
+
+        TextView historyTitle = (TextView) convertView.findViewById(R.id.historyTitle);
+        historyTitle.setText(historyElement.getTitle());
+
+        TextView historyCategoryAndDate = (TextView) convertView.findViewById(R.id.historyCategoryAndDate);
+        historyCategoryAndDate.setText(historyElement.getCategoryName() + ", " + historyElement.getDateName());
+
+        TextView historyAmount = (TextView) convertView.findViewById(R.id.historyAmount);
+        historyAmount.setText(Double.toString(historyElement.getAmount()));
+
+        return convertView;
     }
 
 }

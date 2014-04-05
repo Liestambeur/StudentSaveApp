@@ -28,6 +28,10 @@
             android:name="be.kuleuven.chi.app.HistoryActivity"
             android:label="@string/title_activity_history" >
         </activity>
+        <activity
+            android:name="be.kuleuven.chi.app.ExternalPicutureActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
     </application>
 
 </manifest>

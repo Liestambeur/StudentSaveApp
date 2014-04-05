@@ -1,13 +1,17 @@
-package be.kuleuven.chi.backend;
+package be.kuleuven.chi.backend.historyElements;
+
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 
 import java.util.Date;
+
+import be.kuleuven.chi.backend.categories.Category;
 
 /**
  * Created by Lies on 3/04/14.
  */
 public abstract class HistoryElement {
-
-
 
     private double amount;
     private Category category;
@@ -51,7 +55,17 @@ public abstract class HistoryElement {
     }
 
 
+    public Drawable getTypePicture() {
+        // TODO -> moet element-specifiek zijn, dus abstract
+        return Drawable.createFromPath("C:\\Users\\NeleR\\.eclipse\\Git\\StudentSaveApp\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png");
+    }
 
+    public String getCategoryName() {
+        return getCategory().getName();
+    }
 
+    public String getDateName() {
+        return getDate().toString();
+    }
 
 }

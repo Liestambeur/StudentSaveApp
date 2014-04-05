@@ -29,16 +29,18 @@
     <string name="beer_picture_desc">bier</string>
     <string name="suitcase_picture_desc">valies</string>
     <string name="piggybank_picture_desc">spaarvarken</string>
-    <string name="shoppingcart_picture_desc">winkelkar</string>
     <string name="multimedia_picture_desc">multimedia</string>
     <string name="guitar_picture_desc">gitaar</string>
     <string name="gifts_picture_desc">cadeaus</string>
+    <string name="dotdotdot_picture_desc">punten</string>
 
     <!-- Save Activity -->
     <string name="save_for_goal_text">Save money for your goal</string>
 
     <!-- History Activity -->
     <string name="wallet_text">Wallet</string>
+    <string name="saving_for_text">Savings for</string>
+    <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
 
 
 </resources>

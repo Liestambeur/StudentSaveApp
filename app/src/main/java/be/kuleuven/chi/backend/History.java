@@ -3,6 +3,8 @@ package be.kuleuven.chi.backend;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.kuleuven.chi.backend.historyElements.HistoryElement;
+
 /**
  * Created by Lies on 3/04/14.
  */

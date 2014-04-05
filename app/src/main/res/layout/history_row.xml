@@ -58,7 +58,8 @@
                 android:layout_weight="0.3"
                 android:id="@+id/historyCategoryAndDate"
                 android:layout_gravity="right|top"
-                android:textIsSelectable="true" />
+                android:textIsSelectable="true"
+                android:singleLine="true" />
         </LinearLayout>
 
         <TextView
@@ -70,7 +71,9 @@
             android:text="20"
             android:gravity="center_vertical|right"
             android:id="@+id/historyAmount"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            android:singleLine="true"
+            android:maxLength="6" />
     </LinearLayout>
 
 </RelativeLayout>

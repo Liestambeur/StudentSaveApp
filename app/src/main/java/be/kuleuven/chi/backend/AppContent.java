@@ -1,6 +1,7 @@
 package be.kuleuven.chi.backend;
 
-import java.util.List;
+import be.kuleuven.chi.backend.categories.Goal;
+import be.kuleuven.chi.backend.historyElements.HistoryElement;
 
 /**
  * Created by Lies on 3/04/14.
