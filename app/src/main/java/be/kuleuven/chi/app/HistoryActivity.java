@@ -26,7 +26,7 @@ public class HistoryActivity extends Activity {
             setContentView(R.layout.activity_history);
 
             TextView walletTotal = (TextView) findViewById(R.id.walletTotal);
-            walletTotal.append(" " + AppContent.getInstance().getWalletTotal());
+            walletTotal.append(": " + AppContent.getInstance().getWalletTotal());
 
             ListView historyListView = (ListView) findViewById(R.id.fullHistoryList);
             HistoryElementAdapter adapter = new HistoryElementAdapter(this,1);//android.R.layout.history_row);
