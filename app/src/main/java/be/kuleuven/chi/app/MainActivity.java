@@ -1,26 +1,16 @@
 package be.kuleuven.chi.app;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
-import be.kuleuven.chi.backend.categories.ExpenseCategory;
 import be.kuleuven.chi.backend.categories.Goal;
-import be.kuleuven.chi.backend.categories.IncomeCategory;
-import be.kuleuven.chi.backend.historyElements.ExpenseElement;
-import be.kuleuven.chi.backend.historyElements.IncomeElement;
-import be.kuleuven.chi.backend.historyElements.SavingElement;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,6 +35,11 @@ public class MainActivity extends BaseActivity {
             goalPercent.setText(goal.getPercent() + " %");
             ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
             progress.setProgress(goal.getPercent());
+            ImageView im = (ImageView) findViewById(R.id.imageView);
+
+
+
+            im.setImageDrawable(goal.getPicture());
         }else{
             View addgoal = findViewById(R.id.addgoal);
             addgoal.setVisibility(1);
