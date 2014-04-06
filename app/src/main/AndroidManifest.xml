@@ -24,6 +24,9 @@
             android:name="be.kuleuven.chi.app.SaveActivity"
             android:label="@string/title_activity_save" >
         </activity>
+        <activity
+            android:name=".InputActivity"
+            android:label="Input Activity" />
     </application>
 
 </manifest>

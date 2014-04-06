@@ -10,6 +10,9 @@
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
 
+    <!-- Static -->
+    <string name="input_activity_type">INPUT_ACTIVITY_TYPE</string>
+
     <!-- Main Activity -->
     <string name="add_goal_area">Add a goal</string>
     <string name="income_button">Income</string>
@@ -34,6 +37,26 @@
 
     <!-- Save Activity -->
     <string name="save_for_goal_text">Save money for your goal</string>
+    <string name="pick_category">Pick a category below:</string>
+    <string name="enter_amount">Enter amount</string>
+
+    <!-- Input -->
+    <string-array name="income_categories">
+        <item>Pocket Money</item>
+        <item>Student Job</item>
+        <item>Babysitting</item>
+        <item>Tutoring</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="expense_categories">
+        <item>Groceries</item>
+        <item>Books</item>
+        <item>Party</item>
+        <item>Gift</item>
+    </string-array>
+    <string-array name="save_categories">
+        <item>Your Goal</item>
+    </string-array>
 
 
 </resources>
