@@ -31,18 +31,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IncomeElement income = new IncomeElement(50.00, new IncomeCategory("Pocket Money"),"Pocket Money 4/apr");
-        ExpenseElement expense = new ExpenseElement(20.00, new ExpenseCategory("Food"),"Groceries");
-
-        Goal paris = new Goal();
-        paris.setName("Paris");
-        paris.setAmount(100.00);
-        SavingElement saving = new SavingElement(20.00, paris);
-
-        AppContent.getInstance().addToHistory(income);
-        AppContent.getInstance().addToHistory(expense);
-        AppContent.getInstance().addToHistory(saving);
-
         if(appContent.hasGoal()){
             Goal goal = appContent.getGoal();
             View goalview = findViewById(R.id.goal);

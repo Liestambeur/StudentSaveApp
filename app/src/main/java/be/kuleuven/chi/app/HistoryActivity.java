@@ -42,19 +42,6 @@ public class HistoryActivity extends BaseActivity {
             HistoryElementAdapter adapter = new HistoryElementAdapter(this,R.layout.history_row);
             historyListView.setAdapter(adapter);
 
-
-            requestWindowFeature(Window.FEATURE_LEFT_ICON);
-            getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,R.drawable.ic_launcher);
-            View v = findViewById (android.R.id.title);
-            v.setClickable(true);
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    v.getContext().startActivity(intent);
-                }
-            });
-
-
         }
 
 
