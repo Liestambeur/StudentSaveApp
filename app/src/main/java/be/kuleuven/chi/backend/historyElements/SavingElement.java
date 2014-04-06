@@ -1,8 +1,6 @@
 package be.kuleuven.chi.backend.historyElements;
 
-import android.graphics.drawable.Drawable;
-
-import be.kuleuven.chi.app.HistoryElementAdapter;
+import be.kuleuven.chi.app.R;
 import be.kuleuven.chi.backend.categories.Category;
 
 /**
@@ -16,7 +14,7 @@ public class SavingElement extends HistoryElement {
     }
 
     @Override
-    public Drawable getTypePicture() {
-        return null;
+    public int getTypePictureId() {
+        return R.drawable.bier;
     }
 }

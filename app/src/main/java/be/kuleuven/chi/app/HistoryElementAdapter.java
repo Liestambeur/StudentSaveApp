@@ -2,6 +2,7 @@ package be.kuleuven.chi.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
-import be.kuleuven.chi.backend.History;
 import be.kuleuven.chi.backend.historyElements.HistoryElement;
 
 /**
@@ -53,11 +53,11 @@ public class HistoryElementAdapter extends ArrayAdapter {
             convertView = inflater.inflate(layoutResourceId, parent, false);
         }
 
-
         HistoryElement historyElement = getItem(index);
 
-        ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType);
-        historyType.setImageDrawable(historyElement.getTypePicture());
+//        Drawable historyPicture = mContext.getResources().getDrawable(historyElement.getTypePictureId());
+//        ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType);
+//        historyType.setImageDrawable(historyPicture);
 
         TextView historyTitle = (TextView) convertView.findViewById(R.id.historyTitle);
         historyTitle.setText(historyElement.getTitle());

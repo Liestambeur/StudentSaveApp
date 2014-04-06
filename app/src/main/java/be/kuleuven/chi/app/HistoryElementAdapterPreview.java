@@ -59,8 +59,8 @@ public class HistoryElementAdapterPreview extends ArrayAdapter {
 
         HistoryElement historyElement = getItem(index);
 
-        ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType1);
-        historyType.setImageDrawable(historyElement.getTypePicture());
+        //ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType1);
+        //historyType.setImageDrawable(historyElement.getTypePictureId());
 
         TextView historyTitle = (TextView) convertView.findViewById(R.id.historyTitle1);
         historyTitle.setText(historyElement.getTitle());

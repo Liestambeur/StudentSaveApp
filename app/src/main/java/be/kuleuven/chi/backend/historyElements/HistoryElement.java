@@ -55,7 +55,7 @@ public abstract class HistoryElement {
     }
 
 
-    public abstract Drawable getTypePicture();
+    public abstract int getTypePictureId();
 
     public String getCategoryName() {
         return getCategory().getName();

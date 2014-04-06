@@ -53,8 +53,12 @@ public class AddGoalActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                newGoal.setAmount(Double.parseDouble(charSequence.toString()));
-
+                try {
+                    newGoal.setAmount(Double.parseDouble(charSequence.toString()));
+                }
+                catch (NumberFormatException e) {
+                    // do nothing
+                }
             }
 
             @Override

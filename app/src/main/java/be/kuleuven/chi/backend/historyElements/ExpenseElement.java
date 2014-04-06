@@ -1,9 +1,6 @@
 package be.kuleuven.chi.backend.historyElements;
 
-import android.graphics.drawable.Drawable;
-
-import java.io.File;
-
+import be.kuleuven.chi.app.R;
 import be.kuleuven.chi.backend.categories.Category;
 
 /**
@@ -16,10 +13,7 @@ public class ExpenseElement extends HistoryElement {
     }
 
     @Override
-    public Drawable getTypePicture() {
-        String filePath = new File("").getAbsolutePath();
-       //filePath.concat("path to the property file");
-        System.err.print(filePath);
-        return null;
+    public int getTypePictureId() {
+        return R.drawable.auto;
     }
 }
