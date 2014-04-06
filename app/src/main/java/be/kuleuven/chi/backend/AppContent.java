@@ -55,4 +55,8 @@ public class AppContent {
     public HistoryElement getHistoryElement(int index) {
         return this.history.getHistoryElement(index);
     }
+
+    public boolean hasHistory(){
+        return this.getNumberOfHistoryElements()!=0;
+    }
 }
