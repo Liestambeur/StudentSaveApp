@@ -10,7 +10,7 @@ import be.kuleuven.chi.backend.AppContent;
 /**
  * Created by NeleR on 5/04/2014.
  */
-public class ExternalPicutureActivity extends Activity {
+public class ExternalPicutureActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

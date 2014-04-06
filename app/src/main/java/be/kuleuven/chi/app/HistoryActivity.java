@@ -1,9 +1,12 @@
 package be.kuleuven.chi.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,12 +21,16 @@ import be.kuleuven.chi.backend.historyElements.SavingElement;
 /**
  * Created by NeleR on 4/04/2014.
  */
-public class HistoryActivity extends Activity {
+public class HistoryActivity extends BaseActivity {
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
+
             setContentView(R.layout.activity_history);
+
+
 
             // TODO verwijder volgende methodeaanroep!!! enkel gebruikt voor het testen!!
             instantiateHardCodeHistoryElements();
@@ -34,6 +41,20 @@ public class HistoryActivity extends Activity {
             ListView historyListView = (ListView) findViewById(R.id.fullHistoryList);
             HistoryElementAdapter adapter = new HistoryElementAdapter(this,R.layout.history_row);
             historyListView.setAdapter(adapter);
+
+
+            requestWindowFeature(Window.FEATURE_LEFT_ICON);
+            getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,R.drawable.ic_launcher);
+            View v = findViewById (android.R.id.title);
+            v.setClickable(true);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
+
+
         }
 
 
@@ -62,15 +83,5 @@ public class HistoryActivity extends Activity {
             return true;
         }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-            if (id == R.id.action_settings) {
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
+
 }

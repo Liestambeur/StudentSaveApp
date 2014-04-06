@@ -22,7 +22,7 @@ import be.kuleuven.chi.backend.historyElements.ExpenseElement;
 import be.kuleuven.chi.backend.historyElements.IncomeElement;
 import be.kuleuven.chi.backend.historyElements.SavingElement;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
     AppContent appContent = AppContent.getInstance();
 
@@ -30,6 +30,18 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        IncomeElement income = new IncomeElement(50.00, new IncomeCategory("Pocket Money"),"Pocket Money 4/apr");
+        ExpenseElement expense = new ExpenseElement(20.00, new ExpenseCategory("Food"),"Groceries");
+
+        Goal paris = new Goal();
+        paris.setName("Paris");
+        paris.setAmount(100.00);
+        SavingElement saving = new SavingElement(20.00, paris);
+
+        AppContent.getInstance().addToHistory(income);
+        AppContent.getInstance().addToHistory(expense);
+        AppContent.getInstance().addToHistory(saving);
 
         if(appContent.hasGoal()){
             Goal goal = appContent.getGoal();
@@ -94,17 +106,6 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
     public void addGoal(View view){
