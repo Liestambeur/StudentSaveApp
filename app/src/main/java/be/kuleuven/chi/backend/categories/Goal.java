@@ -1,6 +1,6 @@
 package be.kuleuven.chi.backend.categories;
 
-import be.kuleuven.chi.backend.categories.Category;
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by Lies on 3/04/14.
@@ -10,13 +10,13 @@ public class Goal implements Category {
     private String name;
     private double amount;
     private double amountSaved;
-    private int pictureId;
+    private Drawable picture;
 
     public Goal(){
         this.name="Goal";
         this.amount=0;
         this.amountSaved =0;
-        this.pictureId=0;
+        this.picture =null;
     }
 
     public String getName() {
@@ -68,12 +68,12 @@ public class Goal implements Category {
     }
 
 
-    public int getPictureId() {
-        return pictureId;
+    public Drawable getPicture() {
+        return picture;
     }
 
-    public void setPictureId(int pictureId) {
-        this.pictureId = pictureId;
+    public void setPicture(Drawable picture) {
+        this.picture = picture;
     }
 
 
