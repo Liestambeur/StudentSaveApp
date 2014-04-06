@@ -18,15 +18,27 @@
         </activity>
         <activity
             android:name="be.kuleuven.chi.app.AddGoalActivity"
+            android:parentActivityName="be.kuleuven.chi.app.MainActivity"
             android:label="@string/title_activity_add_goal" >
         </activity>
         <activity
             android:name="be.kuleuven.chi.app.SaveActivity"
+            android:parentActivityName="be.kuleuven.chi.app.MainActivity"
             android:label="@string/title_activity_save" >
         </activity>
         <activity
             android:name=".InputActivity"
-            android:label="Input Activity" />
+            android:label="@string/activity_input_title" />
+        <activity
+            android:name="be.kuleuven.chi.app.HistoryActivity"
+            android:parentActivityName="be.kuleuven.chi.app.MainActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
+        <activity
+            android:name="be.kuleuven.chi.app.ExternalPicutureActivity"
+            android:parentActivityName="be.kuleuven.chi.app.MainActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
     </application>
 
 </manifest>

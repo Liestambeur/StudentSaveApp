@@ -1,4 +1,6 @@
-package be.kuleuven.chi.backend;
+package be.kuleuven.chi.backend.historyElements;
+
+import be.kuleuven.chi.backend.categories.Category;
 
 /**
  * Created by Lies on 3/04/14.

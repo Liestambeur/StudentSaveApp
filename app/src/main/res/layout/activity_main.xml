@@ -48,6 +48,7 @@
             android:layout_height="fill_parent"
             android:text="@string/income_button"
             android:id="@+id/button_income"
+            android:onClick="income"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.33" />
 
@@ -56,6 +57,7 @@
             android:layout_height="fill_parent"
             android:text="@string/save_button"
             android:id="@+id/button_save"
+            android:onClick="save"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.33" />
 
@@ -64,6 +66,7 @@
             android:layout_height="fill_parent"
             android:text="@string/expense_button"
             android:id="@+id/button_expense"
+            android:onClick="expense"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.33" />
     </LinearLayout>
@@ -72,20 +75,26 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.35"
-        android:background="#99ccff">
-
-        <include
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            layout="@layout/historya"
-            android:layout_gravity="center" />
+        android:background="#99ccff"
+        android:onClick="toHistory">
 
         <include
             android:visibility="gone"
+            android:id="@+id/no_history"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            layout="@layout/historya"
+            android:layout_gravity="center"
+            android:onClick="toHistory"/>
+
+        <include
+            android:visibility="gone"
+            android:id="@+id/history_preview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             layout="@layout/historyb"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:onClick="toHistory"/>
 
 
     </FrameLayout>
