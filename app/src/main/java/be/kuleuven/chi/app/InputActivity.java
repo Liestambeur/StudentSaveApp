@@ -38,6 +38,9 @@ public class InputActivity extends BaseActivity {
     private String inputName;
     private Double inputAmount;
 
+    private boolean userClickedYet = true;
+    AlertDialog ad;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
@@ -86,6 +89,13 @@ public class InputActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+        //Save Screen
+        if(inputActivityType.equals(InputActivityType.SAVE.name())){
+            categoryList.setVisibility(View.INVISIBLE);
+            nameText.setVisibility(View.INVISIBLE);
+            TextView pick = (TextView) findViewById(R.id.pick_category);
+            if(pick!=null) pick.setText(R.string.dont_forget_piggybank);
+        }
     }
 
     public void setSelectedCategory(String listItemText) {
@@ -110,28 +120,52 @@ public class InputActivity extends BaseActivity {
 
     public void confirmInput(View view) {
         // TODO Minder vuil maken
+        inputName = inputName==null?"Other":inputName;
+        selectedItem = selectedItem==null?"Other":selectedItem;
+        inputAmount = inputAmount==null?0.0:inputAmount;
         HistoryElement he;
+        AppContent instance = AppContent.getInstance(this);
+        userClickedYet = true;
         if(inputActivityType.equals(InputActivityType.INCOME.name())){
             he = new IncomeElement(inputAmount, new IncomeCategory(selectedItem),inputName);
-            AppContent.getInstance(this).addToHistory(he);
+            instance.addToHistory(he);
         } else if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
             he = new ExpenseElement(inputAmount, new ExpenseCategory(selectedItem), inputName);
-            AppContent.getInstance(this).addToHistory(he);
+            instance.addToHistory(he);
         } else {
-            Goal goal = AppContent.getInstance(this).getGoal();
+            Goal goal = instance.getGoal();
             if(goal != null){
-                he = new SavingElement(inputAmount, AppContent.getInstance(this).getGoal());
-                AppContent.getInstance(this).addToHistory(he);
+                he = new SavingElement(inputAmount, instance.getGoal());
+                instance.addToHistory(he);
+                instance.getGoal().addAmount(inputAmount);
             } else {
+                userClickedYet = false;
                 TextView alertView = new TextView(this);
                 alertView.setText(getResources().getString(R.string.goal_not_initialized));
-                AlertDialog ad = new AlertDialog.Builder(this).
+                ad = new AlertDialog.Builder(this).
                         setView(alertView).setTitle("Warning!").show();
+                alertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismissAd();
+                    }
+                });
             }
         }
 
+        if(userClickedYet){
+            backToMain();
+        }
+    }
+
+    public void backToMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void dismissAd(){
+        ad.dismiss();
+        backToMain();
     }
 }
