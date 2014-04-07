@@ -32,9 +32,9 @@ public class MainActivity extends BaseActivity {
             TextView goalName = (TextView) findViewById(R.id.goalName);
             goalName.setText(goal.getName());
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
-            goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go.");
+            goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go");
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
-            goalDone.setText("€ "+goal.getAmountSaved()+" done.");
+            goalDone.setText("€ "+goal.getAmountSaved()+" done");
             TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
             goalPercent.setText(goal.getPercent() + " %");
             ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
@@ -73,12 +73,21 @@ public class MainActivity extends BaseActivity {
                 v.setLayoutParams(param);
 
                 listPreviewHistory.addView(v);
+                v.setClickable(true);
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toHistory(view);
+                    }
+                });
               //  listPreviewHistory.addView(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             }
 
         }else{
             View noHistory = findViewById(R.id.no_history);
             noHistory.setVisibility(1);
+            View historyFrame = findViewById(R.id.historyFrame);
+            historyFrame.setClickable(false);
         }
 
 
