@@ -1,14 +1,14 @@
 package be.kuleuven.chi.app;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.categories.Goal;
@@ -53,8 +53,12 @@ public class AddGoalActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                newGoal.setAmount(Double.parseDouble(charSequence.toString()));
-
+                try {
+                    newGoal.setAmount(Double.parseDouble(charSequence.toString()));
+                }
+                catch (NumberFormatException e) {
+                    // do nothing
+                }
             }
 
             @Override
@@ -78,9 +82,9 @@ public class AddGoalActivity extends BaseActivity {
 
     public void chooseGoalPicture(View picture) {
         // TODO aangeven dat afbeelding geselecteerd werd
-        int id = picture.getId();
-        this.newGoal.setPictureId(id);
-        System.err.println(id);
+        ImageButton image = (ImageButton) picture;
+        Drawable draw = image.getDrawable();
+        this.newGoal.setPicture(draw);
     }
 
     public void okButton(View okButton) {

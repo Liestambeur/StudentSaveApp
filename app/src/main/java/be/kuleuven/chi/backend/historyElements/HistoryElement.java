@@ -55,10 +55,7 @@ public abstract class HistoryElement {
     }
 
 
-    public Drawable getTypePicture() {
-        // TODO -> moet element-specifiek zijn, dus abstract
-        return Drawable.createFromPath("C:\\Users\\NeleR\\.eclipse\\Git\\StudentSaveApp\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png");
-    }
+    public abstract int getTypePictureId();
 
     public String getCategoryName() {
         return getCategory().getName();

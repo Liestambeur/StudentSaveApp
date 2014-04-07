@@ -8,7 +8,7 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/walletTotal"
         android:layout_weight="0.1"
         android:visibility="visible"
