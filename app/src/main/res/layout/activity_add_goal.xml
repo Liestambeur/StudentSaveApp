@@ -65,7 +65,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture1"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_auto"
+            android:src="@drawable/selector_auto"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/car_picture_desc"/>
@@ -75,7 +76,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture2"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_shopping"
+            android:src="@drawable/selector_shopping"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/shopping_picture_desc"/>
@@ -85,7 +87,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture3"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_bier"
+            android:src="@drawable/selector_bier"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/beer_picture_desc"/>
@@ -103,7 +106,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture4"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_valies"
+            android:src="@drawable/selector_valies"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/suitcase_picture_desc"/>
@@ -113,7 +117,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture5"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_spaarvarken"
+            android:src="@drawable/selector_spaarvarken"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/piggybank_picture_desc"/>
@@ -123,7 +128,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture6"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_cadeaus"
+            android:src="@drawable/selector_cadeaus"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/gifts_picture_desc"/>
@@ -141,7 +147,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture7"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_multimedia"
+            android:src="@drawable/selector_multimedia"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/multimedia_picture_desc"/>
@@ -151,7 +158,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture8"
             android:layout_weight="0.33"
-            android:background="@drawable/selector_gitaar"
+            android:src="@drawable/selector_gitaar"
+            android:background="@null"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/guitar_picture_desc"/>
@@ -161,7 +169,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture9"
             android:layout_weight="0.33"
-            android:background="@drawable/dotdotdot"
+            android:src="@drawable/dotdotdot"
+            android:background="@null"
             android:clickable="true"
             android:onClick="externalGoalPicture"
             android:contentDescription="@string/dotdotdot_picture_desc"/>

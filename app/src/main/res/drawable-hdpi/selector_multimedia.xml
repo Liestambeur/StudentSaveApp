@@ -2,18 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_activated="false"
-        android:state_pressed="false"
         android:drawable="@drawable/multimedia" />
     <item
-        android:state_pressed="true"
-        android:state_activated="false"
-        android:drawable="@drawable/multimedia_pressed" />
-    <item
-        android:state_pressed="true"
-        android:state_activated="true"
-        android:drawable="@drawable/multimedia_pressed" />
-    <item
-        android:state_pressed="false"
         android:state_activated="true"
         android:drawable="@drawable/multimedia_pressed" />
 </selector>
