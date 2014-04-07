@@ -7,9 +7,13 @@
     <string name="title_activity_add_goal">Add Goal</string>
     <string name="title_activity_save">Save</string>
     <string name="title_activity_history">History</string>
+    <string name="activity_input_title">Input</string>
 
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
+
+    <!-- Static -->
+    <string name="input_activity_type">INPUT_ACTIVITY_TYPE</string>
 
     <!-- Main Activity -->
     <string name="add_goal_area">Add a goal</string>
@@ -36,11 +40,33 @@
 
     <!-- Save Activity -->
     <string name="save_for_goal_text">Save money for your goal</string>
+    <string name="pick_category">Pick a category below:</string>
+    <string name="enter_amount">Enter amount</string>
+
+    <!-- Input -->
+    <string-array name="income_categories">
+        <item>Pocket Money</item>
+        <item>Student Job</item>
+        <item>Babysitting</item>
+        <item>Tutoring</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="expense_categories">
+        <item>Groceries</item>
+        <item>Books</item>
+        <item>Party</item>
+        <item>Gift</item>
+    </string-array>
+    <string-array name="save_categories">
+        <item>Your Goal</item>
+    </string-array>
 
     <!-- History Activity -->
     <string name="wallet_text">Wallet</string>
     <string name="saving_for_text">Savings for</string>
     <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
+    <string name="enter_name">Enter name</string>
+    <string name="goal_not_initialized">You must create a goal before you can save for one!</string>
 
 
 </resources>

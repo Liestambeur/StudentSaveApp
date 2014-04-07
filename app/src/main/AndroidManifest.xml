@@ -27,6 +27,9 @@
             android:label="@string/title_activity_save" >
         </activity>
         <activity
+            android:name=".InputActivity"
+            android:label="@string/activity_input_title" />
+        <activity
             android:name="be.kuleuven.chi.app.HistoryActivity"
             android:parentActivityName="be.kuleuven.chi.app.MainActivity"
             android:label="@string/title_activity_history" >

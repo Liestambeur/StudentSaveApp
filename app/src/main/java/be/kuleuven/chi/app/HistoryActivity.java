@@ -36,7 +36,7 @@ public class HistoryActivity extends BaseActivity {
             instantiateHardCodeHistoryElements();
 
             TextView walletTotal = (TextView) findViewById(R.id.walletTotal);
-            walletTotal.append(": " + AppContent.getInstance().getWalletTotal());
+            walletTotal.append(": " + AppContent.getInstance(this).getWalletTotal());
 
             ListView historyListView = (ListView) findViewById(R.id.fullHistoryList);
             HistoryElementAdapter adapter = new HistoryElementAdapter(this,R.layout.history_row);
@@ -57,9 +57,9 @@ public class HistoryActivity extends BaseActivity {
         paris.setAmount(100.00);
         SavingElement saving = new SavingElement(20.00, paris);
 
-        AppContent.getInstance().addToHistory(income);
-        AppContent.getInstance().addToHistory(expense);
-        AppContent.getInstance().addToHistory(saving);
+        AppContent.getInstance(this).addToHistory(income);
+        AppContent.getInstance(this).addToHistory(expense);
+        AppContent.getInstance(this).addToHistory(saving);
     }
 
 

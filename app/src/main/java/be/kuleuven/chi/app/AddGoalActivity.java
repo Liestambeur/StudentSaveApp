@@ -124,7 +124,7 @@ public class AddGoalActivity extends BaseActivity {
     }
 
     public void okButton(View okButton) {
-        AppContent.getInstance().addGoal(this.newGoal);
+        AppContent.getInstance(this).addGoal(this.newGoal);
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
