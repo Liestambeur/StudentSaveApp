@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     android:background="#a8a8a8"
     android:weightSum="1"
-    android:onClick="removeGoal"
     android:clickable="true">
-
 
     <LinearLayout
         android:orientation="horizontal"
