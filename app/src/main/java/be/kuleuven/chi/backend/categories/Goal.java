@@ -72,9 +72,14 @@ public class Goal implements Category {
         return picture;
     }
 
+    public void resetPicture() {
+        this.picture = null;
+    }
+
     public void setPicture(Drawable picture) {
         this.picture = picture;
     }
+
 
 
 }

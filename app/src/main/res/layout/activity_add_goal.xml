@@ -65,8 +65,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture1"
             android:layout_weight="0.33"
-            android:src="@drawable/auto"
-            android:background="@null"
+            android:background="@drawable/selector_auto"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/car_picture_desc"/>
@@ -76,8 +75,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture2"
             android:layout_weight="0.33"
-            android:src="@drawable/shopping"
-            android:background="@null"
+            android:background="@drawable/selector_shopping"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/shopping_picture_desc"/>
@@ -87,8 +85,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture3"
             android:layout_weight="0.33"
-            android:src="@drawable/bier"
-            android:background="@null"
+            android:background="@drawable/selector_bier"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/beer_picture_desc"/>
@@ -106,8 +103,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture4"
             android:layout_weight="0.33"
-            android:src="@drawable/valies"
-            android:background="@null"
+            android:background="@drawable/selector_valies"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/suitcase_picture_desc"/>
@@ -117,8 +113,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture5"
             android:layout_weight="0.33"
-            android:src="@drawable/spaarvarken"
-            android:background="@null"
+            android:background="@drawable/selector_spaarvarken"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/piggybank_picture_desc"/>
@@ -128,8 +123,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture6"
             android:layout_weight="0.33"
-            android:src="@drawable/cadeaus"
-            android:background="@null"
+            android:background="@drawable/selector_cadeaus"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/gifts_picture_desc"/>
@@ -147,8 +141,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture7"
             android:layout_weight="0.33"
-            android:src="@drawable/multimedia"
-            android:background="@null"
+            android:background="@drawable/selector_multimedia"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/multimedia_picture_desc"/>
@@ -158,8 +151,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture8"
             android:layout_weight="0.33"
-            android:src="@drawable/gitaar"
-            android:background="@null"
+            android:background="@drawable/selector_gitaar"
             android:clickable="true"
             android:onClick="chooseGoalPicture"
             android:contentDescription="@string/guitar_picture_desc"/>
@@ -169,8 +161,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/goalPicture9"
             android:layout_weight="0.33"
-            android:src="@drawable/dotdotdot"
-            android:background="@null"
+            android:background="@drawable/dotdotdot"
             android:clickable="true"
             android:onClick="externalGoalPicture"
             android:contentDescription="@string/dotdotdot_picture_desc"/>

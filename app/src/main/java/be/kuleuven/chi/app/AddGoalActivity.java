@@ -10,12 +10,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.categories.Goal;
 
 public class AddGoalActivity extends BaseActivity {
 
     Goal newGoal;
+    List<ImageButton> pictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,12 @@ public class AddGoalActivity extends BaseActivity {
 
         newGoal = new Goal();
 
+        initTextWatchers();
+        fillPicturesList();
+        setAllPicturesUnactivated();
+    }
+
+    private void initTextWatchers() {
         EditText nameOfGoalText = (EditText) findViewById(R.id.nameOfGoal);
         EditText amountOfGoalText = (EditText) findViewById(R.id.amountToSave);
 
@@ -71,6 +81,25 @@ public class AddGoalActivity extends BaseActivity {
         amountOfGoalText.addTextChangedListener(amountOfGoalWatcher);
     }
 
+    private void fillPicturesList() {
+        pictures = new ArrayList<ImageButton>();
+        pictures.add((ImageButton) findViewById(R.id.goalPicture1));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture2));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture3));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture4));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture5));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture6));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture7));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture8));
+        pictures.add((ImageButton) findViewById(R.id.goalPicture9));
+    }
+
+    private void setAllPicturesUnactivated() {
+        for(ImageButton picture: pictures) {
+            picture.setActivated(false);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,10 +110,17 @@ public class AddGoalActivity extends BaseActivity {
 
 
     public void chooseGoalPicture(View picture) {
-        // TODO aangeven dat afbeelding geselecteerd werd
-        ImageButton image = (ImageButton) picture;
-        Drawable draw = image.getDrawable();
-        this.newGoal.setPicture(draw);
+        if(((ImageButton) picture).isActivated()) {
+            setAllPicturesUnactivated();
+            this.newGoal.resetPicture();
+        }
+        else{
+            setAllPicturesUnactivated();
+            ((ImageButton) picture).setActivated(true);
+
+            Drawable drawable = ((ImageButton) picture).getDrawable();
+            this.newGoal.setPicture(drawable);
+        }
     }
 
     public void okButton(View okButton) {
