@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -46,6 +47,8 @@ public class MainActivity extends BaseActivity {
         }else{
             View addgoal = findViewById(R.id.addgoal);
             addgoal.setVisibility(1);
+            Button save = (Button) findViewById(R.id.button_save);
+            save.setEnabled(false);
         }
 
         if(appContent.hasHistory()){

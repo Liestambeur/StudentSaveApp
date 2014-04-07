@@ -31,10 +31,6 @@ public class HistoryActivity extends BaseActivity {
             setContentView(R.layout.activity_history);
 
 
-
-            // TODO verwijder volgende methodeaanroep!!! enkel gebruikt voor het testen!!
-            instantiateHardCodeHistoryElements();
-
             TextView walletTotal = (TextView) findViewById(R.id.walletTotal);
             walletTotal.append(": " + AppContent.getInstance(this).getWalletTotal());
 
@@ -45,22 +41,6 @@ public class HistoryActivity extends BaseActivity {
         }
 
 
-    /**
-     * TODO - DELETE THIS METHOD WHEN THE CREATING OF HISTORY ELEMENTS WORKS AS INTENDED!
-     */
-    private void instantiateHardCodeHistoryElements() {
-        IncomeElement income = new IncomeElement(50.00, new IncomeCategory("Pocket Money"),"Pocket Money 4/apr");
-        ExpenseElement expense = new ExpenseElement(20.00, new ExpenseCategory("Food"),"Groceries");
-
-        Goal paris = new Goal();
-        paris.setName("Paris");
-        paris.setAmount(100.00);
-        SavingElement saving = new SavingElement(20.00, paris);
-
-        AppContent.getInstance(this).addToHistory(income);
-        AppContent.getInstance(this).addToHistory(expense);
-        AppContent.getInstance(this).addToHistory(saving);
-    }
 
 
     @Override
