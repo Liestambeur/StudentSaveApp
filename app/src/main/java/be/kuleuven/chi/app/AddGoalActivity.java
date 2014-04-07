@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -31,8 +32,23 @@ public class AddGoalActivity extends BaseActivity {
         newGoal = new Goal();
 
         initTextWatchers();
-        fillPicturesList();
-        setAllPicturesUnactivated();
+        CoverFlow coverFlow = (CoverFlow) findViewById(R.id.coverflow);
+        coverFlow.setAdapter(new ImageAdapter(this));
+        final ImageAdapter coverImageAdapter =  new ImageAdapter(this);
+        coverFlow.setAdapter(coverImageAdapter);
+        coverFlow.setSpacing(-25);
+        coverFlow.setSelection(4, true);
+        coverFlow.setAnimationDuration(1000);
+        coverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                coverImageAdapter.setAsCurrent(i);
+                coverImageAdapter.notifyDataSetChanged();
+                newGoal.setPicture(coverImageAdapter.getCurrentDrawable());
+            }
+        });
+        //fillPicturesList();
+        //setAllPicturesUnactivated();
     }
 
     private void initTextWatchers() {
@@ -80,7 +96,7 @@ public class AddGoalActivity extends BaseActivity {
         nameOfGoalText.addTextChangedListener(nameOfGoalWatcher);
         amountOfGoalText.addTextChangedListener(amountOfGoalWatcher);
     }
-
+    /*
     private void fillPicturesList() {
         pictures = new ArrayList<ImageButton>();
         pictures.add((ImageButton) findViewById(R.id.goalPicture1));
@@ -93,13 +109,13 @@ public class AddGoalActivity extends BaseActivity {
         pictures.add((ImageButton) findViewById(R.id.goalPicture8));
         pictures.add((ImageButton) findViewById(R.id.goalPicture9));
     }
-
+    /*
     private void setAllPicturesUnactivated() {
         for(ImageButton picture: pictures) {
             picture.setActivated(false);
         }
     }
-
+*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,8 +124,9 @@ public class AddGoalActivity extends BaseActivity {
         return true;
     }
 
-
+    /*
     public void chooseGoalPicture(View picture) {
+
         if(((ImageButton) picture).isActivated()) {
             setAllPicturesUnactivated();
             this.newGoal.resetPicture();
@@ -121,7 +138,7 @@ public class AddGoalActivity extends BaseActivity {
             Drawable drawable = ((ImageButton) picture).getDrawable();
             this.newGoal.setPicture(drawable);
         }
-    }
+    }*/
 
     public void okButton(View okButton) {
         AppContent.getInstance(this).addGoal(this.newGoal);

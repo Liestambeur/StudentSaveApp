@@ -2,189 +2,68 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <Space
-        android:id="@+id/emptySpace"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.02"
-        android:focusable="true" />
-
-    <EditText
-        android:id="@+id/nameOfGoal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.08"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:hint="@string/goal_name_et"
-        android:singleLine="true"
-        android:maxLength="30"
-        android:selectAllOnFocus="true" />
-
-    <EditText
-        android:id="@+id/amountToSave"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.08"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:hint="@string/amount_et"
-        android:singleLine="true"
-        android:maxLength="30"
-        android:selectAllOnFocus="true"
-        android:textColor="#797979"
-        android:inputType="numberDecimal" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:text="@string/choose_picture_text"
-        android:id="@+id/choosePicture"
-        android:autoLink="none"
-        android:layout_weight="0.04"
-        android:textColor="#7dd4ff"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        android:typeface="normal"
-        android:gravity="center"/>
-
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:layout_height="match_parent">
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:id="@+id/header"
+        android:layout_weight="0.25"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.22"
-        android:gravity="center_horizontal">
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/nameOfGoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:hint="@string/goal_name_et"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:selectAllOnFocus="true" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture1"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_auto"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/car_picture_desc"/>
+        <EditText
+            android:id="@+id/amountToSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/amount_et"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            android:textColor="#797979"
+            android:inputType="numberDecimal" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture2"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_shopping"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/shopping_picture_desc"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture3"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_bier"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/beer_picture_desc"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_picture_text"
+            android:id="@+id/choosePicture"
+            android:autoLink="none"
+            android:textColor="#7dd4ff"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:typeface="normal"
+            android:gravity="center"/>
     </LinearLayout>
+    <be.kuleuven.chi.app.CoverFlow
+        android:id="@+id/coverflow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.22"
-        android:gravity="center_horizontal">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture4"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_valies"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/suitcase_picture_desc"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture5"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_spaarvarken"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/piggybank_picture_desc"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture6"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_cadeaus"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/gifts_picture_desc"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.22"
-        android:gravity="center_horizontal">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture7"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_multimedia"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/multimedia_picture_desc"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture8"
-            android:layout_weight="0.33"
-            android:src="@drawable/selector_gitaar"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="chooseGoalPicture"
-            android:contentDescription="@string/guitar_picture_desc"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/goalPicture9"
-            android:layout_weight="0.33"
-            android:src="@drawable/dotdotdot"
-            android:background="@null"
-            android:clickable="true"
-            android:onClick="externalGoalPicture"
-            android:contentDescription="@string/dotdotdot_picture_desc"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.12"
-        android:gravity="center_horizontal">
+        android:layout_gravity="bottom"
+        android:layout_weight="0.25"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_buttons">
 
         <Button
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@string/ok_button"
             android:id="@+id/okGoal"
             android:layout_weight="0.5"
@@ -193,7 +72,7 @@
 
         <Button
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@string/cancel_button"
             android:id="@+id/cancelGoal"
             android:layout_weight="0.5"
