@@ -72,10 +72,13 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/historyFrame"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.35"
-        android:background="#99ccff">
+        android:background="#99ccff"
+        android:clickable="true"
+        android:onClick="toHistory">
 
         <include
             android:visibility="gone"
@@ -83,8 +86,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             layout="@layout/historya"
-            android:layout_gravity="center"
-            android:onClick="toHistory"/>
+            android:layout_gravity="center"/>
 
         <include
             android:visibility="gone"

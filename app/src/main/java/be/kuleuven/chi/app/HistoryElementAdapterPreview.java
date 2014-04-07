@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
@@ -71,6 +72,7 @@ public class HistoryElementAdapterPreview extends ArrayAdapter {
         TextView historyAmount = (TextView) convertView.findViewById(R.id.historyAmount1);
         historyAmount.setText(Double.toString(historyElement.getAmount()));
 
+        convertView.setClickable(true);
         return convertView;
     }
 

@@ -73,12 +73,21 @@ public class MainActivity extends BaseActivity {
                 v.setLayoutParams(param);
 
                 listPreviewHistory.addView(v);
+                v.setClickable(true);
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        toHistory(view);
+                    }
+                });
               //  listPreviewHistory.addView(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             }
 
         }else{
             View noHistory = findViewById(R.id.no_history);
             noHistory.setVisibility(1);
+            View historyFrame = findViewById(R.id.historyFrame);
+            historyFrame.setClickable(false);
         }
 
 
