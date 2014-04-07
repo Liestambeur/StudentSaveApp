@@ -64,7 +64,7 @@ public class Goal implements Category {
      * The percentage saved, rounded to an integer
      */
     public int getPercent() {
-        return (int) (getAmountSaved()/getAmount());
+        return (int) ((getAmountSaved()*100)/getAmount());
     }
 
 
