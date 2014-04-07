@@ -8,7 +8,7 @@
     <string name="title_activity_save">Save</string>
     <string name="title_activity_history">History</string>
     <string name="activity_input_title">Input</string>
-    
+
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
 
@@ -65,7 +65,8 @@
     <string name="wallet_text">Wallet</string>
     <string name="saving_for_text">Savings for</string>
     <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
-
+    <string name="enter_name">Enter name</string>
+    <string name="goal_not_initialized">You must create a goal before you can save for one!</string>
 
 
 </resources>

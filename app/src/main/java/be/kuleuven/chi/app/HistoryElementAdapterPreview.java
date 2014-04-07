@@ -28,7 +28,7 @@ public class HistoryElementAdapterPreview extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        int result = AppContent.getInstance().getNumberOfHistoryElements();
+        int result = AppContent.getInstance(mContext).getNumberOfHistoryElements();
         if(result>3){
             result = 3;
         }
@@ -38,8 +38,8 @@ public class HistoryElementAdapterPreview extends ArrayAdapter {
     @Override
     public HistoryElement getItem(int index) {
         // fetches the history elements from new to old (they are stored from old to new)
-        int totalNumberOfHistoryElements = AppContent.getInstance().getNumberOfHistoryElements();
-        return AppContent.getInstance().getHistoryElement(totalNumberOfHistoryElements - index - 1);
+        int totalNumberOfHistoryElements = AppContent.getInstance(mContext).getNumberOfHistoryElements();
+        return AppContent.getInstance(mContext).getHistoryElement(totalNumberOfHistoryElements - index - 1);
     }
 
     @Override

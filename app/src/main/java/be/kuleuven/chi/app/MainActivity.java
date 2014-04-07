@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.ExpenseCategory;
 import be.kuleuven.chi.backend.categories.Goal;
 import be.kuleuven.chi.backend.categories.IncomeCategory;
@@ -24,12 +25,14 @@ import be.kuleuven.chi.backend.historyElements.SavingElement;
 
 public class MainActivity extends BaseActivity {
 
-    AppContent appContent = AppContent.getInstance();
+    AppContent appContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        appContent = AppContent.getInstance(this);
 
         if(appContent.hasGoal()){
             Goal goal = appContent.getGoal();
@@ -55,7 +58,7 @@ public class MainActivity extends BaseActivity {
             historyPreview.setVisibility(1);
 
             TextView walletTotal = (TextView) findViewById(R.id.previewWalletTotal);
-            walletTotal.append(": " + AppContent.getInstance().getWalletTotal());
+            walletTotal.append(": " + AppContent.getInstance(this).getWalletTotal());
 
             LinearLayout listPreviewHistory = (LinearLayout) findViewById(R.id.listPreviewHistory);
             listPreviewHistory.setWeightSum(3);
@@ -108,20 +111,26 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
-    public void income(View view){  //TODO
-        Intent intent = new Intent(this, SaveActivity.class);
+    public void income(View view){
+        Intent intent = new Intent(this, InputActivity.class);
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
+                InputActivityType.INCOME.name());
         startActivity(intent);
         finish();
     }
 
-    public void expense(View view){ //TODO
-        Intent intent = new Intent(this, SaveActivity.class);
+    public void expense(View view){
+        Intent intent = new Intent(this, InputActivity.class);
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
+                InputActivityType.EXPENSE.name());
         startActivity(intent);
         finish();
     }
 
     public void save(View view){
-        Intent intent = new Intent(this, SaveActivity.class);
+        Intent intent = new Intent(this, InputActivity.class);
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
+                InputActivityType.SAVE.name());
         startActivity(intent);
         finish();
     }

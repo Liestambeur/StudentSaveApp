@@ -8,18 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:hint="@string/enter_amount"
-        android:id="@+id/enter_amount_et"
+        android:hint="@string/enter_name"
+        android:id="@+id/enter_name_et"
         android:layout_gravity="center_horizontal" />
 
-    <!-- name?
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:id="@+id/editText2"
+        android:hint="@string/enter_amount"
+        android:id="@+id/enter_amount_et"
         android:layout_gravity="center_horizontal" />
-    -->
 
     <TextView
         android:layout_width="match_parent"
@@ -37,27 +36,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:entries="@array/save_categories"
         android:id="@+id/categoryListView" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="@dimen/bottom_button_bar_weight">
+        android:layout_weight="0.12">
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="@string/ok_button"
-            android:id="@+id/ok_input" />
+            android:id="@+id/ok_input"
+            android:onClick="confirmInput"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="@string/cancel_button"
-            android:id="@+id/cancel_input" />
+            android:id="@+id/cancel_input"
+            android:onClick="cancelButton"/>
 
         </LinearLayout>
 </LinearLayout>

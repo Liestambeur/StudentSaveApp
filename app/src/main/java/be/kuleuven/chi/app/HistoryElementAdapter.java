@@ -29,14 +29,14 @@ public class HistoryElementAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        return AppContent.getInstance().getNumberOfHistoryElements();
+        return AppContent.getInstance(mContext).getNumberOfHistoryElements();
     }
 
     @Override
     public HistoryElement getItem(int index) {
         // fetches the history elements from new to old (they are stored from old to new)
-        int totalNumberOfHistoryElements = AppContent.getInstance().getNumberOfHistoryElements();
-        return AppContent.getInstance().getHistoryElement(totalNumberOfHistoryElements - index - 1);
+        int totalNumberOfHistoryElements = AppContent.getInstance(mContext).getNumberOfHistoryElements();
+        return AppContent.getInstance(mContext).getHistoryElement(totalNumberOfHistoryElements - index - 1);
     }
 
     @Override
