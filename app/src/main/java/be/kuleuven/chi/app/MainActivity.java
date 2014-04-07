@@ -32,9 +32,9 @@ public class MainActivity extends BaseActivity {
             TextView goalName = (TextView) findViewById(R.id.goalName);
             goalName.setText(goal.getName());
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
-            goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go.");
+            goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go");
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
-            goalDone.setText("€ "+goal.getAmountSaved()+" done.");
+            goalDone.setText("€ "+goal.getAmountSaved()+" done");
             TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
             goalPercent.setText(goal.getPercent() + " %");
             ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
