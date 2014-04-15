@@ -2,6 +2,7 @@ package be.kuleuven.chi.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,40 +17,17 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
 /**
  * Created by NeleR on 4/04/2014.
  */
-public class HistoryElementAdapterPreview extends ArrayAdapter {
+public class HistoryElementAdapterPreview extends HistoryElementAdapter {
 
-    Context mContext;
-    int layoutResourceId;
 
     public HistoryElementAdapterPreview(Context mContext, int layoutResourceId) {
         super(mContext, layoutResourceId);
-        this.mContext = mContext;
-        this.layoutResourceId = layoutResourceId;
-    }
-
-    @Override
-    public int getCount() {
-        int result = AppContent.getInstance(mContext).getNumberOfHistoryElements();
-        if(result>3){
-            result = 3;
-        }
-        return result;
-    }
-
-    @Override
-    public HistoryElement getItem(int index) {
-        // fetches the history elements from new to old (they are stored from old to new)
-        int totalNumberOfHistoryElements = AppContent.getInstance(mContext).getNumberOfHistoryElements();
-        return AppContent.getInstance(mContext).getHistoryElement(totalNumberOfHistoryElements - index - 1);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
     }
 
     @Override
     public View getView(int index, View convertView, ViewGroup parent) {
+
+        //TODO zou mooi moeten kunnen overerven van HistoryElementAdapter en niet met zo'n aparte row
 
         if(convertView==null){
             // inflate the layout
@@ -60,8 +38,9 @@ public class HistoryElementAdapterPreview extends ArrayAdapter {
 
         HistoryElement historyElement = getItem(index);
 
-        //ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType1);
-        //historyType.setImageDrawable(historyElement.getTypePictureId());
+        Drawable historyPicture = mContext.getResources().getDrawable(historyElement.getTypePictureId());
+        ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType1);
+        historyType.setImageDrawable(historyPicture);
 
         TextView historyTitle = (TextView) convertView.findViewById(R.id.historyCategory1);
         historyTitle.setText(historyElement.getCategoryName());

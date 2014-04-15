@@ -15,6 +15,6 @@ public class SavingElement extends HistoryElement {
 
     @Override
     public int getTypePictureId() {
-        return R.drawable.bier;
+        return R.drawable.save;
     }
 }

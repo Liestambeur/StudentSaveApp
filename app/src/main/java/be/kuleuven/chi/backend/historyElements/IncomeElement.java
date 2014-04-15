@@ -14,6 +14,6 @@ public class IncomeElement extends HistoryElement {
 
     @Override
     public int getTypePictureId() {
-        return R.drawable.gitaar;
+        return R.drawable.income;
     }
 }
