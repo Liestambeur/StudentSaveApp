@@ -15,11 +15,11 @@
         android:selectAllOnFocus="true" />
 
     <EditText
+        android:id="@+id/enter_amount_et"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:hint="@string/enter_amount"
-        android:id="@+id/enter_amount_et"
         android:layout_gravity="center_horizontal"
         android:singleLine="true"
         android:maxLength="30"
@@ -52,20 +52,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.12">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="@string/ok_button"
-            android:id="@+id/ok_input"
-            android:onClick="confirmInput"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="@string/cancel_button"
-            android:id="@+id/cancel_input"
-            android:onClick="cancelButton"/>
+        <include
+            android:id="@+id/ok_cancel"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            layout="@layout/ok_cancel"/>
 
     </LinearLayout>
 </LinearLayout>

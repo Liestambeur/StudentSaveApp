@@ -10,11 +10,11 @@
 
 
     <FrameLayout
-        android:layout_weight="0.4"
         android:id="@+id/FrameLayout1"
+        android:layout_weight="0.4"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:background="#a8a8a8">
+        android:background="@null">
 
 
         <include
@@ -22,7 +22,7 @@
             android:visibility="gone"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            layout="@layout/goala"
+            layout="@layout/goal_empty"
             android:layout_gravity="center" />
 
         <include
@@ -30,7 +30,7 @@
             android:visibility="gone"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            layout="@layout/goalb"/>
+            layout="@layout/goal_full"/>
 
 
 
@@ -40,35 +40,106 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.25
-        ">
+        android:layout_weight="0.25"
+        android:background="@null">
 
-        <Button
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/income_button"
-            android:id="@+id/button_income"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
             android:onClick="income"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.33" />
+            android:background="@drawable/button_background">
 
-        <Button
+            <ImageView
+                android:id="@+id/image_income"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:onClick="income"
+                android:src="@drawable/beurs_in"
+                android:layout_weight="0.75"
+                android:layout_gravity="center_vertical|top"
+                android:scaleType="fitCenter" />
+
+            <Button
+                android:id="@+id/button_income"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:text="@string/income_button"
+                android:background="@null"
+                android:onClick="income"
+                android:layout_gravity="center_vertical|bottom"
+                android:layout_weight="0.2"
+                android:gravity="center_horizontal|bottom" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/save_button"
-            android:id="@+id/button_save"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
             android:onClick="save"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.33" />
+            android:background="@drawable/button_background">
 
-        <Button
+            <ImageView
+                android:id="@+id/image_save"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:onClick="save"
+                android:layout_weight="0.75"
+                android:src="@drawable/spaar"
+                android:layout_gravity="center_vertical|bottom"
+                android:scaleType="fitCenter" />
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:text="@string/save_button"
+                android:background="@null"
+                android:onClick="save"
+                android:layout_gravity="center_vertical|bottom"
+                android:layout_weight="0.2"
+                android:gravity="center_horizontal|bottom"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/expense_button"
-            android:id="@+id/button_expense"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
             android:onClick="expense"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.33" />
+            android:background="@drawable/button_background">
+
+            <ImageView
+                android:id="@+id/image_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:onClick="expense"
+                android:src="@drawable/beurs_uit"
+                android:background="@null"
+                android:layout_weight="0.75"
+                android:layout_gravity="center_vertical|top"
+                android:scaleType="fitCenter" />
+
+            <Button
+                android:id="@+id/button_expense"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:text="@string/expense_button"
+                android:background="@null"
+                android:onClick="expense"
+                android:layout_gravity="center_vertical|bottom"
+                android:layout_weight="0.2"
+                android:gravity="center_horizontal|bottom"/>
+            <!--android:tint="@drawable/selector_icon_tint"-->
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <FrameLayout
@@ -76,7 +147,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.35"
-        android:background="#99ccff"
+        android:background="@null"
         android:clickable="true"
         android:onClick="toHistory">
 
@@ -85,7 +156,7 @@
             android:id="@+id/no_history"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            layout="@layout/historya"
+            layout="@layout/history_preview_empty"
             android:layout_gravity="center"/>
 
         <include
@@ -93,7 +164,7 @@
             android:id="@+id/history_preview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            layout="@layout/historyb"
+            layout="@layout/history_preview_full"
             android:layout_gravity="center"
             android:onClick="toHistory"/>
 

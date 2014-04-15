@@ -61,6 +61,7 @@ public class MainActivity extends BaseActivity {
             LinearLayout listPreviewHistory = (LinearLayout) findViewById(R.id.listPreviewHistory);
             listPreviewHistory.setWeightSum(3);
             HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_rowb);
+
             for(int i=0;i<3;i++) {
                 View v;
                 if(appContent.getNumberOfHistoryElements()<=i){

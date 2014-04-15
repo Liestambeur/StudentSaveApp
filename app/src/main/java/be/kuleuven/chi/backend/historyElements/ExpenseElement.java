@@ -14,6 +14,6 @@ public class ExpenseElement extends HistoryElement {
 
     @Override
     public int getTypePictureId() {
-        return R.drawable.auto;
+        return R.drawable.expense;
     }
 }

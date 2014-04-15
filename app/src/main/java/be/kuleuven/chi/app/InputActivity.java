@@ -118,7 +118,7 @@ public class InputActivity extends BaseActivity {
         finish();
     }
 
-    public void confirmInput(View view) {
+    public void okButton(View view) {
         // TODO Minder vuil maken
         inputName = inputName==null?"Other":inputName;
         selectedItem = selectedItem==null?"Other":selectedItem;
