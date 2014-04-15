@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color="@color/SteelBlue"/>
+        android:color="@color/selector_button_color"/>
     <stroke
         android:width="3dip"
         android:color="@null" />
