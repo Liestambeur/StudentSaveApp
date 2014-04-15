@@ -51,6 +51,11 @@ public class MainActivity extends BaseActivity {
             save.setEnabled(false);
         }
 
+        if(appContent.getWalletTotalAmount()<=0){
+            Button save = (Button) findViewById(R.id.button_save);
+            save.setEnabled(false);
+        }
+
         if(appContent.hasHistory()){
             View historyPreview = findViewById(R.id.history_preview);
             historyPreview.setVisibility(1);

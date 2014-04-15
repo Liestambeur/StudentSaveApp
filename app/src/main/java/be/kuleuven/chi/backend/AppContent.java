@@ -68,6 +68,10 @@ public class AppContent {
         return (this.currency.getSymbol() + " " + this.history.getWalletTotal());
     }
 
+    public double getWalletTotalAmount() {
+        return this.history.getWalletTotal();
+    }
+
     public int getNumberOfHistoryElements() {
         return this.history.getNumberOfHistoryElements();
     }

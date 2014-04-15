@@ -4,9 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#a8a8a8"
-    android:weightSum="1"
-    android:onClick="removeGoal"
-    android:clickable="true">
+    android:weightSum="1">
 
 
     <LinearLayout
@@ -93,6 +91,7 @@
             android:layout_margin="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+            android:clickable="false"
             android:progress="0"
             android:duplicateParentState="true"/>
 
