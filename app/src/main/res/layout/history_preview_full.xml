@@ -15,9 +15,7 @@
         android:layout_height="0dp"
         android:id="@+id/previewWalletTotal"
         android:layout_weight="0.15"
-        android:visibility="visible"
         android:textSize="15dp"
-        android:textColor="#000000"
         android:textAlignment="center"
         android:text="@string/wallet_text"
         android:textStyle="bold"
@@ -26,7 +24,7 @@
     <LinearLayout
         android:id="@+id/listPreviewHistory"
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.85"
         android:weightSum="3">
