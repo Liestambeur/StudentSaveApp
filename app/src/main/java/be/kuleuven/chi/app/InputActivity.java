@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -83,7 +84,12 @@ public class InputActivity extends BaseActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setInputAmount(Double.parseDouble(s.toString()));
+                try{
+                    setInputAmount(Double.parseDouble(s.toString()));
+                }catch(NumberFormatException e){
+                    setInputAmount(Double.parseDouble("0"));
+                }
+
             }
             @Override
             public void afterTextChanged(Editable s) {}
@@ -96,6 +102,7 @@ public class InputActivity extends BaseActivity {
             TextView pick = (TextView) findViewById(R.id.pick_category);
             if(pick!=null) pick.setText(R.string.dont_forget_piggybank);
         }
+        this.enableOK(false);
     }
 
     public void setSelectedCategory(String listItemText) {
@@ -107,7 +114,13 @@ public class InputActivity extends BaseActivity {
     }
 
     public void setInputAmount(Double amount) {
-        this.inputAmount = amount;
+         System.out.println(amount);
+         if(amount!=0){
+             this.enableOK(true);
+         } else{
+             this.enableOK(false);
+         }
+             this.inputAmount = amount;
     }
 
 
@@ -167,5 +180,16 @@ public class InputActivity extends BaseActivity {
     public void dismissAd(){
         ad.dismiss();
         backToMain();
+    }
+
+    public void enableOK(Boolean enable){
+        LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
+        if(enable){
+            ok.setAlpha(1);
+        } else{
+            ok.setAlpha(new Float(0.6));
+        }
+        ok.setEnabled(enable);
+
     }
 }
