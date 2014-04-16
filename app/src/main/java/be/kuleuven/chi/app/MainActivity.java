@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity {
         ImageView savei = (ImageView) findViewById(R.id.image_save);
         savei.setEnabled(enable);
         if(!enable){
-            savei.setColorFilter(Color.GRAY);
+            //savei.setColorFilter(Color.GRAY);
             save.setAlpha(new Float(0.6));
         }
 
@@ -181,7 +181,7 @@ public class MainActivity extends BaseActivity {
         ImageView savei = (ImageView) findViewById(R.id.image_expense);
         savei.setEnabled(enable);
         if(!enable){
-            savei.setColorFilter(Color.GRAY);
+            //savei.setColorFilter(Color.GRAY);
             save.setAlpha(new Float(0.6));
         }
 
