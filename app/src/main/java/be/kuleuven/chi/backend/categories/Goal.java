@@ -16,6 +16,7 @@ public class Goal implements Category {
     private double amountSaved;
     private Drawable picture;
     private Calendar dueDate;
+    //TODO when adding a variable, don't forget to change to copy methods!
 
     public Goal(){
         this.name = "Goal";
@@ -92,7 +93,7 @@ public class Goal implements Category {
     }
 
     public void setDueDate(Calendar newDate) {
-        if(newDate.after(new GregorianCalendar())) {
+        if(newDate != null && newDate.after(new GregorianCalendar())) {
             // the given date is a valid dueDate
             this.dueDate = newDate;
         }
@@ -114,4 +115,22 @@ public class Goal implements Category {
         return result && this.amount != 0 && this.name.length() > 0;
     }
 
+    public Goal getCopy() {
+        Goal copy = new Goal();
+        copy.setName(this.name);
+        copy.setAmount(this.amount);
+        copy.setAmountSaved(this.amountSaved);
+        copy.setPicture(this.picture);
+        copy.setDueDate(this.dueDate);
+
+        return copy;
+    }
+
+    public void copyState(Goal goal) {
+        this.name = goal.getName();
+        this.amount = goal.getAmount();
+        this.amountSaved = goal.getAmountSaved();
+        this.picture = goal.getPicture();
+        this.dueDate = goal.getDueDate();
+    }
 }

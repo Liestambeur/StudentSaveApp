@@ -40,8 +40,7 @@ public class InputActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         //Gewoon om die INPUT_ACTIVITY_TYPE string niet overal te hardcoden staat hij in strings.xml
-        inputActivityType = intent.getStringExtra(
-                getResources().getText(R.string.input_activity_type).toString());
+        inputActivityType = intent.getStringExtra(getResources().getText(R.string.input_activity_type).toString());
         int categories = InputActivityType.valueOf(inputActivityType).getCategories();
         setContentView(R.layout.activity_input);
 

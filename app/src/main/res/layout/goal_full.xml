@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@null"
     android:weightSum="1"
-    android:onClick="removeGoal"
+    android:onClick="editGoal"
     android:clickable="true">
 
 

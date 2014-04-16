@@ -14,6 +14,7 @@
 
     <!-- Static -->
     <string name="input_activity_type">INPUT_ACTIVITY_TYPE</string>
+    <string name="goal_activity_type">GOAL_ACTIVITY_TYPE</string>
 
     <!-- Main Activity -->
     <string name="add_goal_area">Add a goal</string>
@@ -67,7 +68,9 @@
         <item>Groceries</item>
         <item>Books</item>
         <item>Party</item>
-        <item>Gift</item>
+        <item>Gifts</item>
+        <item>Transport</item>
+        <item>Other</item>
     </string-array>
     <string-array name="save_categories">
         <item>Your Goal</item>

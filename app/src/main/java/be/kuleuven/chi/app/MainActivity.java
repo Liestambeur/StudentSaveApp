@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.GoalActivityType;
 import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.Goal;
 
@@ -129,6 +130,15 @@ public class MainActivity extends BaseActivity {
     public void addGoal(View view){
         //Intent intent = new Intent(this, AddGoalActivity.class);
         Intent intent = new Intent(this, AddGoalPage1Activity.class);
+        intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
+        startActivity(intent);
+        finish();
+    }
+
+    public void editGoal(View view){
+        //Intent intent = new Intent(this, AddGoalActivity.class);
+        Intent intent = new Intent(this, AddGoalPage1Activity.class);
+        intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.EDIT);
         startActivity(intent);
         finish();
     }
@@ -144,8 +154,7 @@ public class MainActivity extends BaseActivity {
         income.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
-                InputActivityType.INCOME.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.INCOME.name());
         startActivity(intent);
         finish();
     }
@@ -155,8 +164,7 @@ public class MainActivity extends BaseActivity {
         expense.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
-                InputActivityType.EXPENSE.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.EXPENSE.name());
         startActivity(intent);
         finish();
     }
@@ -166,8 +174,7 @@ public class MainActivity extends BaseActivity {
         save.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
-                InputActivityType.SAVE.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.SAVE.name());
         startActivity(intent);
         finish();
     }

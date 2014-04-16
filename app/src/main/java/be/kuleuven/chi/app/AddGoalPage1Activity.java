@@ -3,54 +3,23 @@ package be.kuleuven.chi.app;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
-import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.GoalActivityType;
 import be.kuleuven.chi.backend.categories.Goal;
 
 /**
@@ -58,17 +27,28 @@ import be.kuleuven.chi.backend.categories.Goal;
  */
 public class AddGoalPage1Activity extends BaseActivity {
 
-    Goal newGoal;
-    DatePickerFragment newFragment;
+    Goal goal;
+    Goal oldGoal;
+    int goalActivityType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_goal_page1);
 
+        Intent intent = getIntent();
+        this.goalActivityType = intent.getIntExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
+
         // TODO zorg dat focus niet op 'name of goal' ligt: tekst mag niet geselecteerd zijn bij opstarten
 
-        newGoal = new Goal();
+        if(this.goalActivityType == GoalActivityType.ADD) {
+            goal = new Goal();
+        }
+        else if(this.goalActivityType == GoalActivityType.EDIT) {
+            this.goal = AppContent.getInstance(this).getCurrentGoal();
+            this.oldGoal = AppContent.getInstance(this).getCurrentGoal().getCopy();
+            initGoalValues();
+        }
 
         initTextWatchers();
         this.enableOK(false);
@@ -87,7 +67,7 @@ public class AddGoalPage1Activity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                newGoal.setName(charSequence.toString());
+                goal.setName(charSequence.toString());
                 setOkButton();
             }
 
@@ -105,10 +85,10 @@ public class AddGoalPage1Activity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 try {
-                    newGoal.setAmount(Double.parseDouble(charSequence.toString()));
+                    goal.setAmount(Double.parseDouble(charSequence.toString()));
                 }
                 catch (NumberFormatException e) {
-                    newGoal.setAmount(Double.parseDouble("0"));
+                    goal.setAmount(Double.parseDouble("0"));
                     // do nothing
                 }
                 setOkButton();
@@ -135,7 +115,7 @@ public class AddGoalPage1Activity extends BaseActivity {
                                 Integer.valueOf(dateParts[1]), Integer.valueOf(dateParts[0]));
                         System.out.println(dateParts);
                         if(calendar.after(new GregorianCalendar())) {
-                            newGoal.setDueDate(calendar);
+                            goal.setDueDate(calendar);
 
                         }
                         else {
@@ -143,7 +123,7 @@ public class AddGoalPage1Activity extends BaseActivity {
                         }
                     }
                     catch (NumberFormatException e) {
-                        newGoal.resetDueDate();
+                        goal.resetDueDate();
                         // do nothing
                     }
                 }
@@ -161,6 +141,25 @@ public class AddGoalPage1Activity extends BaseActivity {
         dueDateText.addTextChangedListener(dueDateWatcher);
     }
 
+    private void initGoalValues() {
+        TextView nameOfGoal = (TextView) findViewById(R.id.nameOfGoal);
+        nameOfGoal.setText(this.goal.getName());
+
+        TextView amountToSave = (TextView) findViewById(R.id.amountToSave);
+        amountToSave.setText(Double.toString(this.goal.getAmount()));
+
+        Switch date_switch_goal = (Switch) findViewById(R.id.date_switch_goal);
+        if(this.goal.getDueDate() != null) {
+            date_switch_goal.setChecked(true);
+
+            TextView due_date_field = (TextView) findViewById(R.id.due_date_field);
+            due_date_field.setText(this.goal.getDueDateString());
+        }
+        else {
+            date_switch_goal.setChecked(false);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -176,23 +175,37 @@ public class AddGoalPage1Activity extends BaseActivity {
         }
         else {
             findViewById(R.id.due_date_field).setVisibility(View.INVISIBLE);
-            newGoal.resetDueDate();
+            goal.resetDueDate();
         }
         setOkButton();
     }
 
     public void okButton(View okButton) {
+        if(this.goalActivityType == GoalActivityType.EDIT) {
+            //TODO when in edit-mode, you go now back to main, editing the picture is not possible yet
+            //TODO oldGOal op een of andere manier meegeven aan pagina 2, zodat je rollback kan doen
 
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            AppContent.getInstance(this).addGoal(this.goal);
 
-        AppContent.getInstance(this).addGoal(this.newGoal);
+            Intent intent = new Intent(this, AddGoalPage2Activity.class);
+            intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), this.goalActivityType);
 
-        Intent intent = new Intent(this, AddGoalPage2Activity.class);
-        startActivity(intent);
-        finish();
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void cancelButton(View cancelButton) {
         // the goal is not stored in the AppContent
+        if(this.goalActivityType == GoalActivityType.EDIT) {
+            // change the state of the goal back to its former state
+            this.goal.copyState(this.oldGoal);
+        }
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -200,43 +213,16 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     private void setOkButton(){
-        if(this.newGoal.isValid(((Switch) findViewById(R.id.date_switch_goal)).isChecked())){
+        if(this.goal.isValid(((Switch) findViewById(R.id.date_switch_goal)).isChecked())){
             this.enableOK(true);
         } else{
             this.enableOK(false);
         }
     }
 
-    public void enableOK(Boolean enable){
+    public void enableOK(Boolean enable) {
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
-    }
-
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-        Calendar calendar;
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default values for the picker
-            final Calendar calendar = new GregorianCalendar();
-            int year = calendar.YEAR;
-            int month = calendar.MONTH;
-            int day = calendar.DAY_OF_MONTH;
-
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Called when the date picker is changed
-            calendar.set(year, month, day);
-            System.out.println("Date picked: " + year + "-" + month + "-" + day);
-        }
-
-        public Calendar getCalendar() {
-            return this.calendar;
-        }
     }
 
 }

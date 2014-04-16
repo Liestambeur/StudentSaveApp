@@ -51,7 +51,7 @@ public class AppContent {
     }
 
     public Goal getCurrentGoal() {
-        return currentGoal;
+        return this.currentGoal;
     }
 
     public void addGoal(Goal goal) {
@@ -65,7 +65,9 @@ public class AppContent {
 
     public void deleteGoal(Goal goal) {
         this.goals.remove(goal);
-        this.currentGoal = this.goals.get(this.goals.size() - 1);
+        if(!this.goals.isEmpty()) {
+            this.currentGoal = this.goals.get(this.goals.size() - 1);
+        }
     }
 
     public void addToHistory(HistoryElement element) {

@@ -62,7 +62,7 @@ public abstract class HistoryElement {
     }
 
     public String getDateName() {
-        return getDate().toString();
+        return this.date.get(Calendar.DAY_OF_MONTH) + "/" + this.date.get(Calendar.MONTH) + "/" + this.date.get(Calendar.YEAR);
     }
 
 }

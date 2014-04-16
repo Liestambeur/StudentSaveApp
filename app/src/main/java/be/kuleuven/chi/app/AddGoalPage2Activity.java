@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.GoalActivityType;
 
 /**
  * Created by NeleR on 16/04/2014.
@@ -19,17 +20,23 @@ import be.kuleuven.chi.backend.AppContent;
 public class AddGoalPage2Activity extends BaseActivity {
 
     List<ImageButton> pictures;
+    int goalActivityType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_goal_page2);
 
+        Intent intent = getIntent();
+        this.goalActivityType = intent.getIntExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
+        //TODO implementeer het editeren van de goal-picture
+
         fillPicturesList();
         setAllPicturesUnactivated();
+
         this.enableOK(true);
-        ImageButton image = (ImageButton) findViewById(R.id.goalPicture5);
-        this.chooseGoalPicture(image);
+        //ImageButton image = (ImageButton) findViewById(R.id.goalPicture5);
+        //this.chooseGoalPicture(image);
     }
 
     private void fillPicturesList() {
