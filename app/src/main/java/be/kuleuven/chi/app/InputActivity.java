@@ -184,12 +184,6 @@ public class InputActivity extends BaseActivity {
 
     public void enableOK(Boolean enable){
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
-        if(enable){
-            ok.setAlpha(1);
-        } else{
-            ok.setAlpha(new Float(0.6));
-        }
-        ok.setEnabled(enable);
-
+        this.enableLinear(ok, enable);
     }
 }

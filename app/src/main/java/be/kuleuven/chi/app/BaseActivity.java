@@ -3,6 +3,8 @@ package be.kuleuven.chi.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 /**
  * Created by Lies on 6/04/14.
@@ -21,6 +23,18 @@ public class BaseActivity extends Activity{
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void enableLinear(LinearLayout view, Boolean enable){
+        for(int i = 0; i<view.getChildCount();i++){
+            view.getChildAt(i).setEnabled(enable);
+        }
+        view.setEnabled(enable);
+        if(enable){
+            view.setAlpha(1);
+        } else{
+            view.setAlpha(new Float(0.6));
         }
     }
 }
