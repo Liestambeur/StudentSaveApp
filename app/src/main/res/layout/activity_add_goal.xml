@@ -18,7 +18,8 @@
         android:singleLine="true"
         android:maxLength="30"
         android:selectAllOnFocus="true"
-        android:layout_marginTop="4sp"/>
+        android:layout_marginTop="4sp"
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/amountToSave"
@@ -181,27 +182,18 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.12"
         android:gravity="center_horizontal">
 
-        <Button
-            android:layout_width="0dp"
+        <include
+            android:id="@+id/ok_cancel"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="@string/ok_button"
-            android:id="@+id/okGoal"
-            android:layout_weight="0.5"
-            android:clickable="true"
-            android:onClick="okButton"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:text="@string/cancel_button"
-            android:id="@+id/cancelGoal"
-            android:layout_weight="0.5"
-            android:onClick="cancelButton"/>
+            android:layout_gravity="center"
+            layout="@layout/ok_cancel"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -51,6 +51,11 @@ public class MainActivity extends BaseActivity {
             save.setEnabled(false);
         }
 
+        if(appContent.getWalletTotalAmount()<=0){
+            Button save = (Button) findViewById(R.id.button_save);
+            save.setEnabled(false);
+        }
+
         if(appContent.hasHistory()){
             View historyPreview = findViewById(R.id.history_preview);
             historyPreview.setVisibility(1);
@@ -61,6 +66,7 @@ public class MainActivity extends BaseActivity {
             LinearLayout listPreviewHistory = (LinearLayout) findViewById(R.id.listPreviewHistory);
             listPreviewHistory.setWeightSum(3);
             HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_rowb);
+
             for(int i=0;i<3;i++) {
                 View v;
                 if(appContent.getNumberOfHistoryElements()<=i){
@@ -119,6 +125,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void income(View view){
+        View income = findViewById(R.id.income);
+        income.setPressed(true);
+
         Intent intent = new Intent(this, InputActivity.class);
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
                 InputActivityType.INCOME.name());
@@ -127,6 +136,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void expense(View view){
+        View expense = findViewById(R.id.expense);
+        expense.setPressed(true);
+
         Intent intent = new Intent(this, InputActivity.class);
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
                 InputActivityType.EXPENSE.name());
@@ -135,6 +147,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void save(View view){
+        View save = findViewById(R.id.save);
+        save.setPressed(true);
+
         Intent intent = new Intent(this, InputActivity.class);
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
                 InputActivityType.SAVE.name());

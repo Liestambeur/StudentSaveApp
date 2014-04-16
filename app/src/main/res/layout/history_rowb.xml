@@ -28,51 +28,23 @@
             android:layout_weight="0.1"
             android:layout_gravity="center_vertical|left" />
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/historyCategory1"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.6"
+            android:layout_weight="0.7"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/historyType1"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="School boeken"
+            android:textSize="20dp"
+            android:layout_gravity="bottom|right"
+            android:textIsSelectable="true"
             android:clickable="true"
-            android:onClick="toHistory">
+            android:onClick="toHistory"/>
 
-            <TextView
-                android:id="@+id/historyTitle1"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/historyType1"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="School boeken"
-                android:textSize="15dp"
-                android:layout_weight="0.7"
-                android:layout_gravity="bottom|right"
-                android:textIsSelectable="true"
-                android:clickable="true"
-                android:onClick="toHistory"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_above="@+id/historyTitle1"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignWithParentIfMissing="true"
-                android:layout_toRightOf="@+id/historyType1"
-                android:gravity="center_vertical"
-                android:text="Example application"
-                android:textSize="5dp"
-                android:layout_weight="0.3"
-                android:id="@+id/historyCategoryAndDate1"
-                android:layout_gravity="right|top"
-                android:textIsSelectable="true"
-                android:singleLine="true"
-                android:clickable="true"
-                android:onClick="toHistory"
-                />
-        </LinearLayout>
 
         <TextView
             android:layout_width="0dp"
