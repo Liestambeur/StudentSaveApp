@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class AddGoalActivity extends BaseActivity {
         initTextWatchers();
         fillPicturesList();
         setAllPicturesUnactivated();
+        this.enableOK(false);
+        ImageButton image = (ImageButton) findViewById(R.id.goalPicture1);
+        this.chooseGoalPicture(image);
     }
 
     private void initTextWatchers() {
@@ -48,6 +52,7 @@ public class AddGoalActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 newGoal.setName(charSequence.toString());
+                setOkButton();
             }
 
             @Override
@@ -67,8 +72,10 @@ public class AddGoalActivity extends BaseActivity {
                     newGoal.setAmount(Double.parseDouble(charSequence.toString()));
                 }
                 catch (NumberFormatException e) {
+                    newGoal.setAmount(Double.parseDouble("0"));
                     // do nothing
                 }
+                setOkButton();
             }
 
             @Override
@@ -143,5 +150,23 @@ public class AddGoalActivity extends BaseActivity {
         Intent intent = new Intent(this, ExternalPicutureActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void setOkButton(){
+        if(this.newGoal.isValid()){
+            this.enableOK(true);
+        } else{
+            this.enableOK(false);
+        }
+    }
+
+    public void enableOK(Boolean enable){
+        LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
+        ok.setEnabled(enable);
+        if(enable){
+            ok.setAlpha(1);
+        } else{
+            ok.setAlpha(new Float(0.6));
+        }
     }
 }

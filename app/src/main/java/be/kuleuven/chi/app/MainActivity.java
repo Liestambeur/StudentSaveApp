@@ -168,6 +168,7 @@ public class MainActivity extends BaseActivity {
         savei.setEnabled(enable);
         if(!enable){
             savei.setColorFilter(Color.GRAY);
+            save.setAlpha(new Float(0.6));
         }
 
     }
@@ -181,6 +182,7 @@ public class MainActivity extends BaseActivity {
         savei.setEnabled(enable);
         if(!enable){
             savei.setColorFilter(Color.GRAY);
+            save.setAlpha(new Float(0.6));
         }
 
     }

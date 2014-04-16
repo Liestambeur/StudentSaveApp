@@ -24,6 +24,7 @@ public class Goal implements Category {
     }
 
     public void setName(String name) {
+        System.out.println("NAAM: "+name);
         this.name = name;
     }
 
@@ -80,6 +81,8 @@ public class Goal implements Category {
         this.picture = picture;
     }
 
-
+    public Boolean isValid(){
+        return this.amount!=0 && this.name.length()>0;
+    }
 
 }
