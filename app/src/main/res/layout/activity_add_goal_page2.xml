@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:weightSum="1">
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="fill">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_picture_text"
+        android:id="@+id/choosePicture"
+        android:autoLink="none"
+        android:textColor="#7dd4ff"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:typeface="normal"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture1"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_auto"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/car_picture_desc"/>
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture2"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_shopping"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/shopping_picture_desc"/>
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture3"
+            android:src="@drawable/selector_bier"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/beer_picture_desc"
+            android:layout_weight="0.33" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture4"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_valies"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/suitcase_picture_desc"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture5"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_spaarvarken"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/piggybank_picture_desc"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture6"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_cadeaus"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/gifts_picture_desc"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture7"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_multimedia"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/multimedia_picture_desc"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture8"
+            android:layout_weight="0.33"
+            android:src="@drawable/selector_gitaar"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="chooseGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/guitar_picture_desc"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/goalPicture9"
+            android:layout_weight="0.33"
+            android:src="@drawable/dotdotdot"
+            android:background="@null"
+            android:clickable="true"
+            android:onClick="externalGoalPicture"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/dotdotdot_picture_desc"/>
+    </LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:gravity="bottom"
+    android:layout_gravity="bottom">
+
+    <include
+        android:id="@+id/ok_cancel"
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        layout="@layout/ok_cancel"/>
+</LinearLayout>
+
+</LinearLayout>

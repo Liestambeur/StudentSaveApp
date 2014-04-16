@@ -2,6 +2,10 @@ package be.kuleuven.chi.backend.categories;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+
 /**
  * Created by Lies on 3/04/14.
  */
@@ -11,12 +15,14 @@ public class Goal implements Category {
     private double amount;
     private double amountSaved;
     private Drawable picture;
+    private Calendar dueDate;
 
     public Goal(){
-        this.name="Goal";
-        this.amount=0;
-        this.amountSaved =0;
-        this.picture =null;
+        this.name = "Goal";
+        this.amount = 0;
+        this.amountSaved = 0;
+        this.picture = null;
+        this.dueDate = null;
     }
 
     public String getName() {
@@ -81,8 +87,31 @@ public class Goal implements Category {
         this.picture = picture;
     }
 
-    public Boolean isValid(){
-        return this.amount!=0 && this.name.length()>0;
+    public Calendar getDueDate() {
+        return this.dueDate;
+    }
+
+    public void setDueDate(Calendar newDate) {
+        if(newDate.after(new GregorianCalendar())) {
+            // the given date is a valid dueDate
+            this.dueDate = newDate;
+        }
+    }
+
+    public void resetDueDate() {
+        this.dueDate = null;
+    }
+
+    public String getDueDateString() {
+        return this.dueDate.get(Calendar.DAY_OF_MONTH) + "/" + this.dueDate.get(Calendar.MONTH) + "/" + this.dueDate.get(Calendar.YEAR);
+    }
+
+    public Boolean isValid(boolean dueDateRequired) {
+        boolean result = true;
+        if(dueDateRequired) {
+            result = result && getDueDate() != null;
+        }
+        return result && this.amount != 0 && this.name.length() > 0;
     }
 
 }

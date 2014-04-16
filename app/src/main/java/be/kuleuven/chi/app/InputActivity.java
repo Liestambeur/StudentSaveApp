@@ -1,23 +1,17 @@
 package be.kuleuven.chi.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.InputActivityType;
@@ -146,11 +140,11 @@ public class InputActivity extends BaseActivity {
             he = new ExpenseElement(inputAmount, new ExpenseCategory(selectedItem), inputName);
             instance.addToHistory(he);
         } else {
-            Goal goal = instance.getGoal();
+            Goal goal = instance.getCurrentGoal();
             if(goal != null){
-                he = new SavingElement(inputAmount, instance.getGoal());
+                he = new SavingElement(inputAmount, instance.getCurrentGoal());
                 instance.addToHistory(he);
-                instance.getGoal().addAmount(inputAmount);
+                instance.getCurrentGoal().addAmount(inputAmount);
             } else {
                 userClickedYet = false;
                 TextView alertView = new TextView(this);

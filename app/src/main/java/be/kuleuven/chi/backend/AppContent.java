@@ -18,7 +18,8 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
  */
 public class AppContent {
 
-    private Goal goal;
+    private Goal currentGoal;
+    private List<Goal> goals;
     private History history;
     private Currency currency;
     private List<IncomeCategory> incomeCategories;
@@ -28,6 +29,7 @@ public class AppContent {
 
     /* A private Constructor prevents any other class from instantiating. */
     private AppContent(Context context) {
+        this.goals = new ArrayList<Goal>();
         this.currency = Currency.EURO;
         this.history = new History();
         this.incomeCategories = new ArrayList<IncomeCategory>();
@@ -48,16 +50,22 @@ public class AppContent {
         return singleton;
     }
 
-    public Goal getGoal() {
-        return goal;
+    public Goal getCurrentGoal() {
+        return currentGoal;
     }
 
     public void addGoal(Goal goal) {
-        this.goal = goal; // later a list of goals will be included
+        this.goals.add(goal);
+        this.currentGoal = goal;
     }
 
     public boolean hasGoal() {
-        return this.goal != null;
+        return !this.goals.isEmpty();
+    }
+
+    public void deleteGoal(Goal goal) {
+        this.goals.remove(goal);
+        this.currentGoal = this.goals.get(this.goals.size() - 1);
     }
 
     public void addToHistory(HistoryElement element) {

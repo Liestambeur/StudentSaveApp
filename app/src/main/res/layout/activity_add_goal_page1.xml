@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:gravity="left"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/nameOfGoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:hint="@string/goal_name_et"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            android:layout_marginTop="4sp"
+            android:inputType="textCapSentences" />
+
+        <EditText
+            android:id="@+id/amountToSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:hint="@string/amount_et"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            android:inputType="numberDecimal" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/space2" />
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/goal_date_text"
+            android:id="@+id/date_switch_goal"
+            android:checked="false"
+            android:gravity="center_vertical|left"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="false"
+            android:textOff="@string/goal_date_off_text"
+            android:textOn="@string/goal_date_on_text"
+            android:onClick="dateSwitch" />
+
+        <EditText
+            android:id="@+id/due_date_field"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="date"
+            android:ems="10"
+            android:visibility="gone"
+            android:hint="@string/due_date_et"/>
+
+        <!--
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/space3" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_remind_text"
+                android:id="@+id/textView"
+                android:autoLink="none"
+                android:textColor="#7dd4ff"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:typeface="normal"
+                android:gravity="left" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_remind_never_text"
+                android:id="@+id/radioButton2"
+                android:layout_gravity="left"
+                android:checked="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_remind_month_text"
+                android:id="@+id/radioButton"
+                android:layout_gravity="center_horizontal|left" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_remind_week_text"
+                android:id="@+id/radioButton3"
+                android:layout_gravity="center_horizontal|left" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_remind_day_text"
+                android:id="@+id/radioButton4"
+                android:layout_gravity="center_horizontal|left" />
+
+        </RadioGroup>
+        -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:layout_gravity="bottom">
+
+        <include
+            android:id="@+id/ok_cancel"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            layout="@layout/ok_cancel"/>
+    </LinearLayout>
+
+
+</LinearLayout>

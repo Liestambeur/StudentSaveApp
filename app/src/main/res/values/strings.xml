@@ -26,7 +26,19 @@
     <!-- Add Goal Activity -->
     <string name="goal_name_et">Name of your goal</string>
     <string name="amount_et">Amount to save</string>
-    <string name="choose_picture_text">Choose picture:</string>
+
+    <string name="save_remind_text">How often would you like \n to be reminded to save?</string>
+    <string name="save_remind_never_text">Do not remind me</string>
+    <string name="save_remind_month_text">Remind me every month</string>
+    <string name="save_remind_week_text">Remind me every week</string>
+    <string name="save_remind_day_text">Remind me every day</string>
+
+    <string name="goal_date_text">Set a due date</string>
+    <string name="goal_date_on_text">Yes</string>
+    <string name="goal_date_off_text">No</string>
+    <string name="due_date_et">DD/MM/YYYY</string>
+
+    <string name="choose_picture_text">Choose a picture:</string>
 
     <string name="car_picture_desc">auto</string>
     <string name="shopping_picture_desc">shopping</string>

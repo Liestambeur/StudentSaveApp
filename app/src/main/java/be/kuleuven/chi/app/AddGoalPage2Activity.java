@@ -3,11 +3,8 @@ package be.kuleuven.chi.app;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -15,78 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.kuleuven.chi.backend.AppContent;
-import be.kuleuven.chi.backend.categories.Goal;
 
-public class AddGoalActivity extends BaseActivity {
+/**
+ * Created by NeleR on 16/04/2014.
+ */
+public class AddGoalPage2Activity extends BaseActivity {
 
-    Goal newGoal;
     List<ImageButton> pictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_goal);
+        setContentView(R.layout.activity_add_goal_page2);
 
-        // TODO zorg dat focus niet op 'name of goal' ligt: tekst mag niet geselecteerd zijn bij opstarten
-
-        newGoal = new Goal();
-
-        initTextWatchers();
         fillPicturesList();
         setAllPicturesUnactivated();
-
-        this.enableOK(false);
+        this.enableOK(true);
         ImageButton image = (ImageButton) findViewById(R.id.goalPicture5);
         this.chooseGoalPicture(image);
-    }
-
-    private void initTextWatchers() {
-        EditText nameOfGoalText = (EditText) findViewById(R.id.nameOfGoal);
-        EditText amountOfGoalText = (EditText) findViewById(R.id.amountToSave);
-
-        TextWatcher nameOfGoalWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                // not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                newGoal.setName(charSequence.toString());
-                setOkButton();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // not used
-            }
-        };
-        TextWatcher amountOfGoalWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                // not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                try {
-                    newGoal.setAmount(Double.parseDouble(charSequence.toString()));
-                }
-                catch (NumberFormatException e) {
-                    newGoal.setAmount(Double.parseDouble("0"));
-                    // do nothing
-                }
-                setOkButton();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // not used
-            }
-        };
-
-        nameOfGoalText.addTextChangedListener(nameOfGoalWatcher);
-        amountOfGoalText.addTextChangedListener(amountOfGoalWatcher);
     }
 
     private void fillPicturesList() {
@@ -120,20 +63,18 @@ public class AddGoalActivity extends BaseActivity {
     public void chooseGoalPicture(View picture) {
         if(((ImageButton) picture).isActivated()) {
             setAllPicturesUnactivated();
-            this.newGoal.resetPicture();
+            AppContent.getInstance(this).getCurrentGoal().resetPicture();
         }
         else{
             setAllPicturesUnactivated();
             ((ImageButton) picture).setActivated(true);
 
             Drawable drawable = ((ImageButton) picture).getDrawable();
-            this.newGoal.setPicture(drawable);
+            AppContent.getInstance(this).getCurrentGoal().setPicture(drawable);
         }
     }
 
     public void okButton(View okButton) {
-        AppContent.getInstance(this).addGoal(this.newGoal);
-
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -141,6 +82,7 @@ public class AddGoalActivity extends BaseActivity {
 
     public void cancelButton(View cancelButton) {
         // the goal is not stored in the AppContent
+        AppContent.getInstance(this).deleteGoal(AppContent.getInstance(this).getCurrentGoal());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -154,11 +96,7 @@ public class AddGoalActivity extends BaseActivity {
     }
 
     private void setOkButton(){
-        if(this.newGoal.isValid(false)){
-            this.enableOK(true);
-        } else{
-            this.enableOK(false);
-        }
+        this.enableOK(true);
     }
 
     public void enableOK(Boolean enable){

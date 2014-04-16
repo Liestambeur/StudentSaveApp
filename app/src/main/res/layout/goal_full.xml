@@ -67,6 +67,15 @@
                 android:layout_weight="0.2"
                 android:duplicateParentState="true"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dip"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="days left"
+                android:id="@+id/goalDue"
+                android:layout_weight="0.2"
+                android:duplicateParentState="true"/>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

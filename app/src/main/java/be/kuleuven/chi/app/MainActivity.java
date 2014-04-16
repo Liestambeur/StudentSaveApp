@@ -1,9 +1,7 @@
 package be.kuleuven.chi.app;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -29,23 +27,37 @@ public class MainActivity extends BaseActivity {
         appContent = AppContent.getInstance(this);
 
         if(appContent.hasGoal()){
-            Goal goal = appContent.getGoal();
+            //TODO tekst niet hardcode, maar via String-file
+            Goal goal = appContent.getCurrentGoal();
+
             View goalview = findViewById(R.id.goal);
             goalview.setVisibility(1);
+
             TextView goalName = (TextView) findViewById(R.id.goalName);
             goalName.setText(goal.getName());
+
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
             goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go");
+
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
             goalDone.setText("€ "+goal.getAmountSaved()+" done");
+
+            TextView goalDue = (TextView) findViewById(R.id.goalDue);
+            if(goal.getDueDate() != null) {
+                goalDue.setText("Due " + goal.getDueDateString());
+                //TODO moet eigenlijk zijn: nog zoveel dagen te gaan
+            }
+            else {
+                goalDue.setVisibility(View.INVISIBLE);
+            }
+
             TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
             goalPercent.setText(goal.getPercent() + " %");
+
             ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
             progress.setProgress(goal.getPercent());
+
             ImageView im = (ImageView) findViewById(R.id.imageView);
-
-
-
             im.setImageDrawable(goal.getPicture());
         }else{
             View addgoal = findViewById(R.id.addgoal);
@@ -115,7 +127,8 @@ public class MainActivity extends BaseActivity {
 
 
     public void addGoal(View view){
-        Intent intent = new Intent(this, AddGoalActivity.class);
+        //Intent intent = new Intent(this, AddGoalActivity.class);
+        Intent intent = new Intent(this, AddGoalPage1Activity.class);
         startActivity(intent);
         finish();
     }
