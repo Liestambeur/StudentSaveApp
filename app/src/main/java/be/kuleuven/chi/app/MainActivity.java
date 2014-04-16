@@ -47,13 +47,12 @@ public class MainActivity extends BaseActivity {
         }else{
             View addgoal = findViewById(R.id.addgoal);
             addgoal.setVisibility(1);
-            Button save = (Button) findViewById(R.id.button_save);
-            save.setEnabled(false);
+            this.enableButtonSave(false);
         }
 
         if(appContent.getWalletTotalAmount()<=0){
-            Button save = (Button) findViewById(R.id.button_save);
-            save.setEnabled(false);
+            this.enableButtonSave(false);
+            this.enableButtonExpense(false);
         }
 
         if(appContent.hasHistory()){
@@ -155,6 +154,24 @@ public class MainActivity extends BaseActivity {
                 InputActivityType.SAVE.name());
         startActivity(intent);
         finish();
+    }
+
+    private void enableButtonSave(Boolean enable){
+        LinearLayout save = (LinearLayout) findViewById(R.id.save);
+        save.setEnabled(enable);
+        Button saveb = (Button) findViewById(R.id.button_save);
+        saveb.setEnabled(enable);
+        ImageView savei = (ImageView) findViewById(R.id.image_save);
+        savei.setEnabled(enable);
+    }
+
+    private void enableButtonExpense(Boolean enable){
+        LinearLayout save = (LinearLayout) findViewById(R.id.expense);
+        save.setEnabled(enable);
+        Button saveb = (Button) findViewById(R.id.button_expense);
+        saveb.setEnabled(enable);
+        ImageView savei = (ImageView) findViewById(R.id.image_expense);
+        savei.setEnabled(enable);
     }
 
 }
