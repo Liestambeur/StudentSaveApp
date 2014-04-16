@@ -1,6 +1,9 @@
 package be.kuleuven.chi.app;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -163,6 +166,10 @@ public class MainActivity extends BaseActivity {
         saveb.setEnabled(enable);
         ImageView savei = (ImageView) findViewById(R.id.image_save);
         savei.setEnabled(enable);
+        if(!enable){
+            savei.setColorFilter(Color.GRAY);
+        }
+
     }
 
     private void enableButtonExpense(Boolean enable){
@@ -172,6 +179,10 @@ public class MainActivity extends BaseActivity {
         saveb.setEnabled(enable);
         ImageView savei = (ImageView) findViewById(R.id.image_expense);
         savei.setEnabled(enable);
+        if(!enable){
+            savei.setColorFilter(Color.GRAY);
+        }
+
     }
 
 }
