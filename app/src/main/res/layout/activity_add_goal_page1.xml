@@ -7,121 +7,144 @@
     android:weightSum="1">
 
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:gravity="left"
-        android:padding="10dp">
+        android:id="@+id/scrollView" >
 
-        <EditText
-            android:id="@+id/nameOfGoal"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:hint="@string/goal_name_et"
-            android:singleLine="true"
-            android:maxLength="30"
-            android:selectAllOnFocus="true"
-            android:layout_marginTop="4sp"
-            android:inputType="textCapSentences" />
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:padding="10dp">
 
-        <EditText
-            android:id="@+id/amountToSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:hint="@string/amount_et"
-            android:singleLine="true"
-            android:maxLength="30"
-            android:selectAllOnFocus="true"
-            android:inputType="numberDecimal" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:id="@+id/space2" />
-
-        <Switch
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/goal_date_text"
-            android:id="@+id/date_switch_goal"
-            android:checked="false"
-            android:gravity="center_vertical|left"
-            android:layout_gravity="center_horizontal"
-            android:singleLine="false"
-            android:textOff="@string/goal_date_off_text"
-            android:textOn="@string/goal_date_on_text"
-            android:onClick="dateSwitch" />
-
-        <EditText
-            android:id="@+id/due_date_field"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="date"
-            android:ems="10"
-            android:visibility="gone"
-            android:hint="@string/due_date_et"/>
-
-        <!--
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:id="@+id/space3" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
+            <EditText
+                android:id="@+id/nameOfGoal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/goal_name_et"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:selectAllOnFocus="true"
+                android:layout_marginTop="4sp"
+                android:inputType="textCapSentences" />
+
+            <EditText
+                android:id="@+id/amountToSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/amount_et"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:selectAllOnFocus="true"
+                android:inputType="numberDecimal" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/space2" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/goal_date_text"
+                android:id="@+id/date_switch_goal"
+                android:checked="false"
+                android:gravity="center_vertical|left"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="false"
+                android:textOff="@string/goal_date_off_text"
+                android:textOn="@string/goal_date_on_text"
+                android:onClick="dateSwitch" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|top">
+
+                <EditText
+                    android:id="@+id/due_date_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="date"
+                    android:ems="10"
+                    android:visibility="gone"
+                    android:hint="@string/due_date_et"/>
+
+                <TextView
+                    android:id="@+id/date_format_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/date_format_text"
+                    android:textColor="@color/Crimson"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/date_no_past_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/date_no_past_text"
+                    android:textColor="@color/Crimson"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!--
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/space3" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/save_remind_text"
-                android:id="@+id/textView"
-                android:autoLink="none"
-                android:textColor="#7dd4ff"
-                android:textSize="20sp"
-                android:textStyle="normal"
-                android:typeface="normal"
-                android:gravity="left" />
+                android:id="@+id/remind_switch_goal"
+                android:checked="false"
+                android:gravity="center_vertical|left"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="false"
+                android:textOff="@string/save_remind_off_text"
+                android:textOn="@string/save_remind_on_text"
+                android:onClick="remindSwitch"/>
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_remind"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/save_remind_never_text"
-                android:id="@+id/radioButton2"
-                android:layout_gravity="left"
-                android:checked="true" />
+                android:visibility="gone">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save_remind_month_text"
-                android:id="@+id/radioButton"
-                android:layout_gravity="center_horizontal|left" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_remind_month_text"
+                    android:id="@+id/radio_month"
+                    android:layout_gravity="center_horizontal|left" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save_remind_week_text"
-                android:id="@+id/radioButton3"
-                android:layout_gravity="center_horizontal|left" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_remind_week_text"
+                    android:id="@+id/radio_week"
+                    android:layout_gravity="center_horizontal|left" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save_remind_day_text"
-                android:id="@+id/radioButton4"
-                android:layout_gravity="center_horizontal|left" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_remind_day_text"
+                    android:id="@+id/radio_day"
+                    android:layout_gravity="center_horizontal|left" />
 
-        </RadioGroup>
-        -->
+            </RadioGroup>
+            -->
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:orientation="vertical"

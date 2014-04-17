@@ -21,6 +21,7 @@ public class AddGoalPage2Activity extends BaseActivity {
 
     List<ImageButton> pictures;
     int goalActivityType;
+    Drawable oldPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +30,20 @@ public class AddGoalPage2Activity extends BaseActivity {
 
         Intent intent = getIntent();
         this.goalActivityType = intent.getIntExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
-        //TODO implementeer het editeren van de goal-picture
 
         fillPicturesList();
         setAllPicturesUnactivated();
 
+        if(this.goalActivityType == GoalActivityType.ADD) {
+            // do nothing in preperation
+        }
+        else if(this.goalActivityType == GoalActivityType.EDIT) {
+            findViewById(R.id.delete).setVisibility(View.VISIBLE);
+            this.oldPicture = AppContent.getInstance(this).getCurrentGoal().getPicture();
+            // initGoalValues(); TODO - the current picture should be highlighted
+        }
+
         this.enableOK(true);
-        //ImageButton image = (ImageButton) findViewById(R.id.goalPicture5);
-        //this.chooseGoalPicture(image);
     }
 
     private void fillPicturesList() {
@@ -87,9 +94,25 @@ public class AddGoalPage2Activity extends BaseActivity {
         finish();
     }
 
-    public void cancelButton(View cancelButton) {
-        // the goal is not stored in the AppContent
+    public void deleteButton(View deleteButton) {
+        // the goal is removed from the AppContent
         AppContent.getInstance(this).deleteGoal(AppContent.getInstance(this).getCurrentGoal());
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void cancelButton(View cancelButton) {
+
+        if(this.goalActivityType == GoalActivityType.ADD) {
+            // the goal is not stored in the AppContent
+            AppContent.getInstance(this).deleteGoal(AppContent.getInstance(this).getCurrentGoal());
+        }
+        else if(this.goalActivityType == GoalActivityType.EDIT) {
+            // the picture of the goal is restored to its older value
+            AppContent.getInstance(this).getCurrentGoal().setPicture(this.oldPicture);
+        }
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

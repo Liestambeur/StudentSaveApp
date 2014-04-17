@@ -9,8 +9,10 @@
     <string name="title_activity_history">History</string>
     <string name="activity_input_title">Input</string>
 
+    <!-- Ok_cancel -->
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
+    <string name="delete_button">Delete</string>
 
     <!-- Static -->
     <string name="input_activity_type">INPUT_ACTIVITY_TYPE</string>
@@ -28,16 +30,19 @@
     <string name="goal_name_et">Name of your goal</string>
     <string name="amount_et">Amount to save</string>
 
-    <string name="save_remind_text">How often would you like \n to be reminded to save?</string>
-    <string name="save_remind_never_text">Do not remind me</string>
-    <string name="save_remind_month_text">Remind me every month</string>
-    <string name="save_remind_week_text">Remind me every week</string>
-    <string name="save_remind_day_text">Remind me every day</string>
+    <string name="save_remind_text">Remind me to save</string>
+    <string name="save_remind_on_text">Yes</string>
+    <string name="save_remind_off_text">No</string>
+    <string name="save_remind_month_text">Every month</string>
+    <string name="save_remind_week_text">Every week</string>
+    <string name="save_remind_day_text">Every day</string>
 
-    <string name="goal_date_text">Set a due date</string>
+    <string name="goal_date_text">Set a deadline</string>
     <string name="goal_date_on_text">Yes</string>
     <string name="goal_date_off_text">No</string>
     <string name="due_date_et">DD/MM/YYYY</string>
+    <string name="date_format_text">Format should be \n DD/MM/YYYY</string>
+    <string name="date_no_past_text">No date in the past!</string>
 
     <string name="choose_picture_text">Choose a picture:</string>
 

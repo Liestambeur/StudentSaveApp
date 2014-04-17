@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -43,15 +44,18 @@ public class AddGoalPage1Activity extends BaseActivity {
 
         if(this.goalActivityType == GoalActivityType.ADD) {
             goal = new Goal();
+            this.enableOK(false);
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
+            findViewById(R.id.delete).setVisibility(View.VISIBLE);
+
             this.goal = AppContent.getInstance(this).getCurrentGoal();
             this.oldGoal = AppContent.getInstance(this).getCurrentGoal().getCopy();
             initGoalValues();
+            this.enableOK(true);
         }
 
         initTextWatchers();
-        this.enableOK(false);
     }
 
     private void initTextWatchers() {
@@ -107,25 +111,32 @@ public class AddGoalPage1Activity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
                 String date = charSequence.toString();
+
                 if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
+                    findViewById(R.id.date_format_text).setVisibility(View.GONE);
+
                     String[] dateParts = date.split("/");
                     try {
                         Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
                                 Integer.valueOf(dateParts[1]), Integer.valueOf(dateParts[0]));
                         System.out.println(dateParts);
                         if(calendar.after(new GregorianCalendar())) {
+                            findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
                             goal.setDueDate(calendar);
-
                         }
                         else {
-                            //TODO waarschuwing dat een datum in het verleden niet mag
+                            findViewById(R.id.date_no_past_text).setVisibility(View.VISIBLE);
                         }
                     }
                     catch (NumberFormatException e) {
                         goal.resetDueDate();
                         // do nothing
                     }
+                }
+                else {
+                    findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
                 }
                 setOkButton();
             }
@@ -168,36 +179,49 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     public void dateSwitch(View dateSwitch) {
-        ((Switch) dateSwitch).isChecked();
-
         if(((Switch) dateSwitch).isChecked()) {
             findViewById(R.id.due_date_field).setVisibility(View.VISIBLE);
         }
         else {
-            findViewById(R.id.due_date_field).setVisibility(View.INVISIBLE);
+            findViewById(R.id.due_date_field).setVisibility(View.GONE);
             goal.resetDueDate();
         }
         setOkButton();
     }
 
-    public void okButton(View okButton) {
-        if(this.goalActivityType == GoalActivityType.EDIT) {
-            //TODO when in edit-mode, you go now back to main, editing the picture is not possible yet
-            //TODO oldGOal op een of andere manier meegeven aan pagina 2, zodat je rollback kan doen
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+    public void remindSwitch(View remindSwitch) {
+        if(((Switch) remindSwitch).isChecked()) {
+            findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
         }
         else {
-            AppContent.getInstance(this).addGoal(this.goal);
-
-            Intent intent = new Intent(this, AddGoalPage2Activity.class);
-            intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), this.goalActivityType);
-
-            startActivity(intent);
-            finish();
+            findViewById(R.id.radio_remind).setVisibility(View.GONE);
+            ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
+            //TODO reset remind optie van goal
         }
+        setOkButton();
+    }
+
+    // TODO registreer optie van RadioButtons en implementeer het herinneren
+
+    public void okButton(View okButton) {
+        // TODO de oude goal gaat hier verloren, alle wijzigingen die je hebt aangebracht zijn permanent
+        // TODO is dit wat de gebruiker verwacht? of wil hij op volgende pagina nog volledig kunnen rollbacken?
+        AppContent.getInstance(this).addGoal(this.goal);
+
+        Intent intent = new Intent(this, AddGoalPage2Activity.class);
+        intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), this.goalActivityType);
+
+        startActivity(intent);
+        finish();
+    }
+
+    public void deleteButton(View deleteButton) {
+         // the goal is removed from the AppContent
+         AppContent.getInstance(this).deleteGoal(AppContent.getInstance(this).getCurrentGoal());
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void cancelButton(View cancelButton) {
