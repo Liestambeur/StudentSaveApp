@@ -3,6 +3,7 @@ package be.kuleuven.chi.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,10 +53,7 @@ public class InputActivity extends BaseActivity {
         categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Context context = view.getContext();
-                TextView categoryTextView = ((TextView) view.findViewById(R.id.categoryTextView));
-                String listItemText = categoryTextView.getText().toString();
-                setSelectedCategory(listItemText);
+                setSelected(view);
             }
         });
 
@@ -98,6 +96,22 @@ public class InputActivity extends BaseActivity {
         this.enableOK(false);
     }
 
+    /**
+     * Selects the view (makes all other views in the list white and this one gray, sets the category accordingly)
+     * @param view
+     */
+    public void setSelected(View view){
+        ListView list = (ListView) findViewById(R.id.categoryListView);
+        for(int i =0; i<list.getChildCount(); i++){
+            list.getChildAt(i).setBackgroundColor(Color.WHITE);
+        }
+        view.setBackgroundColor(Color.LTGRAY);
+        Context context = view.getContext();
+        TextView categoryTextView = ((TextView) view.findViewById(R.id.categoryTextView));
+        String listItemText = categoryTextView.getText().toString();
+        setSelectedCategory(listItemText);
+    }
+
     public void setSelectedCategory(String listItemText) {
         this.selectedItem = listItemText;
     }
@@ -107,13 +121,13 @@ public class InputActivity extends BaseActivity {
     }
 
     public void setInputAmount(Double amount) {
-         System.out.println(amount);
-         if(amount!=0){
-             this.enableOK(true);
-         } else{
-             this.enableOK(false);
-         }
-             this.inputAmount = amount;
+        System.out.println(amount);
+        if(amount!=0){
+            this.enableOK(true);
+        } else{
+            this.enableOK(false);
+        }
+        this.inputAmount = amount;
     }
 
 
