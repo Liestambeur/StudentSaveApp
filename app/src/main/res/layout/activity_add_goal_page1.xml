@@ -50,6 +50,7 @@
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:thumb="@drawable/ourtheme_switch_inner_holo_light"
                 android:text="@string/goal_date_text"
                 android:id="@+id/date_switch_goal"
                 android:checked="false"
@@ -104,6 +105,7 @@
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:thumb="@drawable/ourtheme_switch_inner_holo_light"
                 android:text="@string/save_remind_text"
                 android:id="@+id/remind_switch_goal"
                 android:checked="false"
