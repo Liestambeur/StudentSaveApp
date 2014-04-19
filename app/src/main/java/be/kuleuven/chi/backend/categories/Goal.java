@@ -133,4 +133,8 @@ public class Goal implements Category {
         this.picture = goal.getPicture();
         this.dueDate = goal.getDueDate();
     }
+
+    public boolean isDone(){
+        return amountSaved>=amount;
+    }
 }

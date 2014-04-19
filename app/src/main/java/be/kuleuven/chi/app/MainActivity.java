@@ -1,13 +1,19 @@
 package be.kuleuven.chi.app;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,15 +25,17 @@ import be.kuleuven.chi.backend.categories.Goal;
 public class MainActivity extends BaseActivity {
 
     AppContent appContent;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         appContent = AppContent.getInstance(this);
 
-        if(appContent.hasGoal()){
+        if(appContent.hasCurrentGoal()){
             //TODO tekst niet hardcode, maar via String-file
             Goal goal = appContent.getCurrentGoal();
 
@@ -60,6 +68,14 @@ public class MainActivity extends BaseActivity {
 
             ImageView im = (ImageView) findViewById(R.id.imageView);
             im.setImageDrawable(goal.getPicture());
+
+            if(goal.isDone()){
+
+
+
+                showDialogGoal();
+               // showDialog(DIALOG_ALERT);
+            }
         }else{
             View addgoal = findViewById(R.id.addgoal);
             addgoal.setVisibility(1);
@@ -206,5 +222,63 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
+    public void showDialogGoal(){
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.popup);
+        dialog.setTitle("Congratulations");
+
+        // set the custom dialog components - text, image and button
+        TextView text = (TextView) dialog.findViewById(R.id.popuptext1);
+        text.setText("You have saved enough!");
+        TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
+        text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
+        ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
+        image.setImageResource(R.drawable.ic_launcher);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appContent.currentGoalDone();
+                dialog.dismiss();
+                View goalview = findViewById(R.id.goal);
+                goalview.setVisibility(View.INVISIBLE);
+                View addgoal = findViewById(R.id.addgoal);
+                addgoal.setVisibility(1);
+                enableButtonSave(false);
+
+
+            }
+        });
+
+        dialog.show();
+    }
+/*
+    // constant for identifying the dialog
+    private static final int DIALOG_ALERT = 10;
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_ALERT:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("This ends the activity");
+                builder.setCancelable(false);
+                builder.setPositiveButton("I agree", new OkOnClickListener());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        }
+        return super.onCreateDialog(id);
+    }
+
+    private final class OkOnClickListener implements
+            DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+            MainActivity.this.finish();
+        }
+    }*/
 
 }
