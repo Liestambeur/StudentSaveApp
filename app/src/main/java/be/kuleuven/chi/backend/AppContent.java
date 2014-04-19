@@ -2,9 +2,13 @@ package be.kuleuven.chi.backend;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import be.kuleuven.chi.app.R;
@@ -39,13 +43,17 @@ public class AppContent {
         String[] ecs = resources.getStringArray(R.array.expense_categories);
         for(int i=0;i<ics.length;i++){incomeCategories.add(new IncomeCategory(ics[i]));}
         for(int i=0;i<ecs.length;i++){expenseCategories.add(new ExpenseCategory(ecs[i]));}
-
+        Goal g = new Goal();
+        g.setAmount(100);
+        g.addAmount(100);
+        //addGoal(g);
     }
 
     /* Static 'instance' method */
     public static AppContent getInstance(Context context) {
         if(AppContent.singleton == null) {
             AppContent.singleton = new AppContent(context);
+
         }
         return singleton;
     }
@@ -57,6 +65,10 @@ public class AppContent {
     public void addGoal(Goal goal) {
         this.goals.add(goal);
         this.currentGoal = goal;
+    }
+
+    public boolean hasCurrentGoal(){
+        return this.currentGoal!=null;
     }
 
     public boolean hasGoal() {
@@ -93,6 +105,35 @@ public class AppContent {
     public boolean hasHistory(){
         return this.getNumberOfHistoryElements()!=0;
     }
+
+    public List<Goal> getGoalsDone(){
+        List<Goal> result = new ArrayList<Goal>();
+        Iterator<Goal> goalIterator = goals.iterator();
+        while (goalIterator.hasNext()){
+            Goal g = goalIterator.next();
+            if(g.isDone()){
+                result.add(g);
+            }
+        }
+        return result;
+    }
+
+    public List<Goal> getGoalsBusy(){
+        List<Goal> result = new ArrayList<Goal>();
+        Iterator<Goal> goalIterator = goals.iterator();
+        while (goalIterator.hasNext()){
+            Goal g = goalIterator.next();
+            if(!g.isDone()){
+                result.add(g);
+            }
+        }
+        return result;
+    }
+
+    public void currentGoalDone(){
+        this.currentGoal=null;
+    }
+
 
     public List<IncomeCategory> getIncomeCategories(){ return this.incomeCategories; }
     public int getNumberOfIncomeCategories(){ return incomeCategories.size(); }
