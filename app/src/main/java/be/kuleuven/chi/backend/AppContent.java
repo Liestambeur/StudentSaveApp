@@ -79,6 +79,8 @@ public class AppContent {
         this.goals.remove(goal);
         if(!this.goals.isEmpty()) {
             this.currentGoal = this.goals.get(this.goals.size() - 1);
+        }else{
+            this.currentGoal=null;
         }
     }
 
