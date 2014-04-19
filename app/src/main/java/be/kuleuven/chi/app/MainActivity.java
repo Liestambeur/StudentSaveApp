@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -225,7 +226,7 @@ public class MainActivity extends BaseActivity {
 
     public void showDialogGoal(){
         // custom dialog
-        final Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
         dialog.setTitle("Congratulations");
 
@@ -235,11 +236,18 @@ public class MainActivity extends BaseActivity {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        image.setImageResource(R.drawable.ic_launcher);
+        Drawable draw = appContent.getCurrentGoal().getPicture();
+        if(draw==null){
+            image.setImageResource(R.drawable.ic_launcher);
+        } else{
+            image.setImageDrawable(draw);
+        }
 
-        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+
+
+        LinearLayout lin = (LinearLayout) dialog.findViewById(R.id.dialogButtonOK);
         // if button is clicked, close the custom dialog
-        dialogButton.setOnClickListener(new View.OnClickListener() {
+        lin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 appContent.currentGoalDone();
@@ -249,8 +257,6 @@ public class MainActivity extends BaseActivity {
                 View addgoal = findViewById(R.id.addgoal);
                 addgoal.setVisibility(1);
                 enableButtonSave(false);
-
-
             }
         });
 

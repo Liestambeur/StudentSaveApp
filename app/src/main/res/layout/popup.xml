@@ -54,13 +54,40 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/dialogButtonOK"
-        android:layout_width="100px"
-        android:layout_height="wrap_content"
-        android:text=" Ok "
-        android:layout_below="@+id/popuplin"
-        android:layout_centerHorizontal="true" />
 
+
+    <LinearLayout
+        android:id="@+id/dialogButtonOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:background="@drawable/button_background"
+        android:layout_below="@+id/popuplin"
+        android:layout_centerHorizontal="true" >
+
+        <ImageButton
+            android:id="@+id/image_ok"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:layout_gravity="center_vertical|right"
+            android:src="@drawable/ok"
+            android:scaleType="fitCenter"
+            android:paddingRight="10dp"
+            android:tint="@color/GhostWhite" />
+
+        <TextView
+            android:id="@+id/text_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok_button"
+            android:background="@null"
+            android:singleLine="true"
+            android:textSize="30dp"
+            android:gravity="center_vertical|left"
+            android:layout_gravity="center_vertical|left"
+            android:textColor="@color/GhostWhite" />
+    </LinearLayout>
 
 </RelativeLayout>
