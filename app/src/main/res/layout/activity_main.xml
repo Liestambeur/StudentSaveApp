@@ -11,6 +11,7 @@
 
     <FrameLayout
         android:id="@+id/FrameLayout1"
+        android:padding="@dimen/edge_margin"
         android:layout_weight="0.4"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
@@ -59,6 +60,7 @@
                 android:onClick="income"
                 android:src="@drawable/beurs_in"
                 android:layout_weight="0.75"
+                android:tint="@color/GhostWhite"
                 android:layout_gravity="center_vertical|top"
                 android:scaleType="fitCenter" />
 
@@ -68,6 +70,7 @@
                 android:layout_height="0dp"
                 android:text="@string/income_button"
                 android:background="@null"
+                android:textColor="@color/GhostWhite"
                 android:onClick="income"
                 android:layout_gravity="center_vertical|bottom"
                 android:layout_weight="0.2"
@@ -81,6 +84,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.33"
+            android:clickable="true"
             android:onClick="save"
             android:background="@drawable/button_background">
 
@@ -88,7 +92,9 @@
                 android:id="@+id/image_save"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:clickable="true"
                 android:onClick="save"
+                android:tint="@color/GhostWhite"
                 android:layout_weight="0.75"
                 android:src="@drawable/spaar"
                 android:layout_gravity="center_vertical|bottom"
@@ -100,6 +106,7 @@
                 android:layout_height="0dp"
                 android:text="@string/save_button"
                 android:background="@null"
+                android:textColor="@color/GhostWhite"
                 android:onClick="save"
                 android:layout_gravity="center_vertical|bottom"
                 android:layout_weight="0.2"
@@ -122,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:onClick="expense"
+                android:tint="@color/GhostWhite"
                 android:src="@drawable/beurs_uit"
                 android:background="@null"
                 android:layout_weight="0.75"
@@ -133,6 +141,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:text="@string/expense_button"
+                android:textColor="@color/GhostWhite"
                 android:background="@null"
                 android:onClick="expense"
                 android:layout_gravity="center_vertical|bottom"
@@ -152,6 +161,7 @@
         android:layout_weight="0.35"
         android:background="@null"
         android:clickable="true"
+        android:padding="@dimen/edge_margin"
         android:onClick="toHistory">
 
         <include

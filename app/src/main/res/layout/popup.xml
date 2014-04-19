@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+
+    <LinearLayout
+        android:id="@+id/popuplin"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:id="@+id/popupimage"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_launcher"
+            android:layout_gravity="center_vertical" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/popuptext1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/popuptext1"
+                    android:text="New Text"
+                    android:id="@+id/popuptext2" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/dialogButtonOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:background="@drawable/button_background"
+        android:layout_below="@+id/popuplin"
+        android:layout_centerHorizontal="true" >
+
+        <ImageButton
+            android:id="@+id/image_ok"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:layout_gravity="center_vertical|right"
+            android:src="@drawable/ok"
+            android:scaleType="fitCenter"
+            android:paddingRight="10dp"
+            android:tint="@color/GhostWhite" />
+
+        <TextView
+            android:id="@+id/text_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok_button"
+            android:background="@null"
+            android:singleLine="true"
+            android:textSize="30dp"
+            android:gravity="center_vertical|left"
+            android:layout_gravity="center_vertical|left"
+            android:textColor="@color/GhostWhite" />
+    </LinearLayout>
+
+</RelativeLayout>

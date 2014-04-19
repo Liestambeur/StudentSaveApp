@@ -4,7 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import be.kuleuven.chi.backend.categories.Category;
 
@@ -16,11 +17,11 @@ public abstract class HistoryElement {
     private double amount;
     private Category category;
     private String title;
-    private Date date;
+    private Calendar date;
 
 
     public HistoryElement(double amount, Category category, String title){
-        this.date = new Date();
+        this.date = new GregorianCalendar();
         this.amount=amount;
         this.category=category;
         this.title=title;
@@ -50,10 +51,9 @@ public abstract class HistoryElement {
         this.title = title;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
-
 
     public abstract int getTypePictureId();
 
@@ -62,7 +62,7 @@ public abstract class HistoryElement {
     }
 
     public String getDateName() {
-        return getDate().toString();
+        return this.date.get(Calendar.DAY_OF_MONTH) + "/" + this.date.get(Calendar.MONTH) + "/" + this.date.get(Calendar.YEAR);
     }
 
 }

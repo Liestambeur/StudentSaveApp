@@ -39,12 +39,16 @@
         android:gravity="center"
         android:id="@+id/pick_category"/>
 
-    <ListView
-        android:isScrollContainer="false"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:id="@+id/categoryListView" />
+
+        <ListView
+            android:isScrollContainer="false"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:id="@+id/categoryListView" />
+
+
+
 
     <LinearLayout
         android:orientation="horizontal"

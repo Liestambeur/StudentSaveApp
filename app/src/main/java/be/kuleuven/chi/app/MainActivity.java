@@ -1,59 +1,91 @@
 package be.kuleuven.chi.app;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import be.kuleuven.chi.backend.AppContent;
+import be.kuleuven.chi.backend.GoalActivityType;
 import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.Goal;
 
 public class MainActivity extends BaseActivity {
 
     AppContent appContent;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         appContent = AppContent.getInstance(this);
 
-        if(appContent.hasGoal()){
-            Goal goal = appContent.getGoal();
+        if(appContent.hasCurrentGoal()){
+            //TODO tekst niet hardcode, maar via String-file
+            Goal goal = appContent.getCurrentGoal();
+
             View goalview = findViewById(R.id.goal);
             goalview.setVisibility(1);
+
             TextView goalName = (TextView) findViewById(R.id.goalName);
             goalName.setText(goal.getName());
+
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
             goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go");
+
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
             goalDone.setText("€ "+goal.getAmountSaved()+" done");
+
+            TextView goalDue = (TextView) findViewById(R.id.goalDue);
+            if(goal.getDueDate() != null) {
+                goalDue.setText("Due " + goal.getDueDateString());
+                //TODO moet eigenlijk zijn: nog zoveel dagen te gaan
+            }
+            else {
+                goalDue.setVisibility(View.INVISIBLE);
+            }
+
             TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
             goalPercent.setText(goal.getPercent() + " %");
+
             ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
             progress.setProgress(goal.getPercent());
+
             ImageView im = (ImageView) findViewById(R.id.imageView);
-
-
-
             im.setImageDrawable(goal.getPicture());
+
+            if(goal.isDone()){
+
+
+
+                showDialogGoal();
+               // showDialog(DIALOG_ALERT);
+            }
         }else{
             View addgoal = findViewById(R.id.addgoal);
             addgoal.setVisibility(1);
-            Button save = (Button) findViewById(R.id.button_save);
-            save.setEnabled(false);
+            this.enableButtonSave(false);
         }
 
         if(appContent.getWalletTotalAmount()<=0){
-            Button save = (Button) findViewById(R.id.button_save);
-            save.setEnabled(false);
+            this.enableButtonSave(false);
+            this.enableButtonExpense(false);
         }
 
         if(appContent.hasHistory()){
@@ -113,7 +145,17 @@ public class MainActivity extends BaseActivity {
 
 
     public void addGoal(View view){
-        Intent intent = new Intent(this, AddGoalActivity.class);
+        //Intent intent = new Intent(this, AddGoalActivity.class);
+        Intent intent = new Intent(this, AddGoalPage1Activity.class);
+        intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
+        startActivity(intent);
+        finish();
+    }
+
+    public void editGoal(View view){
+        //Intent intent = new Intent(this, AddGoalActivity.class);
+        Intent intent = new Intent(this, AddGoalPage1Activity.class);
+        intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.EDIT);
         startActivity(intent);
         finish();
     }
@@ -129,8 +171,7 @@ public class MainActivity extends BaseActivity {
         income.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
-                InputActivityType.INCOME.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.INCOME.name());
         startActivity(intent);
         finish();
     }
@@ -140,8 +181,7 @@ public class MainActivity extends BaseActivity {
         expense.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
-                InputActivityType.EXPENSE.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.EXPENSE.name());
         startActivity(intent);
         finish();
     }
@@ -151,10 +191,100 @@ public class MainActivity extends BaseActivity {
         save.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),
-                InputActivityType.SAVE.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.SAVE.name());
         startActivity(intent);
         finish();
     }
+
+    private void enableButtonSave(Boolean enable){
+        LinearLayout save = (LinearLayout) findViewById(R.id.save);
+        save.setEnabled(enable);
+        Button saveb = (Button) findViewById(R.id.button_save);
+        saveb.setEnabled(enable);
+        ImageView savei = (ImageView) findViewById(R.id.image_save);
+        savei.setEnabled(enable);
+        if(!enable){
+            //savei.setColorFilter(Color.GRAY);
+            save.setAlpha(new Float(0.6));
+        }
+
+    }
+
+    private void enableButtonExpense(Boolean enable){
+        LinearLayout save = (LinearLayout) findViewById(R.id.expense);
+        save.setEnabled(enable);
+        Button saveb = (Button) findViewById(R.id.button_expense);
+        saveb.setEnabled(enable);
+        ImageView savei = (ImageView) findViewById(R.id.image_expense);
+        savei.setEnabled(enable);
+        if(!enable){
+            //savei.setColorFilter(Color.GRAY);
+            save.setAlpha(new Float(0.6));
+        }
+
+    }
+
+    public void showDialogGoal(){
+        // custom dialog
+        final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
+        dialog.setContentView(R.layout.popup);
+        dialog.setTitle("Congratulations");
+
+        // set the custom dialog components - text, image and button
+        TextView text = (TextView) dialog.findViewById(R.id.popuptext1);
+        text.setText("You have saved enough!");
+        TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
+        text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
+        ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
+        Drawable draw = appContent.getCurrentGoal().getPicture();
+        if(draw==null){
+            image.setImageResource(R.drawable.ic_launcher);
+        } else{
+            image.setImageDrawable(draw);
+        }
+
+
+
+        LinearLayout lin = (LinearLayout) dialog.findViewById(R.id.dialogButtonOK);
+        // if button is clicked, close the custom dialog
+        lin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appContent.currentGoalDone();
+                dialog.dismiss();
+                View goalview = findViewById(R.id.goal);
+                goalview.setVisibility(View.INVISIBLE);
+                View addgoal = findViewById(R.id.addgoal);
+                addgoal.setVisibility(1);
+                enableButtonSave(false);
+            }
+        });
+
+        dialog.show();
+    }
+/*
+    // constant for identifying the dialog
+    private static final int DIALOG_ALERT = 10;
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_ALERT:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("This ends the activity");
+                builder.setCancelable(false);
+                builder.setPositiveButton("I agree", new OkOnClickListener());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        }
+        return super.onCreateDialog(id);
+    }
+
+    private final class OkOnClickListener implements
+            DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+            MainActivity.this.finish();
+        }
+    }*/
 
 }

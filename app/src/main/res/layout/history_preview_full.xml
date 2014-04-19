@@ -6,6 +6,7 @@
     android:layout_height="fill_parent"
     android:clickable="true"
     android:onClick="toHistory"
+    android:background="@drawable/button_edge_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -15,9 +16,7 @@
         android:layout_height="0dp"
         android:id="@+id/previewWalletTotal"
         android:layout_weight="0.15"
-        android:visibility="visible"
         android:textSize="15dp"
-        android:textColor="#000000"
         android:textAlignment="center"
         android:text="@string/wallet_text"
         android:textStyle="bold"
@@ -26,7 +25,7 @@
     <LinearLayout
         android:id="@+id/listPreviewHistory"
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.85"
         android:weightSum="3">

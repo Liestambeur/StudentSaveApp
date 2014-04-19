@@ -1,22 +1,18 @@
 package be.kuleuven.chi.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.InputActivityType;
@@ -45,8 +41,7 @@ public class InputActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         //Gewoon om die INPUT_ACTIVITY_TYPE string niet overal te hardcoden staat hij in strings.xml
-        inputActivityType = intent.getStringExtra(
-                getResources().getText(R.string.input_activity_type).toString());
+        inputActivityType = intent.getStringExtra(getResources().getText(R.string.input_activity_type).toString());
         int categories = InputActivityType.valueOf(inputActivityType).getCategories();
         setContentView(R.layout.activity_input);
 
@@ -58,10 +53,7 @@ public class InputActivity extends BaseActivity {
         categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Context context = view.getContext();
-                TextView categoryTextView = ((TextView) view.findViewById(R.id.categoryTextView));
-                String listItemText = categoryTextView.getText().toString();
-                setSelectedCategory(listItemText);
+                setSelected(view);
             }
         });
 
@@ -83,7 +75,12 @@ public class InputActivity extends BaseActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setInputAmount(Double.parseDouble(s.toString()));
+                try{
+                    setInputAmount(Double.parseDouble(s.toString()));
+                }catch(NumberFormatException e){
+                    setInputAmount(Double.parseDouble("0"));
+                }
+
             }
             @Override
             public void afterTextChanged(Editable s) {}
@@ -96,6 +93,23 @@ public class InputActivity extends BaseActivity {
             TextView pick = (TextView) findViewById(R.id.pick_category);
             if(pick!=null) pick.setText(R.string.dont_forget_piggybank);
         }
+        this.enableOK(false);
+    }
+
+    /**
+     * Selects the view (makes all other views in the list white and this one gray, sets the category accordingly)
+     * @param view
+     */
+    public void setSelected(View view){
+        ListView list = (ListView) findViewById(R.id.categoryListView);
+        for(int i =0; i<list.getChildCount(); i++){
+            list.getChildAt(i).setBackgroundColor(Color.WHITE);
+        }
+        view.setBackgroundColor(Color.LTGRAY);
+        Context context = view.getContext();
+        TextView categoryTextView = ((TextView) view.findViewById(R.id.categoryTextView));
+        String listItemText = categoryTextView.getText().toString();
+        setSelectedCategory(listItemText);
     }
 
     public void setSelectedCategory(String listItemText) {
@@ -107,6 +121,12 @@ public class InputActivity extends BaseActivity {
     }
 
     public void setInputAmount(Double amount) {
+        System.out.println(amount);
+        if(amount!=0){
+            this.enableOK(true);
+        } else{
+            this.enableOK(false);
+        }
         this.inputAmount = amount;
     }
 
@@ -133,11 +153,11 @@ public class InputActivity extends BaseActivity {
             he = new ExpenseElement(inputAmount, new ExpenseCategory(selectedItem), inputName);
             instance.addToHistory(he);
         } else {
-            Goal goal = instance.getGoal();
+            Goal goal = instance.getCurrentGoal();
             if(goal != null){
-                he = new SavingElement(inputAmount, instance.getGoal());
+                he = new SavingElement(inputAmount, instance.getCurrentGoal());
                 instance.addToHistory(he);
-                instance.getGoal().addAmount(inputAmount);
+                instance.getCurrentGoal().addAmount(inputAmount);
             } else {
                 userClickedYet = false;
                 TextView alertView = new TextView(this);
@@ -167,5 +187,10 @@ public class InputActivity extends BaseActivity {
     public void dismissAd(){
         ad.dismiss();
         backToMain();
+    }
+
+    public void enableOK(Boolean enable){
+        LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
+        this.enableLinear(ok, enable);
     }
 }
