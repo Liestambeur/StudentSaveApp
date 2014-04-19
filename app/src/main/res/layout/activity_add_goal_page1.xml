@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/goal_name_et"
                 android:singleLine="true"
+                android:shadowColor="@color/Black"
                 android:maxLength="30"
                 android:selectAllOnFocus="true"
                 android:layout_marginTop="4sp"
@@ -93,7 +94,7 @@
                     android:visibility="gone"/>
             </LinearLayout>
 
-            <!--
+
 
             <Space
                 android:layout_width="match_parent"
@@ -141,7 +142,7 @@
                     android:layout_gravity="center_horizontal|left" />
 
             </RadioGroup>
-            -->
+
 
         </LinearLayout>
     </ScrollView>
