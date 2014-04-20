@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -44,6 +46,10 @@ public class InputActivity extends BaseActivity {
         inputActivityType = intent.getStringExtra(getResources().getText(R.string.input_activity_type).toString());
         int categories = InputActivityType.valueOf(inputActivityType).getCategories();
         setContentView(R.layout.activity_input);
+
+        //Textview
+        TextView inWalletText = (TextView) findViewById(R.id.wallet_left);
+        inWalletText.append(" "+AppContent.getInstance(getApplicationContext()).getWalletTotal());
 
         //Listview stuff
         ListView categoryList = (ListView) findViewById(R.id.categoryListView);
@@ -86,10 +92,16 @@ public class InputActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+
+
         //Save Screen
         if(inputActivityType.equals(InputActivityType.SAVE.name())){
             categoryList.setVisibility(View.INVISIBLE);
             nameText.setVisibility(View.INVISIBLE);
+            nameText.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0));
+            categoryList.setLayoutParams(new LinearLayout.LayoutParams(0,0, (float) 0.5));
+            nameText.setImeOptions(EditorInfo.IME_ACTION_NONE);
+            amountText.setImeOptions(EditorInfo.IME_ACTION_DONE);
             TextView pick = (TextView) findViewById(R.id.pick_category);
             if(pick!=null) pick.setText(R.string.dont_forget_piggybank);
         }
@@ -140,7 +152,7 @@ public class InputActivity extends BaseActivity {
 
     public void okButton(View view) {
         // TODO Minder vuil maken
-        inputName = inputName==null?"Other":inputName;
+        inputName = inputName==null?"No Description":inputName;
         selectedItem = selectedItem==null?"Other":selectedItem;
         inputAmount = inputAmount==null?0.0:inputAmount;
         HistoryElement he;

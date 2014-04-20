@@ -85,10 +85,11 @@
     <string name="wallet_text">Wallet</string>
     <string name="saving_for_text">Savings for</string>
     <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
-    <string name="enter_name">Enter name</string>
+    <string name="enter_name">Enter a description (optional)</string>
     <string name="goal_not_initialized">You must create a goal before you can save for one!</string>
     <string name="dont_forget_piggybank">Don\'t forget to actually put the money in your piggy bank!</string>
     <string name="title_activity_input">Input</string>
+    <string name="amount_in_wallet">Currently in wallet: </string>
 
 
 </resources>
