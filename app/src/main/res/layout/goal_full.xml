@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/button_edge_background"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@null"
     android:weightSum="1"
     android:onClick="editGoal"
     android:clickable="true">
@@ -22,65 +22,65 @@
             android:id="@+id/imageView"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.5"
-            android:src="@drawable/img_1621"
             android:duplicateParentState="true"/>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:duplicateParentState="true">
+            android:layout_height="fill_parent">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:layout_weight="0.2"
-                android:duplicateParentState="true"></FrameLayout>
+            <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="0dip"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Skiing"
-                android:id="@+id/goalName"
-                android:layout_weight="0.2"
-                android:duplicateParentState="true"/>
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="0dip"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="€ 100 to go"
-                android:id="@+id/goalAmount"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.2"
-                android:duplicateParentState="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dip"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="€ 0 already saved"
-                android:id="@+id/goalDone"
-                android:layout_weight="0.2"
-                android:duplicateParentState="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Skiing"
+                    android:id="@+id/goalName"
+                    android:duplicateParentState="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dip"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="days left"
-                android:id="@+id/goalDue"
-                android:layout_weight="0.2"
-                android:duplicateParentState="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="€ 100 to go"
+                    android:id="@+id/goalAmount"
+                    android:layout_gravity="center_horizontal"
+                    android:duplicateParentState="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/goalName"/>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.2"
-                android:duplicateParentState="true"></FrameLayout>
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="€ 0 already saved"
+                    android:id="@+id/goalDone"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/goalAmount"
+                    android:duplicateParentState="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="days left"
+                    android:id="@+id/goalDue"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/goalDone"
+                    android:duplicateParentState="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
     </LinearLayout>
 
     <RelativeLayout

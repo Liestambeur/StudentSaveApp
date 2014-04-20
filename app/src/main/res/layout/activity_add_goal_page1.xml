@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/goal_name_et"
                 android:singleLine="true"
+                android:shadowColor="@color/Black"
                 android:maxLength="30"
                 android:selectAllOnFocus="true"
                 android:layout_marginTop="4sp"
@@ -49,6 +50,7 @@
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:thumb="@drawable/ourtheme_switch_inner_holo_light"
                 android:text="@string/goal_date_text"
                 android:id="@+id/date_switch_goal"
                 android:checked="false"
@@ -93,7 +95,7 @@
                     android:visibility="gone"/>
             </LinearLayout>
 
-            <!--
+
 
             <Space
                 android:layout_width="match_parent"
@@ -103,6 +105,7 @@
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:thumb="@drawable/ourtheme_switch_inner_holo_light"
                 android:text="@string/save_remind_text"
                 android:id="@+id/remind_switch_goal"
                 android:checked="false"
@@ -141,7 +144,7 @@
                     android:layout_gravity="center_horizontal|left" />
 
             </RadioGroup>
-            -->
+
 
         </LinearLayout>
     </ScrollView>
