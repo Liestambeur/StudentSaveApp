@@ -60,10 +60,10 @@ public class HistoryElementAdapter extends ArrayAdapter {
         historyType.setImageDrawable(historyPicture);
 
         TextView historyTitle = (TextView) convertView.findViewById(R.id.historyTitle);
-        historyTitle.setText(historyElement.getTitle());
+        historyTitle.setText(historyElement.getCategoryName());
 
         TextView historyCategoryAndDate = (TextView) convertView.findViewById(R.id.historyCategoryAndDate);
-        historyCategoryAndDate.setText(historyElement.getCategoryName() + ", " + historyElement.getDateName());
+        historyCategoryAndDate.setText(historyElement.getTitle() + "  " + historyElement.getDateName());
 
         TextView historyAmount = (TextView) convertView.findViewById(R.id.historyAmount);
         historyAmount.setText(Double.toString(historyElement.getAmount()));
