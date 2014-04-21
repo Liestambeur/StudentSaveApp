@@ -90,6 +90,8 @@
     <string name="dont_forget_piggybank">Don\'t forget to actually put the money in your piggy bank!</string>
     <string name="title_activity_input">Input</string>
     <string name="amount_in_wallet">Currently in wallet: </string>
+    <string name="fill_in_amount">You should fill in a correct amount.</string>
+    <string name="not_enough_money">You don\'t have enough money in your wallet to do that!</string>
 
 
 </resources>

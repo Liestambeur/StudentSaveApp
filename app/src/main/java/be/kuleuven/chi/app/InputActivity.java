@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -31,6 +30,9 @@ import be.kuleuven.chi.backend.historyElements.SavingElement;
  */
 public class InputActivity extends BaseActivity {
 
+    private String walletTotal;
+    private double walletAmount;
+    private AppContent appContent;
     String inputActivityType;
     private String selectedItem;
     private String inputName;
@@ -42,6 +44,11 @@ public class InputActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+
+        appContent = AppContent.getInstance(getApplicationContext());
+        walletTotal = appContent.getWalletTotal();
+        walletAmount = appContent.getWalletTotalAmount();
+
         //Gewoon om die INPUT_ACTIVITY_TYPE string niet overal te hardcoden staat hij in strings.xml
         inputActivityType = intent.getStringExtra(getResources().getText(R.string.input_activity_type).toString());
         int categories = InputActivityType.valueOf(inputActivityType).getCategories();
@@ -49,7 +56,7 @@ public class InputActivity extends BaseActivity {
 
         //Textview
         TextView inWalletText = (TextView) findViewById(R.id.wallet_left);
-        inWalletText.append(" "+AppContent.getInstance(getApplicationContext()).getWalletTotal());
+        inWalletText.append(" "+ walletTotal);
 
         //Listview stuff
         ListView categoryList = (ListView) findViewById(R.id.categoryListView);
@@ -155,39 +162,48 @@ public class InputActivity extends BaseActivity {
         inputName = inputName==null?"No Description":inputName;
         selectedItem = selectedItem==null?"Other":selectedItem;
         inputAmount = inputAmount==null?0.0:inputAmount;
-        HistoryElement he;
-        AppContent instance = AppContent.getInstance(this);
-        userClickedYet = true;
-        if(inputActivityType.equals(InputActivityType.INCOME.name())){
-            he = new IncomeElement(inputAmount, new IncomeCategory(selectedItem),inputName);
-            instance.addToHistory(he);
-        } else if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
-            he = new ExpenseElement(inputAmount, new ExpenseCategory(selectedItem), inputName);
-            instance.addToHistory(he);
+        if(inputAmount==null || inputAmount==0){
+            alertUser(getResources().getString(R.string.fill_in_amount), false);
+        } else if(!(inputActivityType.equals(InputActivityType.INCOME.name())) && inputAmount>walletAmount){
+            alertUser(getResources().getString(R.string.not_enough_money), false);
         } else {
-            Goal goal = instance.getCurrentGoal();
-            if(goal != null){
-                he = new SavingElement(inputAmount, instance.getCurrentGoal());
+            HistoryElement he;
+            AppContent instance = AppContent.getInstance(this);
+            userClickedYet = true;
+            if(inputActivityType.equals(InputActivityType.INCOME.name())){
+                he = new IncomeElement(inputAmount, new IncomeCategory(selectedItem),inputName);
                 instance.addToHistory(he);
-                instance.getCurrentGoal().addAmount(inputAmount);
+            } else if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
+                he = new ExpenseElement(inputAmount, new ExpenseCategory(selectedItem), inputName);
+                instance.addToHistory(he);
             } else {
-                userClickedYet = false;
-                TextView alertView = new TextView(this);
-                alertView.setText(getResources().getString(R.string.goal_not_initialized));
-                ad = new AlertDialog.Builder(this).
-                        setView(alertView).setTitle("Warning!").show();
-                alertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dismissAd();
-                    }
-                });
+                Goal goal = instance.getCurrentGoal();
+                if(goal != null){
+                    he = new SavingElement(inputAmount, instance.getCurrentGoal());
+                    instance.addToHistory(he);
+                    instance.getCurrentGoal().addAmount(inputAmount);
+                } else {
+                    userClickedYet = false;
+                    alertUser(getResources().getString(R.string.goal_not_initialized), true);
+                }
+            }
+            if(userClickedYet){
+                backToMain();
             }
         }
+    }
 
-        if(userClickedYet){
-            backToMain();
-        }
+    private void alertUser(String text, final boolean backToMain) {
+        TextView alertView = new TextView(this);
+        alertView.setText(text);
+        ad = new AlertDialog.Builder(this).
+                setView(alertView).setTitle("Warning!").show();
+        alertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissAd(backToMain);
+            }
+        });
     }
 
     public void backToMain(){
@@ -196,9 +212,9 @@ public class InputActivity extends BaseActivity {
         finish();
     }
 
-    public void dismissAd(){
+    public void dismissAd(boolean backToMain){
         ad.dismiss();
-        backToMain();
+        if(backToMain) backToMain();
     }
 
     public void enableOK(Boolean enable){
