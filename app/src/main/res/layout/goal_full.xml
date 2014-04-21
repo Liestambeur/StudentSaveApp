@@ -44,7 +44,8 @@
                     android:id="@+id/goalName"
                     android:duplicateParentState="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"/>
+                    android:layout_alignParentTop="true"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
                     android:layout_gravity="center_horizontal"
                     android:duplicateParentState="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/goalName"/>
+                    android:layout_below="@+id/goalName"
+                    android:textColor="@color/SteelBlue"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +67,8 @@
                     android:id="@+id/goalDone"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/goalAmount"
-                    android:duplicateParentState="true"/>
+                    android:duplicateParentState="true"
+                    android:textColor="@color/SteelBlue"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -75,7 +78,8 @@
                     android:id="@+id/goalDue"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/goalDone"
-                    android:duplicateParentState="true"/>
+                    android:duplicateParentState="true"
+                    android:textColor="@color/SteelBlue"/>
 
             </RelativeLayout>
 
