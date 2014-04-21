@@ -17,7 +17,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.GoalActivityType;
@@ -205,14 +207,19 @@ public class AddGoalPage1Activity extends BaseActivity {
         setOkButton();
     }
 
+    private boolean reminder = false;
+
     public void remindSwitch(View remindSwitch) {
         if(((Switch) remindSwitch).isChecked()) {
             findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
+            reminder = true;
         }
         else {
             findViewById(R.id.radio_remind).setVisibility(View.GONE);
             ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
             //TODO reset remind optie van goal
+            goal.resetRemind();
+            reminder = false;
         }
         setOkButton();
     }
@@ -220,6 +227,22 @@ public class AddGoalPage1Activity extends BaseActivity {
     // TODO registreer optie van RadioButtons en implementeer het herinneren
 
     public void okButton(View okButton) {
+        if(reminder){
+            RadioGroup group = (RadioGroup) findViewById(R.id.radio_remind);
+            int id = group.getCheckedRadioButtonId();
+            long time = 0;
+            if(id==R.id.radio_day){
+                time = TimeUnit.DAYS.toMillis(1);
+            }else if(id==R.id.radio_week){
+                time = TimeUnit.DAYS.toMillis(7);
+            }else if(id==R.id.radio_month){
+                time = TimeUnit.DAYS.toMillis(30);
+            }
+           // time = TimeUnit.MINUTES.toMillis(1);
+            goal.setMilisecondsToBeReminded(time);
+        }
+
+
         // TODO de oude goal gaat hier verloren, alle wijzigingen die je hebt aangebracht zijn permanent
         // TODO is dit wat de gebruiker verwacht? of wil hij op volgende pagina nog volledig kunnen rollbacken?
         AppContent.getInstance(this).addGoal(this.goal);

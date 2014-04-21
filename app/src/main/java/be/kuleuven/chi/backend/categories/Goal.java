@@ -3,6 +3,7 @@ package be.kuleuven.chi.backend.categories;
 import android.graphics.drawable.Drawable;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 
@@ -15,6 +16,10 @@ public class Goal implements Category {
     private double amount;
     private double amountSaved;
     private Drawable picture;
+    private Calendar createdDate;
+    private Calendar lastReminded;
+    // -1 -> not reminded
+    private long milisecondsToBeReminded;
     private Calendar dueDate;
     //TODO when adding a variable, don't forget to change to copy methods!
 
@@ -24,6 +29,34 @@ public class Goal implements Category {
         this.amountSaved = 0;
         this.picture = null;
         this.dueDate = null;
+        this.milisecondsToBeReminded = -1;
+        this.createdDate = new GregorianCalendar();
+        this.lastReminded = new GregorianCalendar();
+    }
+
+    public boolean shouldRemind(){
+        if(milisecondsToBeReminded<=0){
+            return false;
+        }
+        Calendar now = new GregorianCalendar();
+        Calendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(lastReminded.getTimeInMillis()+milisecondsToBeReminded);
+        if(now.after(cal)){
+            return true;
+        }
+        return false;
+    }
+
+    public void resetRemind(){
+        this.milisecondsToBeReminded = -1;
+    }
+
+    public void setMilisecondsToBeReminded(long milisecondsToBeReminded){
+        this.milisecondsToBeReminded = milisecondsToBeReminded;
+    }
+
+    public void updateLastReminded(){
+        this.lastReminded = new GregorianCalendar();
     }
 
     public String getName() {
