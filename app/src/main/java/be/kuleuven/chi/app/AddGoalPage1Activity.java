@@ -53,6 +53,22 @@ public class AddGoalPage1Activity extends BaseActivity {
             this.oldGoal = AppContent.getInstance(this).getCurrentGoal().getCopy();
             initGoalValues();
             this.enableOK(true);
+
+            if(((Switch) findViewById(R.id.date_switch_goal)).isChecked()) {
+                findViewById(R.id.due_date_field).setVisibility(View.VISIBLE);
+            }
+            else {
+                findViewById(R.id.due_date_field).setVisibility(View.GONE);
+                goal.resetDueDate();
+            }
+            if(((Switch) findViewById(R.id.remind_switch_goal)).isChecked()) {
+                findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
+            }
+            else {
+                findViewById(R.id.radio_remind).setVisibility(View.GONE);
+                ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
+                //TODO reset remind optie van goal
+            }
         }
 
         initTextWatchers();
