@@ -224,6 +224,45 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    public void showReminder(){
+        // custom dialog
+        final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
+        dialog.setContentView(R.layout.popup);
+        dialog.setTitle("Reminder");
+
+        // set the custom dialog components - text, image and button
+        TextView text = (TextView) dialog.findViewById(R.id.popuptext1);
+        text.setText("Please remember to save");
+        TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
+        text2.setText("for your goal: "+appContent.getCurrentGoal().getName());
+        ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
+        Drawable draw = appContent.getCurrentGoal().getPicture();
+        if(draw==null){
+            image.setImageResource(R.drawable.ic_launcher);
+        } else{
+            image.setImageDrawable(draw);
+        }
+
+
+
+        LinearLayout lin = (LinearLayout) dialog.findViewById(R.id.dialogButtonOK);
+        // if button is clicked, close the custom dialog
+        lin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appContent.currentGoalDone();
+                dialog.dismiss();
+                View goalview = findViewById(R.id.goal);
+                goalview.setVisibility(View.INVISIBLE);
+                View addgoal = findViewById(R.id.addgoal);
+                addgoal.setVisibility(1);
+                enableButtonSave(false);
+            }
+        });
+
+        dialog.show();
+    }
+
     public void showDialogGoal(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
