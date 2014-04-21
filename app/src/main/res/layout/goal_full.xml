@@ -9,7 +9,6 @@
     android:onClick="editGoal"
     android:clickable="true">
 
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

@@ -4,15 +4,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="fill_parent">
 
-    <EditText
-        android:id="@+id/enter_name_et"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:hint="@string/enter_name"
-        android:singleLine="true"
-        android:maxLength="30"
-        android:selectAllOnFocus="true" />
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
+        android:text="@string/amount_in_wallet"
+        android:autoLink="none"
+        android:textColor="#7dd4ff"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:typeface="normal"
+        android:gravity="center"
+        android:id="@+id/wallet_left"/>
 
     <EditText
         android:id="@+id/enter_amount_et"
@@ -24,31 +27,41 @@
         android:singleLine="true"
         android:maxLength="30"
         android:selectAllOnFocus="true"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:imeOptions="actionNext"/>
+
+    <EditText
+        android:id="@+id/enter_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:hint="@string/enter_name"
+        android:singleLine="true"
+        android:maxLength="30"
+        android:selectAllOnFocus="true"
+        android:inputType="textCapWords"
+        android:imeOptions="actionDone"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.08"
+        android:layout_weight="0.01"
         android:text="@string/pick_category"
         android:autoLink="none"
         android:textColor="#7dd4ff"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="normal"
         android:typeface="normal"
         android:gravity="center"
         android:id="@+id/pick_category"/>
 
 
-        <ListView
-            android:isScrollContainer="false"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
-            android:id="@+id/categoryListView" />
-
-
-
+    <ListView
+        android:isScrollContainer="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:id="@+id/categoryListView" />
 
     <LinearLayout
         android:orientation="horizontal"
