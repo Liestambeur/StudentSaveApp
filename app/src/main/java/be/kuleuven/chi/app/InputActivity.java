@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -100,7 +101,6 @@ public class InputActivity extends BaseActivity {
         });
 
 
-
         //Save Screen
         if(inputActivityType.equals(InputActivityType.SAVE.name())){
             categoryList.setVisibility(View.INVISIBLE);
@@ -111,6 +111,16 @@ public class InputActivity extends BaseActivity {
             amountText.setImeOptions(EditorInfo.IME_ACTION_DONE);
             TextView pick = (TextView) findViewById(R.id.pick_category);
             if(pick!=null) pick.setText(R.string.dont_forget_piggybank);
+
+            EditText et = (EditText) findViewById(R.id.enter_amount_et);
+            double togo = appContent.getCurrentGoal().getAmountToGo();
+            double available = appContent.getWalletTotalAmount();
+            et.setFilters(new InputFilter[]{ new InputFilterMinMax(0, Math.min(togo,available))});
+        }
+        if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
+            EditText et = (EditText) findViewById(R.id.enter_amount_et);
+            double available = appContent.getWalletTotalAmount();
+            et.setFilters(new InputFilter[]{ new InputFilterMinMax(0, available)});
         }
         this.enableOK(false);
     }
