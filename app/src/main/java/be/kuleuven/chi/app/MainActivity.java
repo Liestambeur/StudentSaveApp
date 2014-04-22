@@ -49,12 +49,15 @@ public class MainActivity extends BaseActivity {
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
             goalAmount.setText("€ "+String.format("%.2f",goal.getAmount()- goal.getAmountSaved())+" to go");
 
+
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
             goalDone.setText("€ "+String.format("%.2f", goal.getAmountSaved())+" done");
 
+
             TextView goalDue = (TextView) findViewById(R.id.goalDue);
             if(goal.getDueDate() != null) {
-                goalDue.setText("Due " + goal.getDueDateString());
+
+                goalDue.setText(goal.daysLeft()+" days left");
                 //TODO moet eigenlijk zijn: nog zoveel dagen te gaan
             }
             else {
