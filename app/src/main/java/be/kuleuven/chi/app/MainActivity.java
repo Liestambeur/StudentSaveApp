@@ -49,14 +49,17 @@ public class MainActivity extends BaseActivity implements Serializable {
             goalName.setText(goal.getName());
 
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
-            goalAmount.setText("€ "+(goal.getAmount()- goal.getAmountSaved())+" to go");
+            goalAmount.setText("€ "+String.format("%.2f",goal.getAmount()- goal.getAmountSaved())+" to go");
+
 
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
-            goalDone.setText("€ "+goal.getAmountSaved()+" done");
+            goalDone.setText("€ "+String.format("%.2f", goal.getAmountSaved())+" done");
+
 
             TextView goalDue = (TextView) findViewById(R.id.goalDue);
             if(goal.getDueDate() != null) {
-                goalDue.setText("Due " + goal.getDueDateString());
+
+                goalDue.setText(goal.daysLeft()+" days left");
                 //TODO moet eigenlijk zijn: nog zoveel dagen te gaan
             }
             else {
@@ -72,10 +75,15 @@ public class MainActivity extends BaseActivity implements Serializable {
             ImageView im = (ImageView) findViewById(R.id.imageView);
             im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
 
+
+            //REMIND
+            if(goal.shouldRemind()){
+                this.showReminder();
+                goal.updateLastReminded();
+            }
+
+            //GOAL gedaan
             if(goal.isDone()){
-
-
-
                 showDialogGoal();
                // showDialog(DIALOG_ALERT);
             }
@@ -252,13 +260,8 @@ public class MainActivity extends BaseActivity implements Serializable {
         lin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appContent.currentGoalDone();
                 dialog.dismiss();
-                View goalview = findViewById(R.id.goal);
-                goalview.setVisibility(View.INVISIBLE);
-                View addgoal = findViewById(R.id.addgoal);
-                addgoal.setVisibility(1);
-                enableButtonSave(false);
+
             }
         });
 

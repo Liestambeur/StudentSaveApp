@@ -125,6 +125,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="@string/save_remind_month_text"
                     android:id="@+id/radio_month"
                     android:layout_gravity="center_horizontal|left" />

@@ -1,7 +1,11 @@
 package be.kuleuven.chi.backend.categories;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 
 /**
@@ -13,6 +17,10 @@ public class Goal implements Category {
     private double amount;
     private double amountSaved;
     private int picture;
+    private Calendar createdDate;
+    private Calendar lastReminded;
+    // -1 -> not reminded
+    private long milisecondsToBeReminded;
     private Calendar dueDate;
     //TODO when adding a variable, don't forget to change to copy methods!
 
@@ -22,6 +30,50 @@ public class Goal implements Category {
         this.amountSaved = 0;
         this.picture = 0;
         this.dueDate = null;
+        this.milisecondsToBeReminded = -1;
+        this.createdDate = new GregorianCalendar();
+        this.lastReminded = new GregorianCalendar();
+    }
+
+    public long daysLeft(){
+        return this.daysBetween(new GregorianCalendar(), dueDate);
+        //return Days.daysBetween(new DateTime(), new DateTime(dueDate.getTime())).getDays();
+    }
+
+    private int daysBetween(final Calendar startDate, final Calendar endDate)
+    {
+        if(startDate.after(endDate)){
+            return 0;
+        }
+        //assert: startDate must be before endDate
+        int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
+        long endInstant = endDate.getTimeInMillis();
+        return  (int) ((endInstant - startDate.getTimeInMillis()) / MILLIS_IN_DAY);
+    }
+
+    public boolean shouldRemind(){
+        if(milisecondsToBeReminded<=0){
+            return false;
+        }
+        Calendar now = new GregorianCalendar();
+        Calendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(lastReminded.getTimeInMillis()+milisecondsToBeReminded);
+        if(now.after(cal)){
+            return true;
+        }
+        return false;
+    }
+
+    public void resetRemind(){
+        this.milisecondsToBeReminded = -1;
+    }
+
+    public void setMilisecondsToBeReminded(long milisecondsToBeReminded){
+        this.milisecondsToBeReminded = milisecondsToBeReminded;
+    }
+
+    public void updateLastReminded(){
+        this.lastReminded = new GregorianCalendar();
     }
 
     public String getName() {

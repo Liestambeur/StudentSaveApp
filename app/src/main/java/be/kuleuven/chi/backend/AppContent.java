@@ -116,8 +116,12 @@ public class AppContent implements Serializable {
         saveState();
     }
 
+    /**
+     * 2 decimals only!
+     * @return
+     */
     public String getWalletTotal() {
-        return (this.currency.getSymbol() + " " + this.history.getWalletTotal());
+        return (this.currency.getSymbol() + " " + String.format("%.2f", this.history.getWalletTotal()));
     }
 
     public double getWalletTotalAmount() {
