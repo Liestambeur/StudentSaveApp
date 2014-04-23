@@ -17,18 +17,36 @@
         android:gravity="center"
         android:id="@+id/wallet_left"/>
 
-    <EditText
-        android:id="@+id/enter_amount_et"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:hint="@string/enter_amount"
-        android:layout_gravity="center_horizontal"
-        android:singleLine="true"
-        android:maxLength="30"
-        android:selectAllOnFocus="true"
-        android:inputType="numberDecimal"
-        android:imeOptions="actionNext"/>
+        >
+
+        <EditText
+            android:id="@+id/enter_amount_et"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="@string/enter_amount"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext"/>
+
+        <TextView
+            android:id="@+id/amount_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/amount_too_much"
+            android:textColor="@color/Crimson"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/enter_name_et"

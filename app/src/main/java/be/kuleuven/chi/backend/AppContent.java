@@ -1,12 +1,20 @@
 package be.kuleuven.chi.backend;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,19 +28,21 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
 /**
  * Created by Lies on 3/04/14.
  */
-public class AppContent {
+public class AppContent implements Serializable {
 
     private Goal currentGoal;
     private List<Goal> goals;
     private History history;
     private Currency currency;
+    private Context context;
     private List<IncomeCategory> incomeCategories;
     private List<ExpenseCategory> expenseCategories;
-
+    private static final String THISFILENAME = "thisfile";
     private static AppContent singleton;
 
     /* A private Constructor prevents any other class from instantiating. */
     private AppContent(Context context) {
+        this.context = context;
         this.goals = new ArrayList<Goal>();
         this.currency = Currency.EURO;
         this.history = new History();
@@ -43,17 +53,32 @@ public class AppContent {
         String[] ecs = resources.getStringArray(R.array.expense_categories);
         for(int i=0;i<ics.length;i++){incomeCategories.add(new IncomeCategory(ics[i]));}
         for(int i=0;i<ecs.length;i++){expenseCategories.add(new ExpenseCategory(ecs[i]));}
-        Goal g = new Goal();
-        g.setAmount(100);
-        g.addAmount(100);
-        //addGoal(g);
+        //Persist this singleton
+        saveState();
+    }
+
+    private void saveState() {
+        try {
+            FileOutputStream fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.flush();
+            oos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /* Static 'instance' method */
     public static AppContent getInstance(Context context) {
         if(AppContent.singleton == null) {
-            AppContent.singleton = new AppContent(context);
-
+            try{
+                FileInputStream fis = new FileInputStream(THISFILENAME);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                AppContent.singleton = (AppContent) ois.readObject();
+            } catch(Exception e){
+                AppContent.singleton = new AppContent(context);
+            }
         }
         return singleton;
     }
@@ -65,6 +90,7 @@ public class AppContent {
     public void addGoal(Goal goal) {
         this.goals.add(goal);
         this.currentGoal = goal;
+        saveState();
     }
 
     public boolean hasCurrentGoal(){
@@ -82,10 +108,12 @@ public class AppContent {
         }else{
             this.currentGoal=null;
         }
+        saveState();
     }
 
     public void addToHistory(HistoryElement element) {
-       this.history.addToHistory(element);
+        this.history.addToHistory(element);
+        saveState();
     }
 
     public String getWalletTotal() {
@@ -134,6 +162,7 @@ public class AppContent {
 
     public void currentGoalDone(){
         this.currentGoal=null;
+        saveState();
     }
 
 

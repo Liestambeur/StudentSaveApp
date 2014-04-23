@@ -1,7 +1,5 @@
 package be.kuleuven.chi.backend.categories;
 
-import android.graphics.drawable.Drawable;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -14,7 +12,7 @@ public class Goal implements Category {
     private String name;
     private double amount;
     private double amountSaved;
-    private Drawable picture;
+    private int picture;
     private Calendar dueDate;
     //TODO when adding a variable, don't forget to change to copy methods!
 
@@ -22,7 +20,7 @@ public class Goal implements Category {
         this.name = "Goal";
         this.amount = 0;
         this.amountSaved = 0;
-        this.picture = null;
+        this.picture = 0;
         this.dueDate = null;
     }
 
@@ -76,15 +74,15 @@ public class Goal implements Category {
     }
 
 
-    public Drawable getPicture() {
+    public int getPicture() {
         return picture;
     }
 
     public void resetPicture() {
-        this.picture = null;
+        this.picture = 0;
     }
 
-    public void setPicture(Drawable picture) {
+    public void setPicture(int picture) {
         this.picture = picture;
     }
 
@@ -137,4 +135,5 @@ public class Goal implements Category {
     public boolean isDone(){
         return amountSaved>=amount;
     }
+
 }

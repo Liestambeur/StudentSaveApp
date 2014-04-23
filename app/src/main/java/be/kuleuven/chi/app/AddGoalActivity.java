@@ -127,7 +127,10 @@ public class AddGoalActivity extends BaseActivity {
             ((ImageButton) picture).setActivated(true);
 
             Drawable drawable = ((ImageButton) picture).getDrawable();
-            this.newGoal.setPicture(drawable);
+            System.out.println("Als ge deze print ziet check AddGoalActivity");
+            //Uit luiheid uitgecomment omdat ik er van overtuigd ben dat deze klasse niet meer
+            //gebruikt wordt en geen zin heb om dit helemaal naar het nieuwe systeem om te zetten.
+            //this.newGoal.setPicture(drawable);
         }
     }
 

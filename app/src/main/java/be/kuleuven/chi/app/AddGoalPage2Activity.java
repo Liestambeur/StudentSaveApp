@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.GoalActivityType;
@@ -19,7 +19,7 @@ import be.kuleuven.chi.backend.GoalActivityType;
  */
 public class AddGoalPage2Activity extends BaseActivity {
 
-    List<ImageButton> pictures;
+    Map<ImageButton, Integer> pictures;
     int goalActivityType;
     Drawable oldPicture;
 
@@ -39,7 +39,7 @@ public class AddGoalPage2Activity extends BaseActivity {
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
-            this.oldPicture = AppContent.getInstance(this).getCurrentGoal().getPicture();
+            this.oldPicture = getResources().getDrawable(AppContent.getInstance(this).getCurrentGoal().getPicture());
             // initGoalValues(); TODO - the current picture should be highlighted
         }
 
@@ -47,20 +47,20 @@ public class AddGoalPage2Activity extends BaseActivity {
     }
 
     private void fillPicturesList() {
-        pictures = new ArrayList<ImageButton>();
-        pictures.add((ImageButton) findViewById(R.id.goalPicture1));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture2));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture3));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture4));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture5));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture6));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture7));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture8));
-        pictures.add((ImageButton) findViewById(R.id.goalPicture9));
+        pictures = new HashMap<ImageButton, Integer>();
+        pictures.put((ImageButton) findViewById(R.id.goalPicture1), R.id.goalPicture1);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture2), R.id.goalPicture2);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture3), R.id.goalPicture3);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture4), R.id.goalPicture4);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture5), R.id.goalPicture5);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture6), R.id.goalPicture6);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture7), R.id.goalPicture7);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture8), R.id.goalPicture8);
+        pictures.put((ImageButton) findViewById(R.id.goalPicture9), R.id.goalPicture9);
     }
 
     private void setAllPicturesUnactivated() {
-        for(ImageButton picture: pictures) {
+        for(ImageButton picture: pictures.keySet()) {
             picture.setActivated(false);
         }
     }
@@ -84,7 +84,8 @@ public class AddGoalPage2Activity extends BaseActivity {
             ((ImageButton) picture).setActivated(true);
 
             Drawable drawable = ((ImageButton) picture).getDrawable();
-            AppContent.getInstance(this).getCurrentGoal().setPicture(drawable);
+            //TODO FIX FIX FIX FIX FIX NULLPOINTER
+            AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
         }
     }
 
@@ -111,7 +112,7 @@ public class AddGoalPage2Activity extends BaseActivity {
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             // the picture of the goal is restored to its older value
-            AppContent.getInstance(this).getCurrentGoal().setPicture(this.oldPicture);
+            AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(this.oldPicture));
         }
 
         Intent intent = new Intent(this, MainActivity.class);

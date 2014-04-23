@@ -1,5 +1,6 @@
 package be.kuleuven.chi.backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
 /**
  * Created by Lies on 3/04/14.
  */
-public class History {
+public class History implements Serializable{
 
     private List<HistoryElement> history;
 

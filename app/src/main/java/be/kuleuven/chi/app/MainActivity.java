@@ -18,12 +18,14 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.GoalActivityType;
 import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.Goal;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Serializable {
 
     AppContent appContent;
     Context context;
@@ -68,7 +70,7 @@ public class MainActivity extends BaseActivity {
             progress.setProgress(goal.getPercent());
 
             ImageView im = (ImageView) findViewById(R.id.imageView);
-            im.setImageDrawable(goal.getPicture());
+            im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
 
             if(goal.isDone()){
 
@@ -236,7 +238,7 @@ public class MainActivity extends BaseActivity {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("for your goal: "+appContent.getCurrentGoal().getName());
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        Drawable draw = appContent.getCurrentGoal().getPicture();
+        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
         if(draw==null){
             image.setImageResource(R.drawable.ic_launcher);
         } else{
@@ -275,7 +277,7 @@ public class MainActivity extends BaseActivity {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        Drawable draw = appContent.getCurrentGoal().getPicture();
+        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
         if(draw==null){
             image.setImageResource(R.drawable.ic_launcher);
         } else{

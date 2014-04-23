@@ -16,6 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.ExpenseCategory;
@@ -84,21 +87,26 @@ public class InputActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-        amountText.addTextChangedListener(new TextWatcher() {
+        TextWatcher amountWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try{
+                try {
                     setInputAmount(Double.parseDouble(s.toString()));
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     setInputAmount(Double.parseDouble("0"));
                 }
 
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
-        });
+            public void afterTextChanged(Editable s) {
+            }
+        };
+        //It isn't added immediately, we check if this is the save screen first
 
 
         //Save Screen
@@ -113,15 +121,60 @@ public class InputActivity extends BaseActivity {
             if(pick!=null) pick.setText(R.string.dont_forget_piggybank);
 
             EditText et = (EditText) findViewById(R.id.enter_amount_et);
-            double togo = appContent.getCurrentGoal().getAmountToGo();
-            double available = appContent.getWalletTotalAmount();
-            et.setFilters(new InputFilter[]{ new InputFilterMinMax(0, Math.min(togo,available))});
+            final double togo = appContent.getCurrentGoal().getAmountToGo();
+            final double available = appContent.getWalletTotalAmount();
+
+            amountWatcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    String amount = charSequence.toString();
+                    double v;
+                    try{
+                        if(amount.equals("")){
+                            v = 0;
+                        } else {
+                            v = Double.parseDouble(amount);
+                        }
+                    } catch (NumberFormatException e) {
+                        v = -1;
+                    }
+
+                    TextView amount_warning = (TextView) findViewById(R.id.amount_warning);
+                    if(v < 0) {
+                        amount_warning.setText(R.string.amount_something_wrong);
+                        amount_warning.setVisibility(View.VISIBLE);
+                        enableOK(false);
+                    } else if(v > available) {
+                        amount_warning.setText(R.string.amount_too_much);
+                        amount_warning.setVisibility(View.VISIBLE);
+                        enableOK(false);
+                    } else if(v > togo) {
+                        amount_warning.setText(R.string.amount_over_left);
+                        amount_warning.append(" € "+String.valueOf(togo));
+                        amount_warning.setVisibility(View.VISIBLE);
+                        enableOK(false);
+                    } else {
+                        // It should be OK then
+                        amount_warning.setVisibility(View.GONE);
+                        setInputAmount(v);
+                        enableOK(true);
+                    }
+                }
+                @Override
+                public void afterTextChanged(Editable editable) {}
+            };
+            amountText.removeTextChangedListener(amountWatcher);
+
         }
         if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
             EditText et = (EditText) findViewById(R.id.enter_amount_et);
             double available = appContent.getWalletTotalAmount();
             et.setFilters(new InputFilter[]{ new InputFilterMinMax(0, available)});
         }
+
+        amountText.addTextChangedListener(amountWatcher);
         this.enableOK(false);
     }
 
