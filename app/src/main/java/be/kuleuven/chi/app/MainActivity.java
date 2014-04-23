@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,7 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 import be.kuleuven.chi.backend.AppContent;
@@ -74,7 +76,10 @@ public class MainActivity extends BaseActivity implements Serializable {
             progress.setProgress(goal.getPercent());
 
             ImageView im = (ImageView) findViewById(R.id.imageView);
-            im.setImageBitmap(BitmapFactory.decodeFile(goal.getPictureUrl()));
+
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
+            Bitmap bm = BitmapFactory.decodeStream(inputStream);
+            im.setImageBitmap(bm);
 
             //im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
 
@@ -249,7 +254,9 @@ public class MainActivity extends BaseActivity implements Serializable {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("for your goal: "+appContent.getCurrentGoal().getName());
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        image.setImageBitmap(BitmapFactory.decodeFile(appContent.getCurrentGoal().getPictureUrl()));
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(appContent.getCurrentGoal().getPictureUrl());
+        Bitmap bm = BitmapFactory.decodeStream(inputStream);
+        image.setImageBitmap(bm);
         //Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
         //if(draw==null){
         //    image.setImageResource(R.drawable.ic_launcher);
@@ -284,7 +291,9 @@ public class MainActivity extends BaseActivity implements Serializable {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        image.setImageBitmap(BitmapFactory.decodeFile(appContent.getCurrentGoal().getPictureUrl()));
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(appContent.getCurrentGoal().getPictureUrl());
+        Bitmap bm = BitmapFactory.decodeStream(inputStream);
+        image.setImageBitmap(bm);
 //
 //        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
 //        if(draw==null){

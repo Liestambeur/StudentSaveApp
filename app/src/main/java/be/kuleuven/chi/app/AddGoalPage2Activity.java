@@ -1,13 +1,20 @@
 package be.kuleuven.chi.app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +26,7 @@ import be.kuleuven.chi.backend.GoalActivityType;
  */
 public class AddGoalPage2Activity extends BaseActivity {
 
-    Map<ImageButton, Integer> pictures;
+    Map<ImageButton, String> paths;
     int goalActivityType;
     String oldPicture;
    // Drawable oldPicture;
@@ -48,20 +55,20 @@ public class AddGoalPage2Activity extends BaseActivity {
     }
 
     private void fillPicturesList() {
-        pictures = new HashMap<ImageButton, Integer>();
-        pictures.put((ImageButton) findViewById(R.id.goalPicture1), R.id.goalPicture1);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture2), R.id.goalPicture2);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture3), R.id.goalPicture3);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture4), R.id.goalPicture4);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture5), R.id.goalPicture5);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture6), R.id.goalPicture6);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture7), R.id.goalPicture7);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture8), R.id.goalPicture8);
-        pictures.put((ImageButton) findViewById(R.id.goalPicture9), R.id.goalPicture9);
+        paths = new HashMap<ImageButton, String>();
+        paths.put((ImageButton) findViewById(R.id.goalPicture1), getResources().getString(R.drawable.auto));
+        paths.put((ImageButton) findViewById(R.id.goalPicture2), getResources().getString(R.drawable.shopping));
+        paths.put((ImageButton) findViewById(R.id.goalPicture3), getResources().getString(R.drawable.bier));
+        paths.put((ImageButton) findViewById(R.id.goalPicture4), getResources().getString(R.drawable.valies));
+        paths.put((ImageButton) findViewById(R.id.goalPicture5), getResources().getString(R.drawable.spaarvarken));
+        paths.put((ImageButton) findViewById(R.id.goalPicture6), getResources().getString(R.drawable.cadeaus));
+        paths.put((ImageButton) findViewById(R.id.goalPicture7), getResources().getString(R.drawable.multimedia));
+        paths.put((ImageButton) findViewById(R.id.goalPicture8), getResources().getString(R.drawable.gitaar));
+        paths.put((ImageButton) findViewById(R.id.goalPicture9), getResources().getString(R.drawable.dotdotdot));
     }
 
     private void setAllPicturesUnactivated() {
-        for(ImageButton picture: pictures.keySet()) {
+        for(ImageButton picture: paths.keySet()) {
             picture.setActivated(false);
         }
     }
@@ -83,31 +90,12 @@ public class AddGoalPage2Activity extends BaseActivity {
         else{
             setAllPicturesUnactivated();
             ((ImageButton) picture).setActivated(true);
-
-            Drawable drawable = ((ImageButton) picture).getDrawable();
-            //int id = ((ImageButton) picture).getDrawingCache().getGenerationId();
-            //TODO FILENOTFOUND, wrm niet?
-            String url = this.getResourceURL(R.drawable.bier,"jpg");
-            AppContent.getInstance(this).getCurrentGoal().setPicture(url);
+            String path = paths.get(((ImageButton) picture));
+            AppContent.getInstance(this).getCurrentGoal().setPicture(path);
 
             //TODO FIX FIX FIX FIX FIX NULLPOINTER
            // AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
         }
-    }
-
-    protected String getResourceURL(int resourceId, String extension){
-        String resName = getResources().getResourceName(resourceId);
-        int index = resName.indexOf("/");
-        resName = resName.substring(0,index);
-        index = resName.indexOf(":");
-        String resType = resName.substring(index+1);
-
-        StringBuilder link = new StringBuilder(128);
-        link.append("file:///android_res/");
-        link.append(resType).append("/");
-        link.append(getResources().getResourceEntryName(resourceId));
-        link.append(".").append(extension);
-        return link.toString();
     }
 
     public void okButton(View okButton) {
@@ -141,10 +129,38 @@ public class AddGoalPage2Activity extends BaseActivity {
         finish();
     }
 
+    private static int RESULT_LOAD_IMAGE = 1;
+
     public void externalGoalPicture(View dotdotdotPicture) {
-        Intent intent = new Intent(this, ExternalPicutureActivity.class);
-        startActivity(intent);
-        finish();
+
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            AppContent.getInstance(this).getCurrentGoal().setPicture(picturePath);
+
+        }
+
+
     }
 
     private void setOkButton(){
