@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -73,7 +74,9 @@ public class MainActivity extends BaseActivity implements Serializable {
             progress.setProgress(goal.getPercent());
 
             ImageView im = (ImageView) findViewById(R.id.imageView);
-            im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
+            im.setImageBitmap(BitmapFactory.decodeFile(goal.getPictureUrl()));
+
+            //im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
 
 
             //REMIND
@@ -246,12 +249,13 @@ public class MainActivity extends BaseActivity implements Serializable {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("for your goal: "+appContent.getCurrentGoal().getName());
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
-        if(draw==null){
-            image.setImageResource(R.drawable.ic_launcher);
-        } else{
-            image.setImageDrawable(draw);
-        }
+        image.setImageBitmap(BitmapFactory.decodeFile(appContent.getCurrentGoal().getPictureUrl()));
+        //Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
+        //if(draw==null){
+        //    image.setImageResource(R.drawable.ic_launcher);
+        //} else{
+        //    image.setImageDrawable(draw);
+        //}
 
 
 
@@ -280,12 +284,14 @@ public class MainActivity extends BaseActivity implements Serializable {
         TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
         text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
         ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
-        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
-        if(draw==null){
-            image.setImageResource(R.drawable.ic_launcher);
-        } else{
-            image.setImageDrawable(draw);
-        }
+        image.setImageBitmap(BitmapFactory.decodeFile(appContent.getCurrentGoal().getPictureUrl()));
+//
+//        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
+//        if(draw==null){
+//            image.setImageResource(R.drawable.ic_launcher);
+//        } else{
+//            image.setImageDrawable(draw);
+//        }
 
 
 

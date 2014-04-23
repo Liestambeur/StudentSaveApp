@@ -16,7 +16,7 @@ public class Goal implements Category {
     private String name;
     private double amount;
     private double amountSaved;
-    private int picture;
+    private String urlPicture;
     private Calendar createdDate;
     private Calendar lastReminded;
     // -1 -> not reminded
@@ -28,7 +28,7 @@ public class Goal implements Category {
         this.name = "Goal";
         this.amount = 0;
         this.amountSaved = 0;
-        this.picture = 0;
+        this.urlPicture = "";
         this.dueDate = null;
         this.milisecondsToBeReminded = -1;
         this.createdDate = new GregorianCalendar();
@@ -126,16 +126,16 @@ public class Goal implements Category {
     }
 
 
-    public int getPicture() {
-        return picture;
+    public String getPictureUrl() {
+        return urlPicture;
     }
 
     public void resetPicture() {
-        this.picture = 0;
+        this.urlPicture = "";
     }
 
-    public void setPicture(int picture) {
-        this.picture = picture;
+    public void setPicture(String picture) {
+        this.urlPicture = picture;
     }
 
     public Calendar getDueDate() {
@@ -170,7 +170,7 @@ public class Goal implements Category {
         copy.setName(this.name);
         copy.setAmount(this.amount);
         copy.setAmountSaved(this.amountSaved);
-        copy.setPicture(this.picture);
+        copy.setPicture(this.urlPicture);
         copy.setDueDate(this.dueDate);
 
         return copy;
@@ -180,7 +180,7 @@ public class Goal implements Category {
         this.name = goal.getName();
         this.amount = goal.getAmount();
         this.amountSaved = goal.getAmountSaved();
-        this.picture = goal.getPicture();
+        this.urlPicture = goal.getPictureUrl();
         this.dueDate = goal.getDueDate();
     }
 

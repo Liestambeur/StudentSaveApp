@@ -21,7 +21,8 @@ public class AddGoalPage2Activity extends BaseActivity {
 
     Map<ImageButton, Integer> pictures;
     int goalActivityType;
-    Drawable oldPicture;
+    String oldPicture;
+   // Drawable oldPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class AddGoalPage2Activity extends BaseActivity {
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
-            this.oldPicture = getResources().getDrawable(AppContent.getInstance(this).getCurrentGoal().getPicture());
+            this.oldPicture = AppContent.getInstance(this).getCurrentGoal().getPictureUrl();
             // initGoalValues(); TODO - the current picture should be highlighted
         }
 
@@ -84,9 +85,29 @@ public class AddGoalPage2Activity extends BaseActivity {
             ((ImageButton) picture).setActivated(true);
 
             Drawable drawable = ((ImageButton) picture).getDrawable();
+            //int id = ((ImageButton) picture).getDrawingCache().getGenerationId();
+            //TODO FILENOTFOUND, wrm niet?
+            String url = this.getResourceURL(R.drawable.bier,"jpg");
+            AppContent.getInstance(this).getCurrentGoal().setPicture(url);
+
             //TODO FIX FIX FIX FIX FIX NULLPOINTER
-            AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
+           // AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
         }
+    }
+
+    protected String getResourceURL(int resourceId, String extension){
+        String resName = getResources().getResourceName(resourceId);
+        int index = resName.indexOf("/");
+        resName = resName.substring(0,index);
+        index = resName.indexOf(":");
+        String resType = resName.substring(index+1);
+
+        StringBuilder link = new StringBuilder(128);
+        link.append("file:///android_res/");
+        link.append(resType).append("/");
+        link.append(getResources().getResourceEntryName(resourceId));
+        link.append(".").append(extension);
+        return link.toString();
     }
 
     public void okButton(View okButton) {
@@ -112,7 +133,7 @@ public class AddGoalPage2Activity extends BaseActivity {
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             // the picture of the goal is restored to its older value
-            AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(this.oldPicture));
+            AppContent.getInstance(this).getCurrentGoal().setPicture(oldPicture);
         }
 
         Intent intent = new Intent(this, MainActivity.class);
