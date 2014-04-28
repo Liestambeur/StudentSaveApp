@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import be.kuleuven.chi.backend.categories.Category;
 /**
  * Created by Lies on 3/04/14.
  */
-public abstract class HistoryElement {
+public abstract class HistoryElement implements Serializable {
 
     private double amount;
     private Category category;

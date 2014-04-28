@@ -34,9 +34,33 @@ public class MainActivity extends BaseActivity implements Serializable {
     Context context;
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        appContent = AppContent.getInstance(this);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        appContent.saveState();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        appContent.saveState();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        appContent = AppContent.getInstance(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        context = this;
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_main);
 
         appContent = AppContent.getInstance(this);
@@ -125,7 +149,7 @@ public class MainActivity extends BaseActivity implements Serializable {
                     v = adapter.getView(i, null, null);
                 }
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.FILL_PARENT,0, 1.0f);
+                        LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
                 v.setLayoutParams(param);
 
                 listPreviewHistory.addView(v);

@@ -93,7 +93,7 @@ public class AddGoalPage2Activity extends BaseActivity {
             String path = paths.get(((ImageButton) picture));
             AppContent.getInstance(this).getCurrentGoal().setPicture(path);
 
-            //TODO FIX FIX FIX FIX FIX NULLPOINTER
+            //NULLPOINTER
            // AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
         }
     }

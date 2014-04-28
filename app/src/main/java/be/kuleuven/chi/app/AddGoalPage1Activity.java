@@ -1,15 +1,11 @@
 package be.kuleuven.chi.app;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -17,7 +13,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
@@ -239,7 +234,7 @@ public class AddGoalPage1Activity extends BaseActivity {
                 time = TimeUnit.DAYS.toMillis(30);
             }
            // time = TimeUnit.MINUTES.toMillis(1);
-            goal.setMilisecondsToBeReminded(time);
+            goal.setMillisecondsToBeReminded(time);
         }
 
 

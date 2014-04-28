@@ -1,11 +1,10 @@
 package be.kuleuven.chi.backend.categories;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
+//import org.joda.time.DateTime;
+//import org.joda.time.Days;
 
 
 /**
@@ -20,7 +19,7 @@ public class Goal implements Category {
     private Calendar createdDate;
     private Calendar lastReminded;
     // -1 -> not reminded
-    private long milisecondsToBeReminded;
+    private long millisecondsToBeReminded;
     private Calendar dueDate;
     //TODO when adding a variable, don't forget to change to copy methods!
 
@@ -30,7 +29,7 @@ public class Goal implements Category {
         this.amountSaved = 0;
         this.urlPicture = "";
         this.dueDate = null;
-        this.milisecondsToBeReminded = -1;
+        this.millisecondsToBeReminded = -1;
         this.createdDate = new GregorianCalendar();
         this.lastReminded = new GregorianCalendar();
     }
@@ -52,12 +51,12 @@ public class Goal implements Category {
     }
 
     public boolean shouldRemind(){
-        if(milisecondsToBeReminded<=0){
+        if(millisecondsToBeReminded <=0){
             return false;
         }
         Calendar now = new GregorianCalendar();
         Calendar cal = new GregorianCalendar();
-        cal.setTimeInMillis(lastReminded.getTimeInMillis()+milisecondsToBeReminded);
+        cal.setTimeInMillis(lastReminded.getTimeInMillis()+ millisecondsToBeReminded);
         if(now.after(cal)){
             return true;
         }
@@ -65,11 +64,11 @@ public class Goal implements Category {
     }
 
     public void resetRemind(){
-        this.milisecondsToBeReminded = -1;
+        this.millisecondsToBeReminded = -1;
     }
 
-    public void setMilisecondsToBeReminded(long milisecondsToBeReminded){
-        this.milisecondsToBeReminded = milisecondsToBeReminded;
+    public void setMillisecondsToBeReminded(long millisecondsToBeReminded){
+        this.millisecondsToBeReminded = millisecondsToBeReminded;
     }
 
     public void updateLastReminded(){
@@ -172,6 +171,7 @@ public class Goal implements Category {
         copy.setAmountSaved(this.amountSaved);
         copy.setPicture(this.urlPicture);
         copy.setDueDate(this.dueDate);
+        copy.setMillisecondsToBeReminded(this.millisecondsToBeReminded);
 
         return copy;
     }
@@ -182,10 +182,14 @@ public class Goal implements Category {
         this.amountSaved = goal.getAmountSaved();
         this.urlPicture = goal.getPictureUrl();
         this.dueDate = goal.getDueDate();
+        this.millisecondsToBeReminded = goal.getMillisecondsToBeReminded();
     }
 
     public boolean isDone(){
         return amountSaved>=amount;
     }
 
+    public long getMillisecondsToBeReminded() {
+        return millisecondsToBeReminded;
+    }
 }

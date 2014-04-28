@@ -57,13 +57,15 @@ public class AppContent implements Serializable {
         saveState();
     }
 
-    private void saveState() {
+    public void saveState() {
         try {
             FileOutputStream fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this);
             oos.flush();
             oos.close();
+            fos.close();
+            System.out.println("State saved.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,7 +78,10 @@ public class AppContent implements Serializable {
                 FileInputStream fis = new FileInputStream(THISFILENAME);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 AppContent.singleton = (AppContent) ois.readObject();
+                System.out.println("State loaded from file.");
             } catch(Exception e){
+                System.out.println(e.getCause().toString());
+                System.out.println("Failed to load file!");
                 AppContent.singleton = new AppContent(context);
             }
         }

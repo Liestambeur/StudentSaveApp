@@ -1,11 +1,13 @@
 package be.kuleuven.chi.backend.categoryElements;
 
+import java.io.Serializable;
+
 import be.kuleuven.chi.backend.categories.Category;
 
 /**
  * Created by joren on 4/6/14.
  */
-public class CategoryElement {
+public class CategoryElement implements Serializable {
     private final Category category;
 
     public CategoryElement(Category cat) {
