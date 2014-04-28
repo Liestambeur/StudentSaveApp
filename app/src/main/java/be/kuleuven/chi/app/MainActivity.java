@@ -30,32 +30,34 @@ import be.kuleuven.chi.backend.categories.Goal;
 
 public class MainActivity extends BaseActivity implements Serializable {
 
+    static final long serialVersionUID = 0L;
+
     AppContent appContent;
     Context context;
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        appContent = AppContent.getInstance(this);
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        appContent.saveState();
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        appContent.saveState();
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        appContent = AppContent.getInstance(this);
-    }
+//
+//    @Override
+//    protected void onResume(){
+//        super.onResume();
+//        appContent = AppContent.getInstance(this);
+//    }
+//
+//    @Override
+//    protected void onPause(){
+//        super.onPause();
+//        appContent.saveState();
+//    }
+//
+//    @Override
+//    public void onStop(){
+//        super.onStop();
+//        appContent.saveState();
+//    }
+//
+//    @Override
+//    public void onStart(){
+//        super.onStart();
+//        appContent = AppContent.getInstance(this);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

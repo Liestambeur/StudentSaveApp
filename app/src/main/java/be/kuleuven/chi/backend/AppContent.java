@@ -3,21 +3,18 @@ package be.kuleuven.chi.backend;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ListAdapter;
 
+import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import be.kuleuven.chi.app.R;
 import be.kuleuven.chi.backend.categories.ExpenseCategory;
@@ -30,6 +27,8 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
  */
 public class AppContent implements Serializable {
 
+    static final long serialVersionUID=0L;
+
     private Goal currentGoal;
     private List<Goal> goals;
     private History history;
@@ -37,7 +36,7 @@ public class AppContent implements Serializable {
     private Context context;
     private List<IncomeCategory> incomeCategories;
     private List<ExpenseCategory> expenseCategories;
-    private static final String THISFILENAME = "thisfile";
+    private static final String THISFILENAME = "anotherfile";
     private static AppContent singleton;
 
     /* A private Constructor prevents any other class from instantiating. */
@@ -58,31 +57,39 @@ public class AppContent implements Serializable {
     }
 
     public void saveState() {
-        try {
-            FileOutputStream fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this);
-            oos.flush();
-            oos.close();
-            fos.close();
-            System.out.println("State saved.");
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(context!=null){
+            try {
+                FileOutputStream fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(this);
+                oos.close();
+                fos.close();
+                System.out.println("State saved.");
+            } catch(FileNotFoundException f){
+                System.out.println("WTF?!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     /* Static 'instance' method */
     public static AppContent getInstance(Context context) {
         if(AppContent.singleton == null) {
+            System.out.println("Singleton null");
             try{
-                FileInputStream fis = new FileInputStream(THISFILENAME);
+                FileInputStream fis = context.openFileInput(THISFILENAME);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 AppContent.singleton = (AppContent) ois.readObject();
                 System.out.println("State loaded from file.");
-            } catch(Exception e){
+            } catch(FileNotFoundException e){
                 System.out.println(e.getCause().toString());
                 System.out.println("Failed to load file!");
                 AppContent.singleton = new AppContent(context);
+            } catch(Exception e){
+                System.out.print(e.toString());
+                System.out.println(e.getCause());
+                System.out.println("Something is horribly wrong!");
             }
         }
         return singleton;
@@ -94,24 +101,24 @@ public class AppContent implements Serializable {
 
     public void addGoal(Goal goal) {
         this.goals.add(goal);
-        this.currentGoal = goal;
+        setCurrentGoal(goal);
         saveState();
     }
 
     public boolean hasCurrentGoal(){
-        return this.currentGoal!=null;
+        return getCurrentGoal()!=null;
     }
 
     public boolean hasGoal() {
-        return !this.goals.isEmpty();
+        return !getGoals().isEmpty();
     }
 
     public void deleteGoal(Goal goal) {
         this.goals.remove(goal);
-        if(!this.goals.isEmpty()) {
-            this.currentGoal = this.goals.get(this.goals.size() - 1);
-        }else{
-            this.currentGoal=null;
+        if (!this.goals.isEmpty()) {
+            setCurrentGoal(getGoals().get(this.goals.size() - 1));
+        } else {
+            setCurrentGoal(null);
         }
         saveState();
     }
@@ -147,10 +154,8 @@ public class AppContent implements Serializable {
 
     public List<Goal> getGoalsDone(){
         List<Goal> result = new ArrayList<Goal>();
-        Iterator<Goal> goalIterator = goals.iterator();
-        while (goalIterator.hasNext()){
-            Goal g = goalIterator.next();
-            if(g.isDone()){
+        for (Goal g : goals) {
+            if (g.isDone()) {
                 result.add(g);
             }
         }
@@ -159,10 +164,8 @@ public class AppContent implements Serializable {
 
     public List<Goal> getGoalsBusy(){
         List<Goal> result = new ArrayList<Goal>();
-        Iterator<Goal> goalIterator = goals.iterator();
-        while (goalIterator.hasNext()){
-            Goal g = goalIterator.next();
-            if(!g.isDone()){
+        for (Goal g : goals) {
+            if (!g.isDone()) {
                 result.add(g);
             }
         }
@@ -170,7 +173,7 @@ public class AppContent implements Serializable {
     }
 
     public void currentGoalDone(){
-        this.currentGoal=null;
+        setCurrentGoal(null);
         saveState();
     }
 
@@ -182,4 +185,12 @@ public class AppContent implements Serializable {
     public List<ExpenseCategory> getExpenseCategories(){ return this.expenseCategories; }
     public int getNumberOfExpenseCategories(){ return expenseCategories.size(); }
     public ExpenseCategory getExpenseCategoryAt(int index){ return expenseCategories.get(index); }
+
+    public void setCurrentGoal(Goal currentGoal) {
+        this.currentGoal = currentGoal;
+    }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
 }

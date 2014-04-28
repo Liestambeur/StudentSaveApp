@@ -185,11 +185,12 @@ public class Goal implements Category {
         this.millisecondsToBeReminded = goal.getMillisecondsToBeReminded();
     }
 
+    public long getMillisecondsToBeReminded() {
+        return millisecondsToBeReminded;
+    }
+
     public boolean isDone(){
         return amountSaved>=amount;
     }
 
-    public long getMillisecondsToBeReminded() {
-        return millisecondsToBeReminded;
-    }
 }
