@@ -132,12 +132,15 @@ public class AddGoalPage2Activity extends BaseActivity {
     private static int RESULT_LOAD_IMAGE = 1;
 
     public void externalGoalPicture(View dotdotdotPicture) {
+        Intent intent = new Intent(this, ExternalPicutureActivity.class);
+        startActivity(intent);
+        finish();
 
-        Intent i = new Intent(
-                Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(i, RESULT_LOAD_IMAGE);
+//        Intent i = new Intent(
+//                Intent.ACTION_PICK,
+//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//
+//        startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
     @Override
