@@ -1,10 +1,8 @@
 package be.kuleuven.chi.backend;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 
-import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,9 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import be.kuleuven.chi.app.R;
 import be.kuleuven.chi.backend.categories.ExpenseCategory;

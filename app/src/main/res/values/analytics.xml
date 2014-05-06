@@ -2,7 +2,11 @@
 
 <resources>
     <!--Replace placeholder ID with your tracking ID-->
+    <!-- Internal
     <string name="ga_trackingId">UA-50358748-1</string>
+    -->
+    <!-- External -->
+    <string name="ga_trackingId">UA-50528932-1</string>
 
     <!--Enable automatic activity tracking-->
     <bool name="ga_autoActivityTracking">true</bool>
