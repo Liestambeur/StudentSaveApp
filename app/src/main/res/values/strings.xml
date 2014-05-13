@@ -94,8 +94,10 @@
     <string name="not_enough_money">You don\'t have enough money in your wallet to do that!</string>
     <string name="amount_too_much">That\'s more than you have!</string>
     <string name="amount_over_left">You only need to save another </string>
-    <string name="amount_something_wrong">There\'s something wrong with that amount...</string>
+    <string name="amount_something_wrong">There\'s something wrong with that amount…</string>
     <string name="title_activity_externalpicture">External Picture Add</string>
+    <string name="savemoney">Save money for your goal</string>
+    <string name="history_type">History Type</string>
 
 
 </resources>

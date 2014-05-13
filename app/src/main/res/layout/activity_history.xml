@@ -12,15 +12,15 @@
         android:id="@+id/walletTotal"
         android:layout_weight="0.1"
         android:visibility="visible"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textColor="#000000"
-        android:textAlignment="center"
         android:text="@string/wallet_text"
         android:textStyle="bold"
         android:gravity="center_horizontal|fill_vertical" />
+    <!--android:textAlignment="center"-->
 
     <ListView
-        layout="@layout/history_row"
+        android:layout="@layout/history_row"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_vertical"
