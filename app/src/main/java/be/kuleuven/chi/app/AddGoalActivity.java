@@ -118,13 +118,13 @@ public class AddGoalActivity extends BaseActivity {
 
 
     public void chooseGoalPicture(View picture) {
-        if(((ImageButton) picture).isActivated()) {
+        if(picture.isActivated()) {
             setAllPicturesUnactivated();
             this.newGoal.resetPicture();
         }
         else{
             setAllPicturesUnactivated();
-            ((ImageButton) picture).setActivated(true);
+            picture.setActivated(true);
 
             Drawable drawable = ((ImageButton) picture).getDrawable();
             System.out.println("Als ge deze print ziet check AddGoalActivity");

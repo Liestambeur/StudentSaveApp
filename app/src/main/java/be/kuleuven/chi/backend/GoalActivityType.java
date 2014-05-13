@@ -1,7 +1,5 @@
 package be.kuleuven.chi.backend;
 
-import be.kuleuven.chi.app.R;
-
 /**
  * Created by NeleR on 16/04/2014.
  */

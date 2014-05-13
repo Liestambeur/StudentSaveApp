@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import be.kuleuven.chi.backend.AppContent;
@@ -51,14 +53,14 @@ public class AddGoalPage1Activity extends BaseActivity {
             initGoalValues();
             this.enableOK(true);
 
-            if(((Switch) findViewById(R.id.date_switch_goal)).isChecked()) {
+            if(((CheckBox) findViewById(R.id.date_switch_goal)).isChecked()) {
                 findViewById(R.id.due_date_field).setVisibility(View.VISIBLE);
             }
             else {
                 findViewById(R.id.due_date_field).setVisibility(View.GONE);
                 goal.resetDueDate();
             }
-            if(((Switch) findViewById(R.id.remind_switch_goal)).isChecked()) {
+            if(((CheckBox) findViewById(R.id.remind_switch_goal)).isChecked()) {
                 findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
             }
             else {
@@ -172,7 +174,7 @@ public class AddGoalPage1Activity extends BaseActivity {
         TextView amountToSave = (TextView) findViewById(R.id.amountToSave);
         amountToSave.setText(Double.toString(this.goal.getAmount()));
 
-        Switch date_switch_goal = (Switch) findViewById(R.id.date_switch_goal);
+        CheckBox date_switch_goal = (CheckBox) findViewById(R.id.date_switch_goal);
         if(this.goal.getDueDate() != null) {
             date_switch_goal.setChecked(true);
 
@@ -192,11 +194,13 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     public void dateSwitch(View dateSwitch) {
-        if(((Switch) dateSwitch).isChecked()) {
+        if(((CheckBox) dateSwitch).isChecked()) {
             findViewById(R.id.due_date_field).setVisibility(View.VISIBLE);
+            findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
         }
         else {
             findViewById(R.id.due_date_field).setVisibility(View.GONE);
+            findViewById(R.id.date_format_text).setVisibility(View.GONE);
             goal.resetDueDate();
         }
         setOkButton();
@@ -205,7 +209,7 @@ public class AddGoalPage1Activity extends BaseActivity {
     private boolean reminder = false;
 
     public void remindSwitch(View remindSwitch) {
-        if(((Switch) remindSwitch).isChecked()) {
+        if(((CheckBox) remindSwitch).isChecked()) {
             findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
             reminder = true;
         }
@@ -271,7 +275,7 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     private void setOkButton(){
-        if(this.goal.isValid(((Switch) findViewById(R.id.date_switch_goal)).isChecked())){
+        if(this.goal.isValid(((CheckBox) findViewById(R.id.date_switch_goal)).isChecked())){
             this.enableOK(true);
         } else{
             this.enableOK(false);

@@ -1,20 +1,15 @@
 package be.kuleuven.chi.app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,14 +78,14 @@ public class AddGoalPage2Activity extends BaseActivity {
 
 
     public void chooseGoalPicture(View picture) {
-        if(((ImageButton) picture).isActivated()) {
+        if(picture.isActivated()) {
             setAllPicturesUnactivated();
             AppContent.getInstance(this).getCurrentGoal().resetPicture();
         }
         else{
             setAllPicturesUnactivated();
-            ((ImageButton) picture).setActivated(true);
-            String path = paths.get(((ImageButton) picture));
+            picture.setActivated(true);
+            String path = paths.get(picture);
             AppContent.getInstance(this).getCurrentGoal().setPicture(path);
 
             //NULLPOINTER
@@ -129,8 +124,6 @@ public class AddGoalPage2Activity extends BaseActivity {
         finish();
     }
 
-    private static int RESULT_LOAD_IMAGE = 1;
-
     public void externalGoalPicture(View dotdotdotPicture) {
         Intent intent = new Intent(this, ExternalPicutureActivity.class);
         startActivity(intent);
@@ -147,6 +140,7 @@ public class AddGoalPage2Activity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        int RESULT_LOAD_IMAGE = 1;
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };

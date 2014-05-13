@@ -42,12 +42,12 @@
                 android:selectAllOnFocus="true"
                 android:inputType="numberDecimal" />
 
-            <Space
+            <!--<Space
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:id="@+id/space2" />
+                android:id="@+id/space2" />-->
 
-            <Switch
+            <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:thumb="@drawable/ourtheme_switch_inner_holo_light"
@@ -97,12 +97,12 @@
 
 
 
-            <Space
+            <!--<Space
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:id="@+id/space3" />
+                android:id="@+id/space3" />-->
 
-            <Switch
+            <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:thumb="@drawable/ourtheme_switch_inner_holo_light"

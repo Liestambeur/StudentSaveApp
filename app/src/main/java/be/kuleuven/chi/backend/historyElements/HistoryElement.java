@@ -1,9 +1,5 @@
 package be.kuleuven.chi.backend.historyElements;
 
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;

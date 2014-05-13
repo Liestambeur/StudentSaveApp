@@ -57,10 +57,7 @@ public class Goal implements Category {
         Calendar now = new GregorianCalendar();
         Calendar cal = new GregorianCalendar();
         cal.setTimeInMillis(lastReminded.getTimeInMillis()+ millisecondsToBeReminded);
-        if(now.after(cal)){
-            return true;
-        }
-        return false;
+        return now.after(cal);
     }
 
     public void resetRemind(){

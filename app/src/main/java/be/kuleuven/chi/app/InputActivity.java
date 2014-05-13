@@ -16,9 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.ExpenseCategory;

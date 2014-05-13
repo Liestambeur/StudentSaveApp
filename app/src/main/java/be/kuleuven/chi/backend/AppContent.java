@@ -72,20 +72,20 @@ public class AppContent implements Serializable {
     /* Static 'instance' method */
     public static AppContent getInstance(Context context) {
         if(AppContent.singleton == null) {
-            System.out.println("Singleton null");
+            //System.out.println("Singleton null");
             try{
                 FileInputStream fis = context.openFileInput(THISFILENAME);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 AppContent.singleton = (AppContent) ois.readObject();
-                System.out.println("State loaded from file.");
+                //System.out.println("State loaded from file.");
             } catch(FileNotFoundException e){
-                System.out.println(e.getCause().toString());
-                System.out.println("Failed to load file!");
+                //System.out.println(e.getCause().toString());
+                //System.out.println("Failed to load file!");
                 AppContent.singleton = new AppContent(context);
             } catch(Exception e){
-                System.out.print(e.toString());
-                System.out.println(e.getCause());
-                System.out.println("Something is horribly wrong!");
+                //System.out.print(e.toString());
+                //System.out.println(e.getCause());
+                //System.out.println("Something is horribly wrong!");
             }
         }
         return singleton;
