@@ -1,20 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="1dip" >
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_margin="0.5dp">
 
         <ImageView
             android:id="@+id/historyType"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="6dip"
@@ -26,12 +22,13 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.6">
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical|fill_vertical">
 
             <TextView
                 android:id="@+id/historyTitle"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
@@ -40,39 +37,39 @@
                 android:text="School boeken"
                 android:textSize="25dp"
                 android:layout_weight="0.7"
-                android:layout_gravity="bottom|right"
-                android:textIsSelectable="true" />
+                android:layout_gravity="left|top"
+                android:textIsSelectable="true"
+                android:gravity="center_vertical|left|fill_vertical" />
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_above="@+id/historyTitle"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_toRightOf="@+id/historyType"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|left|fill_vertical"
                 android:text="Example application"
                 android:textSize="15dp"
                 android:layout_weight="0.3"
                 android:id="@+id/historyCategoryAndDate"
-                android:layout_gravity="right|top"
+                android:layout_gravity="bottom|left"
                 android:textIsSelectable="true"
                 android:singleLine="true" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.2"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:textSize="30dp"
             android:textStyle="bold"
             android:text="20"
-            android:gravity="center_vertical|right"
+            android:gravity="center_vertical|right|fill_vertical"
             android:id="@+id/historyAmount"
             android:textIsSelectable="true"
             android:singleLine="true"
-            android:maxLength="6" />
+            android:maxLength="6"
+            android:layout_gravity="center_vertical|right" />
     </LinearLayout>
-
-</RelativeLayout>

@@ -1,0 +1,50 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="0.5dp">
+
+        <ImageView
+            android:id="@+id/historyTypePrev"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="6dip"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_launcher"
+            android:layout_weight="0.1"
+            android:layout_gravity="center_vertical|left" />
+
+        <TextView
+            android:id="@+id/historyTitlePrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="School boeken"
+            android:textSize="25dp"
+            android:textIsSelectable="true"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical|fill_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="20"
+            android:gravity="center_vertical|right|fill_vertical"
+            android:id="@+id/historyAmountPrev"
+            android:textIsSelectable="true"
+            android:singleLine="true"
+            android:maxLength="6" />
+    </LinearLayout>

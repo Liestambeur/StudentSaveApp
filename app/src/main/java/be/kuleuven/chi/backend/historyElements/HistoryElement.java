@@ -1,9 +1,5 @@
 package be.kuleuven.chi.backend.historyElements;
 
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -64,6 +60,13 @@ public abstract class HistoryElement implements Serializable {
 
     public String getDateName() {
         return this.date.get(Calendar.DAY_OF_MONTH) + "/" + this.date.get(Calendar.MONTH) + "/" + this.date.get(Calendar.YEAR);
+    }
+
+    /**
+     * Rounds the amount till two decimals and returns a string
+     */
+    public String getAmountName() {
+        return String.format("%.2f", this.getAmount());
     }
 
 }

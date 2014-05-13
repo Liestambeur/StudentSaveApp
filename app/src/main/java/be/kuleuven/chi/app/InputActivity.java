@@ -16,9 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.InputActivityType;
 import be.kuleuven.chi.backend.categories.ExpenseCategory;
@@ -60,7 +57,7 @@ public class InputActivity extends BaseActivity {
 
         //Textview
         TextView inWalletText = (TextView) findViewById(R.id.wallet_left);
-        inWalletText.append(" "+ walletTotal);
+        inWalletText.append(" " + walletTotal);
 
         //Listview stuff
         ListView categoryList = (ListView) findViewById(R.id.categoryListView);
@@ -222,7 +219,7 @@ public class InputActivity extends BaseActivity {
 
     public void okButton(View view) {
         // TODO Minder vuil maken
-        inputName = inputName==null?"No Description":inputName;
+        inputName = (inputName==null || inputName=="")?"":inputName;
         selectedItem = selectedItem==null?"Other":selectedItem;
         inputAmount = inputAmount==null?0.0:inputAmount;
         if(inputAmount==null || inputAmount==0){

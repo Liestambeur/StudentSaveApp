@@ -52,23 +52,44 @@ public class HistoryElementAdapter extends ArrayAdapter {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             convertView = inflater.inflate(layoutResourceId, parent, false);
         }
-
-        HistoryElement historyElement = getItem(index);
-
-        Drawable historyPicture = mContext.getResources().getDrawable(historyElement.getTypePictureId());
-        ImageView historyType = (ImageView) convertView.findViewById(R.id.historyType);
-        historyType.setImageDrawable(historyPicture);
-
-        TextView historyTitle = (TextView) convertView.findViewById(R.id.historyTitle);
-        historyTitle.setText(historyElement.getCategoryName());
-
-        TextView historyCategoryAndDate = (TextView) convertView.findViewById(R.id.historyCategoryAndDate);
-        historyCategoryAndDate.setText(historyElement.getTitle() + "  " + historyElement.getDateName());
-
-        TextView historyAmount = (TextView) convertView.findViewById(R.id.historyAmount);
-        historyAmount.setText(Double.toString(historyElement.getAmount()));
+        getViewIfFull(index, convertView);
 
         return convertView;
+    }
+
+    protected void getViewIfFull(int index, View convertView) {
+        HistoryElement historyElement = getItem(index);
+
+        getPicture( convertView, R.id.historyType, historyElement.getTypePictureId());
+        getTitle(   convertView, R.id.historyTitle, historyElement.getCategoryName());
+        getSubTitle(convertView, R.id.historyCategoryAndDate, historyElement.getTitle(), historyElement.getDateName());
+        getAmount(  convertView, R.id.historyAmount, historyElement.getAmountName());
+    }
+
+    protected void getPicture(View convertView, int viewElement, int pictureID) {
+        Drawable historyPicture = mContext.getResources().getDrawable(pictureID);
+        ImageView historyType = (ImageView) convertView.findViewById(viewElement);
+        historyType.setImageDrawable(historyPicture);
+    }
+
+    protected void getTitle(View convertView, int viewElement, String category) {
+        TextView historyTitle = (TextView) convertView.findViewById(viewElement);
+        historyTitle.setText(category);
+    }
+
+    protected void getSubTitle(View convertView, int viewElement, String title, String date) {
+        TextView historyCategoryAndDate = (TextView) convertView.findViewById(viewElement);
+        if(title == "") {
+            historyCategoryAndDate.setText(date);
+        }
+        else{
+            historyCategoryAndDate.setText(date + "  " + title);
+        }
+    }
+
+    protected void getAmount(View convertView, int viewElement, String amount) {
+        TextView historyAmount = (TextView) convertView.findViewById(viewElement);
+        historyAmount.setText(amount);
     }
 
 }

@@ -1,22 +1,16 @@
 package be.kuleuven.chi.app;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -141,7 +135,7 @@ public class MainActivity extends BaseActivity implements Serializable {
 
             LinearLayout listPreviewHistory = (LinearLayout) findViewById(R.id.listPreviewHistory);
             listPreviewHistory.setWeightSum(3);
-            HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_rowb);
+            HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_row_preview);
 
             for(int i=0;i<3;i++) {
                 View v;
