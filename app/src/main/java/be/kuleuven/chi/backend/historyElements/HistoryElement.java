@@ -17,7 +17,7 @@ public abstract class HistoryElement implements Serializable {
     private Calendar date;
 
 
-    public HistoryElement(double amount, Category category, String title){
+    HistoryElement(double amount, Category category, String title){
         this.date = new GregorianCalendar();
         this.amount=amount;
         this.category=category;
@@ -32,7 +32,7 @@ public abstract class HistoryElement implements Serializable {
         this.amount = amount;
     }
 
-    public Category getCategory() {
+    Category getCategory() {
         return category;
     }
 

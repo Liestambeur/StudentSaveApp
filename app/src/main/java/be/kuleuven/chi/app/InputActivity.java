@@ -34,13 +34,13 @@ public class InputActivity extends BaseActivity {
     private String walletTotal;
     private double walletAmount;
     private AppContent appContent;
-    String inputActivityType;
+    private String inputActivityType;
     private String selectedItem;
     private String inputName;
     private Double inputAmount;
 
     private boolean userClickedYet = true;
-    AlertDialog ad;
+    private AlertDialog ad;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,7 +179,7 @@ public class InputActivity extends BaseActivity {
      * Selects the view (makes all other views in the list white and this one gray, sets the category accordingly)
      * @param view
      */
-    public void setSelected(View view){
+    void setSelected(View view){
         ListView list = (ListView) findViewById(R.id.categoryListView);
         for(int i =0; i<list.getChildCount(); i++){
             list.getChildAt(i).setBackgroundColor(Color.WHITE);
@@ -191,15 +191,15 @@ public class InputActivity extends BaseActivity {
         setSelectedCategory(listItemText);
     }
 
-    public void setSelectedCategory(String listItemText) {
+    void setSelectedCategory(String listItemText) {
         this.selectedItem = listItemText;
     }
 
-    public void setInputName(String name) {
+    void setInputName(String name) {
         this.inputName = name;
     }
 
-    public void setInputAmount(Double amount) {
+    void setInputAmount(Double amount) {
         System.out.println(amount);
         if(amount!=0){
             this.enableOK(true);
@@ -266,18 +266,18 @@ public class InputActivity extends BaseActivity {
         });
     }
 
-    public void backToMain(){
+    void backToMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void dismissAd(boolean backToMain){
+    void dismissAd(boolean backToMain){
         ad.dismiss();
         if(backToMain) backToMain();
     }
 
-    public void enableOK(Boolean enable){
+    void enableOK(Boolean enable){
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
     }

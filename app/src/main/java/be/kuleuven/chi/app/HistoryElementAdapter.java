@@ -16,10 +16,10 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
 /**
  * Created by NeleR on 4/04/2014.
  */
-public class HistoryElementAdapter extends ArrayAdapter {
+class HistoryElementAdapter extends ArrayAdapter {
 
-    Context mContext;
-    int layoutResourceId;
+    private Context mContext;
+    private int layoutResourceId;
 
     public HistoryElementAdapter(Context mContext, int layoutResourceId) {
         super(mContext, layoutResourceId);
@@ -57,7 +57,7 @@ public class HistoryElementAdapter extends ArrayAdapter {
         return convertView;
     }
 
-    protected void getViewIfFull(int index, View convertView) {
+    void getViewIfFull(int index, View convertView) {
         HistoryElement historyElement = getItem(index);
 
         getPicture( convertView, R.id.historyType, historyElement.getTypePictureId());
@@ -66,18 +66,18 @@ public class HistoryElementAdapter extends ArrayAdapter {
         getAmount(  convertView, R.id.historyAmount, historyElement.getAmountName());
     }
 
-    protected void getPicture(View convertView, int viewElement, int pictureID) {
+    void getPicture(View convertView, int viewElement, int pictureID) {
         Drawable historyPicture = mContext.getResources().getDrawable(pictureID);
         ImageView historyType = (ImageView) convertView.findViewById(viewElement);
         historyType.setImageDrawable(historyPicture);
     }
 
-    protected void getTitle(View convertView, int viewElement, String category) {
+    void getTitle(View convertView, int viewElement, String category) {
         TextView historyTitle = (TextView) convertView.findViewById(viewElement);
         historyTitle.setText(category);
     }
 
-    protected void getSubTitle(View convertView, int viewElement, String title, String date) {
+    void getSubTitle(View convertView, int viewElement, String title, String date) {
         TextView historyCategoryAndDate = (TextView) convertView.findViewById(viewElement);
         if(title == "") {
             historyCategoryAndDate.setText(date);
@@ -87,7 +87,7 @@ public class HistoryElementAdapter extends ArrayAdapter {
         }
     }
 
-    protected void getAmount(View convertView, int viewElement, String amount) {
+    void getAmount(View convertView, int viewElement, String amount) {
         TextView historyAmount = (TextView) convertView.findViewById(viewElement);
         historyAmount.setText(amount);
     }

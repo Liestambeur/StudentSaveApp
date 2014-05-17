@@ -19,8 +19,8 @@ import be.kuleuven.chi.backend.categories.Goal;
 
 public class AddGoalActivity extends BaseActivity {
 
-    Goal newGoal;
-    List<ImageButton> pictures;
+    private Goal newGoal;
+    private List<ImageButton> pictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class AddGoalActivity extends BaseActivity {
     }
 
 
-    public void chooseGoalPicture(View picture) {
+    void chooseGoalPicture(View picture) {
         if(picture.isActivated()) {
             setAllPicturesUnactivated();
             this.newGoal.resetPicture();
@@ -164,7 +164,7 @@ public class AddGoalActivity extends BaseActivity {
         }
     }
 
-    public void enableOK(Boolean enable){
+    void enableOK(Boolean enable){
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
     }

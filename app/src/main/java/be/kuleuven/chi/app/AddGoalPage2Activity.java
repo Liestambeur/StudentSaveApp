@@ -21,9 +21,9 @@ import be.kuleuven.chi.backend.GoalActivityType;
  */
 public class AddGoalPage2Activity extends BaseActivity {
 
-    Map<ImageButton, String> paths;
-    int goalActivityType;
-    String oldPicture;
+    private Map<ImageButton, String> paths;
+    private int goalActivityType;
+    private String oldPicture;
    // Drawable oldPicture;
 
     @Override
@@ -164,7 +164,7 @@ public class AddGoalPage2Activity extends BaseActivity {
         this.enableOK(true);
     }
 
-    public void enableOK(Boolean enable){
+    void enableOK(Boolean enable){
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
     }

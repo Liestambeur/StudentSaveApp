@@ -52,7 +52,7 @@ public class AppContent implements Serializable {
         saveState();
     }
 
-    public void saveState() {
+    void saveState() {
         if(context!=null){
             try {
                 FileOutputStream fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
@@ -182,11 +182,11 @@ public class AppContent implements Serializable {
     public int getNumberOfExpenseCategories(){ return expenseCategories.size(); }
     public ExpenseCategory getExpenseCategoryAt(int index){ return expenseCategories.get(index); }
 
-    public void setCurrentGoal(Goal currentGoal) {
+    void setCurrentGoal(Goal currentGoal) {
         this.currentGoal = currentGoal;
     }
 
-    public List<Goal> getGoals() {
+    List<Goal> getGoals() {
         return goals;
     }
 }

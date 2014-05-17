@@ -26,8 +26,8 @@ public class MainActivity extends BaseActivity implements Serializable {
 
     static final long serialVersionUID = 0L;
 
-    AppContent appContent;
-    Context context;
+    private AppContent appContent;
+    private Context context;
 //
 //    @Override
 //    protected void onResume(){
@@ -198,7 +198,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         finish();
     }
 
-    public void toHistory(View view) {
+    void toHistory(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
         finish();
@@ -262,7 +262,7 @@ public class MainActivity extends BaseActivity implements Serializable {
 
     }
 
-    public void showReminder(){
+    void showReminder(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
@@ -299,7 +299,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         dialog.show();
     }
 
-    public void showDialogGoal(){
+    void showDialogGoal(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);

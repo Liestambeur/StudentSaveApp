@@ -1,5 +1,8 @@
 package be.kuleuven.chi.app;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -27,9 +31,9 @@ import be.kuleuven.chi.backend.categories.Goal;
  */
 public class AddGoalPage1Activity extends BaseActivity {
 
-    Goal goal;
-    Goal oldGoal;
-    int goalActivityType;
+    private static Goal goal;
+    private Goal oldGoal;
+    private int goalActivityType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +171,33 @@ public class AddGoalPage1Activity extends BaseActivity {
         dueDateText.addTextChangedListener(dueDateWatcher);
     }
 
+// Een ideetje
+//    public class DatePickerFragment extends DialogFragment
+//            implements DatePickerDialog.OnDateSetListener {
+//
+//        @Override
+//        public Dialog onCreateDialog(Bundle savedInstanceState) {
+//            // Use the current date as the default date in the picker
+//            final Calendar c = Calendar.getInstance();
+//            int year = c.get(Calendar.YEAR);
+//            int month = c.get(Calendar.MONTH);
+//            int day = c.get(Calendar.DAY_OF_MONTH);
+//
+//            // Create a new instance of DatePickerDialog and return it
+//            return new DatePickerDialog(getActivity(), this, year, month, day);
+//        }
+//
+//        public void onDateSet(DatePicker view, int year, int month, int day) {
+//            populateDateField(year,month,day);
+//            goal.setDueDate(new GregorianCalendar(year,month,day));
+//        }
+//    }
+
+    private void populateDateField(int year, int month, int day) {
+        TextView dueDateField = (TextView) findViewById(R.id.due_date_field);
+        dueDateField.setText(day+"/"+month+"/"+year);
+    }
+
     private void initGoalValues() {
         TextView nameOfGoal = (TextView) findViewById(R.id.nameOfGoal);
         nameOfGoal.setText(this.goal.getName());
@@ -282,7 +313,7 @@ public class AddGoalPage1Activity extends BaseActivity {
         }
     }
 
-    public void enableOK(Boolean enable) {
+    void enableOK(Boolean enable) {
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
     }
