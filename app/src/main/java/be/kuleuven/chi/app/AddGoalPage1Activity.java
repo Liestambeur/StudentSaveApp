@@ -23,11 +23,7 @@ import be.kuleuven.chi.backend.categories.Goal;
 /**
  * Created by NeleR on 16/04/2014.
  */
-public class AddGoalPage1Activity extends BaseActivity {
-
-    Goal goal;
-    int goalActivityType;
-
+public class AddGoalPage1Activity extends AddGoalPageActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -284,13 +280,7 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     public void deleteButton(View deleteButton) {
-        // the goal is removed from the AppContent
-        AppContent.getInstance(this).deleteCurrentGoal();
-        AppContent.getInstance(this).deleteBackUpCurrentGoal();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        showDeleteConfirmation();
     }
 
     public void cancelButton(View cancelButton) {

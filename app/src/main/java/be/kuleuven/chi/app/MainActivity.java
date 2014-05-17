@@ -62,9 +62,10 @@ public class MainActivity extends BaseActivity implements Serializable {
         this.appContent = AppContent.getInstance(this);
 
         if(this.appContent.hasCurrentGoal()){
-            Goal goal = appContent.getCurrentGoal();
-            fillInGoalView(goal);
-            checkGoalPopUps(goal);
+            fillInGoalView(appContent.getCurrentGoal());
+            for(Goal goal: AppContent.getInstance(this).getGoals()) {
+                checkGoalPopUps(goal);
+            }
         }
         else{
             View addgoal = findViewById(R.id.addgoal);
@@ -136,16 +137,13 @@ public class MainActivity extends BaseActivity implements Serializable {
         return goal;
     }
     private void checkGoalPopUps(Goal goal) {
-        //REMIND
         if(goal.shouldRemind()){
             this.showReminder();
             goal.updateNextRemindDate();
         }
 
-        //GOAL gedaan
         if(goal.isDone()){
-            showDialogGoal();
-           // showDialog(DIALOG_ALERT);
+            this.showDialogGoal();
         }
     }
 
@@ -179,7 +177,7 @@ public class MainActivity extends BaseActivity implements Serializable {
                     toHistory(view);
                 }
             });
-          //  listPreviewHistory.addView(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            //  listPreviewHistory.addView(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
     }
 
@@ -264,17 +262,16 @@ public class MainActivity extends BaseActivity implements Serializable {
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
-        dialog.setTitle("Reminder");
 
-        // set the custom dialog components - text, image and button
-        TextView text = (TextView) dialog.findViewById(R.id.popuptext1);
-        text.setText("Please remember to save");
-        TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
-        text2.setText("for your goal: "+appContent.getCurrentGoal().getName());
-        ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
+        // set the dialog text and image
+        dialog.setTitle(getResources().getString(R.string.goal_reminder_title));
+        TextView text = (TextView) dialog.findViewById(R.id.popup_text);
+        text.setText(getResources().getString(R.string.goal_reminder_text,appContent.getCurrentGoal().getName()));
+        ImageView image = (ImageView) dialog.findViewById(R.id.popup_image);
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(appContent.getCurrentGoal().getPictureUrl());
         Bitmap bm = BitmapFactory.decodeStream(inputStream);
         image.setImageBitmap(bm);
+
         //Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
         //if(draw==null){
         //    image.setImageResource(R.drawable.ic_launcher);
@@ -282,15 +279,13 @@ public class MainActivity extends BaseActivity implements Serializable {
         //    image.setImageDrawable(draw);
         //}
 
+        // buttons
+        dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
 
-
-        LinearLayout lin = (LinearLayout) dialog.findViewById(R.id.dialogButtonOK);
-        // if button is clicked, close the custom dialog
-        lin.setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
             }
         });
 
@@ -300,17 +295,18 @@ public class MainActivity extends BaseActivity implements Serializable {
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
-        dialog.setTitle("Congratulations");
 
-        // set the custom dialog components - text, image and button
-        TextView text = (TextView) dialog.findViewById(R.id.popuptext1);
-        text.setText("You have saved enough!");
-        TextView text2 = (TextView) dialog.findViewById(R.id.popuptext2);
-        text2.setText("Enjoy "+appContent.getCurrentGoal().getName()+"!");
-        ImageView image = (ImageView) dialog.findViewById(R.id.popupimage);
+        // set the dialog text and image
+        dialog.setTitle(getResources().getString(R.string.goal_done_title));
+        TextView text = (TextView) dialog.findViewById(R.id.popup_text);
+        text.setText(getResources().getString(R.string.goal_done_text,appContent.getCurrentGoal().getName()));
+        ImageView image = (ImageView) dialog.findViewById(R.id.popup_image);
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(appContent.getCurrentGoal().getPictureUrl());
         Bitmap bm = BitmapFactory.decodeStream(inputStream);
         image.setImageBitmap(bm);
+
+        // buttons
+        dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
 //
 //        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
 //        if(draw==null){
@@ -319,20 +315,17 @@ public class MainActivity extends BaseActivity implements Serializable {
 //            image.setImageDrawable(draw);
 //        }
 
-
-
-        LinearLayout lin = (LinearLayout) dialog.findViewById(R.id.dialogButtonOK);
-        // if button is clicked, close the custom dialog
-        lin.setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appContent.currentGoalDone();
-                dialog.dismiss();
-                View goalview = findViewById(R.id.goal);
-                goalview.setVisibility(View.INVISIBLE);
-                View addgoal = findViewById(R.id.addgoal);
-                addgoal.setVisibility(View.VISIBLE);
-                enableButtonSave(false);
+            dialog.dismiss();
+            appContent.currentGoalDone();
+
+            View goalview = findViewById(R.id.goal);
+            goalview.setVisibility(View.INVISIBLE);
+            View addgoal = findViewById(R.id.addgoal);
+            addgoal.setVisibility(View.VISIBLE);
+            enableButtonSave(false);
             }
         });
 

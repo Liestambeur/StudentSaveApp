@@ -14,17 +14,14 @@ import java.util.HashMap;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.GoalActivityType;
-import be.kuleuven.chi.backend.categories.Goal;
 
 /**
  * Created by NeleR on 16/04/2014.
  */
-public class AddGoalPage2Activity extends BaseActivity {
+public class AddGoalPage2Activity extends AddGoalPageActivity {
 
     HashMap<Integer, String> paths;
     HashMap<String, ImageButton> views;
-    int goalActivityType;
-    Goal goal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +105,6 @@ public class AddGoalPage2Activity extends BaseActivity {
             picture.setActivated(true);
             this.goal.setPicture(paths.get(picture.getId()));
 
-            //NULLPOINTER
-           // AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
         }
     }
 
@@ -125,14 +120,7 @@ public class AddGoalPage2Activity extends BaseActivity {
     }
 
     public void deleteButton(View deleteButton) {
-        // the goal is removed from the AppContent
-        // TODO ask for confirmation of delete
-        AppContent.getInstance(this).deleteCurrentGoal();
-        AppContent.getInstance(this).deleteBackUpCurrentGoal();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        showDeleteConfirmation();
     }
 
     public void cancelButton(View cancelButton) {
