@@ -45,6 +45,9 @@ public class Goal implements Category {
     public double getAmountTotalNeeded() {
         return amountTotalNeeded;
     }
+    public String getAmountTotalNeededString() {
+        return String.format("%.2f", getAmountTotalNeeded());
+    }
     public void setAmountTotalNeeded(double amountTotalNeeded) {
         this.amountTotalNeeded = amountTotalNeeded;
     }
@@ -199,5 +202,6 @@ public class Goal implements Category {
         this.remindType = goal.getRemindType();
         this.nextRemindDate = goal.getNextRemindDate();
     }
+
 
 }

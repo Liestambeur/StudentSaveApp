@@ -198,7 +198,7 @@ public class AddGoalPage1Activity extends BaseActivity {
 
         // amount
         TextView amountToSave = (TextView) findViewById(R.id.amountToSave);
-        amountToSave.setText(Double.toString(this.goal.getAmountTotalNeeded()));
+        amountToSave.setText(this.goal.getAmountTotalNeededString());
 
         // due date
         CheckBox dateSwitch = (CheckBox) findViewById(R.id.date_switch_goal);
@@ -217,8 +217,12 @@ public class AddGoalPage1Activity extends BaseActivity {
         if(this.goal.hasRemindSetting()) {
             remindSwitch.setChecked(true);
 
+
+
+            System.out.println(goal.getRemindType().toString());
             int radioID = goal.getRemindType().getRadioID();
-            findViewById(radioID).setSelected(true);
+            ((RadioGroup) findViewById(R.id.radio_remind)).check(radioID);
+            System.out.println(radioID);
         }
         else {
             remindSwitch.setChecked(false);
@@ -277,7 +281,9 @@ public class AddGoalPage1Activity extends BaseActivity {
     public void okButton(View okButton) {
         // TODO de oude goal gaat hier verloren, alle wijzigingen die je hebt aangebracht zijn permanent
         // TODO is dit wat de gebruiker verwacht? of wil hij op volgende pagina nog volledig kunnen rollbacken?
-        AppContent.getInstance(this).addGoal(this.goal);
+        if(this.goalActivityType == GoalActivityType.ADD) {
+            AppContent.getInstance(this).addGoal(this.goal);
+        }
 
         Intent intent = new Intent(this, AddGoalPage2Activity.class);
         intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), this.goalActivityType);

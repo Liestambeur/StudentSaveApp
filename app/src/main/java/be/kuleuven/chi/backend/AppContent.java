@@ -61,8 +61,10 @@ public class AppContent implements Serializable {
                 oos.close();
                 fos.close();
                 System.out.println("State saved.");
-            } catch(FileNotFoundException f){
-                System.out.println("WTF?!");
+            } catch(FileNotFoundException f) {
+                System.out.println("WTF?! FileNotFound");
+            } catch (NullPointerException n) {
+                System.out.println("WTF?! NullPointer");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -142,15 +144,6 @@ public class AppContent implements Serializable {
     }
     public void setCurrentGoal(Goal currentGoal) {
         this.currentGoal = currentGoal;
-    }
-    public String getPictureCurrentGoal() {
-        return this.getCurrentGoal().getPictureUrl();
-    }
-    public void setPictureCurrentGoal(String path) {
-        this.getCurrentGoal().setPicture(path);
-    }
-    public void resetPictureCurrentGoal() {
-        this.getCurrentGoal().resetPicture();
     }
     public void currentGoalDone(){
         setCurrentGoal(null);
