@@ -14,12 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import be.kuleuven.chi.backend.AppContent;
@@ -131,6 +129,7 @@ public class AddGoalPage1Activity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
+                findViewById(R.id.date_format_text).setVisibility(View.GONE);
                 String date = charSequence.toString();
 
                 if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
@@ -138,8 +137,11 @@ public class AddGoalPage1Activity extends BaseActivity {
 
                     String[] dateParts = date.split("/");
                     try {
+                        // note: the calendar counts months starting from 0 (e.g. January = 0, February = 1)
+                        // so decrease the user input with one as the user will start counting from 1.
+                        // days of month start from 1, as the user will expect so no change needed here.
                         Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
-                                Integer.valueOf(dateParts[1]), Integer.valueOf(dateParts[0]));
+                                Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
                         System.out.println(dateParts);
                         if(calendar.after(new GregorianCalendar())) {
                             findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
@@ -286,7 +288,7 @@ public class AddGoalPage1Activity extends BaseActivity {
 
     public void deleteButton(View deleteButton) {
          // the goal is removed from the AppContent
-         AppContent.getInstance(this).deleteGoal(AppContent.getInstance(this).getCurrentGoal());
+         AppContent.getInstance(this).deleteCurrentGoal();
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

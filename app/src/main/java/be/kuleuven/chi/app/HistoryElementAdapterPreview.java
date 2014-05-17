@@ -2,7 +2,6 @@ package be.kuleuven.chi.app;
 
 import android.content.Context;
 import android.view.View;
-
 import be.kuleuven.chi.backend.historyElements.HistoryElement;
 
 /**
