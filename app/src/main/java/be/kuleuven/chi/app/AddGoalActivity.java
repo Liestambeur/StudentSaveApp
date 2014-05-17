@@ -70,10 +70,10 @@ public class AddGoalActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 try {
-                    newGoal.setAmount(Double.parseDouble(charSequence.toString()));
+                    newGoal.setAmountTotalNeeded(Double.parseDouble(charSequence.toString()));
                 }
                 catch (NumberFormatException e) {
-                    newGoal.setAmount(Double.parseDouble("0"));
+                    newGoal.setAmountTotalNeeded(Double.parseDouble("0"));
                     // do nothing
                 }
                 setOkButton();

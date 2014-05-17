@@ -135,7 +135,7 @@ public class AppContent implements Serializable {
     }
 
     public boolean hasCurrentGoal(){
-        return getCurrentGoal()!=null;
+        return hasGoal() && getCurrentGoal()!=null;
     }
     public Goal getCurrentGoal() {
         return this.currentGoal;

@@ -102,10 +102,10 @@ public class AddGoalPage1Activity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 try {
-                    goal.setAmount(Double.parseDouble(charSequence.toString()));
+                    goal.setAmountTotalNeeded(Double.parseDouble(charSequence.toString()));
                 }
                 catch (NumberFormatException e) {
-                    goal.setAmount(Double.parseDouble("0"));
+                    goal.setAmountTotalNeeded(Double.parseDouble("0"));
                     // do nothing
                 }
                 setOkButton();
@@ -126,6 +126,7 @@ public class AddGoalPage1Activity extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
                 findViewById(R.id.date_format_text).setVisibility(View.GONE);
+                findViewById(R.id.date_not_valid_text).setVisibility(View.GONE);
                 String date = charSequence.toString();
 
                 if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
@@ -138,16 +139,29 @@ public class AddGoalPage1Activity extends BaseActivity {
                         // days of month start from 1, as the user will expect so no change needed here.
                         Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
                                 Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
-                        System.out.println(dateParts);
                         if(calendar.after(new GregorianCalendar())) {
                             findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
                             goal.setDueDate(calendar);
+
+                            // note: if you fill in 80/5/2014, Calendar will recalculate the date to 19/7/2014,
+                            // adding all the days that are to many in the month.
+                            // checking whether the stored date equals the date in the text editor allows to check for this event.
+                            if(!charSequence.toString().equals(goal.getDueDateString())) {
+                                findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
+                                if(goalActivityType == GoalActivityType.EDIT) {
+                                    goal.setDueDate(oldGoal.getDueDate());
+                                }
+                                else {
+                                    goal.resetDueDate();
+                                }
+                            }
                         }
                         else {
                             findViewById(R.id.date_no_past_text).setVisibility(View.VISIBLE);
                         }
                     }
                     catch (NumberFormatException e) {
+                        findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
                         goal.resetDueDate();
                         // do nothing
                     }
@@ -174,7 +188,7 @@ public class AddGoalPage1Activity extends BaseActivity {
         nameOfGoal.setText(this.goal.getName());
 
         TextView amountToSave = (TextView) findViewById(R.id.amountToSave);
-        amountToSave.setText(Double.toString(this.goal.getAmount()));
+        amountToSave.setText(Double.toString(this.goal.getAmountTotalNeeded()));
 
         CheckBox date_switch_goal = (CheckBox) findViewById(R.id.date_switch_goal);
         if(this.goal.getDueDate() != null) {

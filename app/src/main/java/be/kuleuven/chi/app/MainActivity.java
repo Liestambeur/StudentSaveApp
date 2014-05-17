@@ -59,66 +59,16 @@ public class MainActivity extends BaseActivity implements Serializable {
         context = this;
         setContentView(R.layout.activity_main);
 
-        appContent = AppContent.getInstance(this);
+        this.appContent = AppContent.getInstance(this);
 
-        if(appContent.hasCurrentGoal()){
-            //TODO tekst niet hardcode, maar via String-file
+        if(this.appContent.hasCurrentGoal()){
             Goal goal = appContent.getCurrentGoal();
-            String currencySymbol = AppContent.getInstance(this).getCurrencySymbol();
-
-            View goalview = findViewById(R.id.goal);
-            goalview.setVisibility(View.VISIBLE);
-
-            TextView goalName = (TextView) findViewById(R.id.goalName);
-            goalName.setText(goal.getName());
-
-            TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
-            goalAmount.setText(currencySymbol + " " + String.format("%.2f",goal.getAmount()- goal.getAmountSaved())+" to go");
-
-
-            TextView goalDone = (TextView) findViewById(R.id.goalDone);
-            goalDone.setText(currencySymbol + " " + String.format("%.2f", goal.getAmountSaved())+" done");
-
-
-            TextView goalDue = (TextView) findViewById(R.id.goalDue);
-            if(goal.getDueDate() != null) {
-
-                goalDue.setText(goal.daysLeft()+" days left");
-                //TODO moet eigenlijk zijn: nog zoveel dagen te gaan
-            }
-            else {
-                goalDue.setVisibility(View.INVISIBLE);
-            }
-
-            TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
-            goalPercent.setText(goal.getPercent() + " %");
-
-            ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
-            progress.setProgress(goal.getPercent());
-
-            ImageView im = (ImageView) findViewById(R.id.imageView);
-
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
-            Bitmap bm = BitmapFactory.decodeStream(inputStream);
-            im.setImageBitmap(bm);
-
-            //im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
-
-
-            //REMIND
-            if(goal.shouldRemind()){
-                this.showReminder();
-                goal.updateLastReminded();
-            }
-
-            //GOAL gedaan
-            if(goal.isDone()){
-                showDialogGoal();
-               // showDialog(DIALOG_ALERT);
-            }
-        }else{
+            fillInGoalView(goal);
+            checkGoalPopUps(goal);
+        }
+        else{
             View addgoal = findViewById(R.id.addgoal);
-            addgoal.setVisibility(1);
+            addgoal.setVisibility(View.VISIBLE);
             this.enableButtonSave(false);
         }
 
@@ -128,50 +78,15 @@ public class MainActivity extends BaseActivity implements Serializable {
         }
 
         if(appContent.hasHistory()){
-            View historyPreview = findViewById(R.id.history_preview);
-            historyPreview.setVisibility(1);
-
-            TextView walletTotal = (TextView) findViewById(R.id.previewWalletTotal);
-            walletTotal.append(": " + AppContent.getInstance(this).getWalletTotal());
-
-            LinearLayout listPreviewHistory = (LinearLayout) findViewById(R.id.listPreviewHistory);
-            listPreviewHistory.setWeightSum(3);
-            HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_row_preview);
-
-            for(int i=0;i<3;i++) {
-                View v;
-                if(appContent.getNumberOfHistoryElements()<=i){
-                    v = new LinearLayout(this);
-                } else{
-                    v = adapter.getView(i, null, null);
-                }
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
-                v.setLayoutParams(param);
-
-                listPreviewHistory.addView(v);
-                v.setClickable(true);
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        toHistory(view);
-                    }
-                });
-              //  listPreviewHistory.addView(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            }
-
-        }else{
+            fillInHistoryView();
+        }
+        else{
             View noHistory = findViewById(R.id.no_history);
-            noHistory.setVisibility(1);
+            noHistory.setVisibility(View.VISIBLE);
             View historyFrame = findViewById(R.id.historyFrame);
             historyFrame.setClickable(false);
         }
-
-
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,8 +96,94 @@ public class MainActivity extends BaseActivity implements Serializable {
         return true;
     }
 
+    /** VIEWS **/
+    private Goal fillInGoalView(Goal goal) {
+        String currencySymbol = AppContent.getInstance(this).getCurrencySymbol();
 
+        View goalview = findViewById(R.id.goal);
+        goalview.setVisibility(View.VISIBLE);
 
+        TextView goalName = (TextView) findViewById(R.id.goalName);
+        goalName.setText(goal.getName());
+
+        TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
+        goalAmount.setText(currencySymbol + " " + goal.getAmountToGoString() + " " + getResources().getString(R.string.to_go));
+
+        TextView goalDone = (TextView) findViewById(R.id.goalDone);
+        goalDone.setText(currencySymbol + " " + goal.getAmountSavedString() + " " + getResources().getString(R.string.done));
+
+        TextView goalDue = (TextView) findViewById(R.id.goalDue);
+        if(goal.hasDueDate()) {
+            int numberOfDaysLeft = goal.daysLeft();
+            goalDue.setText(numberOfDaysLeft + " " + getResources().getQuantityString(R.plurals.days_left, numberOfDaysLeft));
+        }
+        else {
+            goalDue.setVisibility(View.GONE);
+        }
+
+        TextView goalPercent = (TextView) findViewById(R.id.goalProcent);
+        goalPercent.setText(goal.getPercent() + " %");
+
+        ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
+        progress.setProgress(goal.getPercent());
+
+        ImageView im = (ImageView) findViewById(R.id.goalPicture);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
+        Bitmap bm = BitmapFactory.decodeStream(inputStream);
+        im.setImageBitmap(bm);
+
+        //im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
+        return goal;
+    }
+    private void checkGoalPopUps(Goal goal) {
+        //REMIND
+        if(goal.shouldRemind()){
+            this.showReminder();
+            goal.updateLastReminded();
+        }
+
+        //GOAL gedaan
+        if(goal.isDone()){
+            showDialogGoal();
+           // showDialog(DIALOG_ALERT);
+        }
+    }
+
+    private void fillInHistoryView() {
+        View historyPreview = findViewById(R.id.history_preview);
+        historyPreview.setVisibility(View.VISIBLE);
+
+        TextView walletTotal = (TextView) findViewById(R.id.previewWalletTotal);
+        walletTotal.append(": " + AppContent.getInstance(this).getWalletTotal());
+
+        LinearLayout listPreviewHistory = (LinearLayout) findViewById(R.id.listPreviewHistory);
+        listPreviewHistory.setWeightSum(3);
+        HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_row_preview);
+
+        for(int i=0;i<3;i++) {
+            View v;
+            if(appContent.getNumberOfHistoryElements()<=i){
+                v = new LinearLayout(this);
+            } else{
+                v = adapter.getView(i, null, null);
+            }
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
+            v.setLayoutParams(param);
+
+            listPreviewHistory.addView(v);
+            v.setClickable(true);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    toHistory(view);
+                }
+            });
+          //  listPreviewHistory.addView(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        }
+    }
+
+    /** ON CLICKS **/
     public void addGoal(View view){
         //Intent intent = new Intent(this, AddGoalActivity.class);
         Intent intent = new Intent(this, AddGoalPage1Activity.class);
@@ -190,7 +191,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
-
     public void editGoal(View view){
         //Intent intent = new Intent(this, AddGoalActivity.class);
         Intent intent = new Intent(this, AddGoalPage1Activity.class);
@@ -198,13 +198,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
-
-    public void toHistory(View view) {
-        Intent intent = new Intent(this, HistoryActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
     public void income(View view){
         View income = findViewById(R.id.income);
         income.setPressed(true);
@@ -214,7 +207,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
-
     public void expense(View view){
         View expense = findViewById(R.id.expense);
         expense.setPressed(true);
@@ -224,7 +216,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
-
     public void save(View view){
         View save = findViewById(R.id.save);
         save.setPressed(true);
@@ -234,7 +225,13 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
+    public void toHistory(View view) {
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
+    /** ENABLE BUTTONS /**/
     private void enableButtonSave(Boolean enable){
         LinearLayout save = (LinearLayout) findViewById(R.id.save);
         save.setEnabled(enable);
@@ -244,11 +241,10 @@ public class MainActivity extends BaseActivity implements Serializable {
         savei.setEnabled(enable);
         if(!enable){
             //savei.setColorFilter(Color.GRAY);
-            save.setAlpha(new Float(0.6));
+            save.setAlpha(0.6f);
         }
 
     }
-
     private void enableButtonExpense(Boolean enable){
         LinearLayout save = (LinearLayout) findViewById(R.id.expense);
         save.setEnabled(enable);
@@ -258,11 +254,12 @@ public class MainActivity extends BaseActivity implements Serializable {
         savei.setEnabled(enable);
         if(!enable){
             //savei.setColorFilter(Color.GRAY);
-            save.setAlpha(new Float(0.6));
+            save.setAlpha(0.6f);
         }
 
     }
 
+    /** POPUPS **/
     public void showReminder(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
@@ -299,7 +296,6 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         dialog.show();
     }
-
     public void showDialogGoal(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
@@ -335,7 +331,7 @@ public class MainActivity extends BaseActivity implements Serializable {
                 View goalview = findViewById(R.id.goal);
                 goalview.setVisibility(View.INVISIBLE);
                 View addgoal = findViewById(R.id.addgoal);
-                addgoal.setVisibility(1);
+                addgoal.setVisibility(View.VISIBLE);
                 enableButtonSave(false);
             }
         });

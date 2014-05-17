@@ -24,6 +24,14 @@
     <string name="expense_button">Expense</string>
     <string name="save_button">Save</string>
     <string name="no_history_yet_text">No History Yet</string>
+
+    <string name="to_go">to go</string>
+    <string name="done">done</string>
+
+    <plurals name="days_left">
+        <item quantity="one">day left</item>
+        <item quantity="other">days left</item>
+    </plurals>
     <!-- wallet: see history -->
 
     <!-- Add Goal Activity -->
@@ -41,10 +49,13 @@
     <string name="goal_date_on_text">Yes</string>
     <string name="goal_date_off_text">No</string>
     <string name="due_date_et">DD/MM/YYYY</string>
-    <string name="date_format_text">Format should be \n DD/MM/YYYY</string>
-    <string name="date_no_past_text">No date in the past!</string>
+    <string name="date_format_text">The format should be DD/MM/YYYY</string>
+    <string name="date_no_past_text">This is a date in the past!</string>
+    <string name="date_not_valid_text">This is not a valid date</string>
 
     <string name="choose_picture_text">Choose a picture:</string>
+    <string name="title_activity_externalpicture">External Picture Add</string>
+    <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
 
     <string name="car_picture_desc">auto</string>
     <string name="shopping_picture_desc">shopping</string>
@@ -59,21 +70,22 @@
     <!-- Save Activity -->
     <string name="save_for_goal_text">Save money for your goal</string>
     <string name="pick_category">Pick a category below:</string>
-    <string name="enter_amount">Enter amount</string>
+    <string name="enter_amount">Enter amountTotalNeeded</string>
 
     <!-- Input -->
     <string-array name="income_categories">
+        <item>Babysitting</item>
         <item>Pocket Money</item>
         <item>Student Job</item>
-        <item>Babysitting</item>
         <item>Tutoring</item>
         <item>Other</item>
     </string-array>
     <string-array name="expense_categories">
-        <item>Groceries</item>
         <item>Books</item>
-        <item>Party</item>
+        <item>Food</item>
         <item>Gifts</item>
+        <item>Groceries</item>
+        <item>Party</item>
         <item>Transport</item>
         <item>Other</item>
     </string-array>
@@ -84,18 +96,18 @@
     <!-- History Activity -->
     <string name="wallet_text">Wallet</string>
     <string name="saving_for_text">Savings for</string>
-    <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
+
+    <!-- Input Activity -->
+    <string name="title_activity_input">Input</string>
     <string name="enter_name">Enter a description (optional)</string>
     <string name="goal_not_initialized">You must create a goal before you can save for one!</string>
-    <string name="dont_forget_piggybank">Don\'t forget to actually put the money in your piggy bank!</string>
-    <string name="title_activity_input">Input</string>
+    <string name="dont_forget_piggybank">Don\'t forget to put the real money in your real piggy bank!</string>
     <string name="amount_in_wallet">Currently in wallet: </string>
-    <string name="fill_in_amount">You should fill in a correct amount.</string>
+    <string name="fill_in_amount">You should fill in a correct amountTotalNeeded.</string>
     <string name="not_enough_money">You don\'t have enough money in your wallet to do that!</string>
     <string name="amount_too_much">That\'s more than you have!</string>
     <string name="amount_over_left">You only need to save another </string>
-    <string name="amount_something_wrong">There\'s something wrong with that amount…</string>
-    <string name="title_activity_externalpicture">External Picture Add</string>
+    <string name="amount_something_wrong">There\'s something wrong with that amountTotalNeeded…</string>
     <string name="savemoney">Save money for your goal</string>
     <string name="history_type">History Type</string>
 
