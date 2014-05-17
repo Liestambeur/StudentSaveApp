@@ -3,6 +3,8 @@ package be.kuleuven.chi.backend.categories;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import be.kuleuven.chi.backend.RemindType;
+
 //import org.joda.time.DateTime;
 //import org.joda.time.Days;
 
@@ -17,10 +19,8 @@ public class Goal implements Category {
     private double amountSaved;
     private String urlPicture;
     private Calendar dueDate;
-    private Calendar createdDate; // the date this goal was created
-    private Calendar lastReminded;
-    // -1 -> not reminded
-    private long millisecondsToBeReminded;
+    private RemindType remindType;
+    private Calendar nextRemindDate;
     //TODO when adding a variable, don't forget to change to copy methods!
 
     public Goal(){
@@ -29,9 +29,8 @@ public class Goal implements Category {
         this.amountSaved = 0;
         this.urlPicture = "";
         this.dueDate = null;
-        this.millisecondsToBeReminded = -1;
-        this.createdDate = new GregorianCalendar();
-        this.lastReminded = new GregorianCalendar();
+        this.remindType = RemindType.NEVER;
+        this.nextRemindDate = new GregorianCalendar();
     }
 
     /** NAME **/
@@ -39,7 +38,6 @@ public class Goal implements Category {
         return name;
     }
     public void setName(String name) {
-        System.out.println("NAAM: "+name);
         this.name = name;
     }
 
@@ -143,33 +141,39 @@ public class Goal implements Category {
     }
 
     /** REMINDING **/
+    public boolean hasRemindSetting() {
+        return this.remindType != RemindType.NEVER;
+    }
+    public RemindType getRemindType() {
+        return this.remindType;
+    }
+    public void setRemindType(RemindType remindType) {
+        this.remindType = remindType;
+    }
+    public Calendar getNextRemindDate() {
+        return this.nextRemindDate;
+    }
+    private void setNextRemindDate(Calendar nextRemindDate) {
+        this.nextRemindDate = nextRemindDate;
+    }
     public boolean shouldRemind(){
-        if(millisecondsToBeReminded <=0){
-            return false;
-        }
-        Calendar now = new GregorianCalendar();
-        Calendar lastTimeReminded = new GregorianCalendar();
-        lastTimeReminded.setTimeInMillis(lastReminded.getTimeInMillis() + millisecondsToBeReminded);
-        return now.after(lastTimeReminded);
+        return hasRemindSetting() && this.nextRemindDate.after(new GregorianCalendar());
     }
     public void resetRemind(){
-        this.millisecondsToBeReminded = -1;
+        this.remindType = RemindType.NEVER;
     }
-    public long getMillisecondsToBeReminded() {
-        return millisecondsToBeReminded;
-    }
-    public void setMillisecondsToBeReminded(long millisecondsToBeReminded){
-        this.millisecondsToBeReminded = millisecondsToBeReminded;
-    }
-    public void updateLastReminded(){
-        this.lastReminded = new GregorianCalendar();
+    public void updateNextRemindDate(){
+        this.nextRemindDate = this.remindType.nextRemindDate(new GregorianCalendar());
     }
 
     /** OTHER **/
-    public Boolean isValid(boolean dueDateRequired) {
+    public Boolean isValid(boolean dueDateRequired, boolean reminderRequired) {
         boolean result = true;
         if(dueDateRequired) {
-            result = result && getDueDate() != null;
+            result = result && hasDueDate();
+        }
+        if(reminderRequired) {
+            result = result && hasRemindSetting();
         }
         return result && this.amountTotalNeeded != 0 && this.name.length() > 0;
     }
@@ -181,7 +185,8 @@ public class Goal implements Category {
         copy.setAmountSaved(this.amountSaved);
         copy.setPicture(this.urlPicture);
         copy.setDueDate(this.dueDate);
-        copy.setMillisecondsToBeReminded(this.millisecondsToBeReminded);
+        copy.setRemindType(this.remindType);
+        copy.setNextRemindDate(this.nextRemindDate);
 
         return copy;
     }
@@ -191,7 +196,8 @@ public class Goal implements Category {
         this.amountSaved = goal.getAmountSaved();
         this.urlPicture = goal.getPictureUrl();
         this.dueDate = goal.getDueDate();
-        this.millisecondsToBeReminded = goal.getMillisecondsToBeReminded();
+        this.remindType = goal.getRemindType();
+        this.nextRemindDate = goal.getNextRemindDate();
     }
 
 }

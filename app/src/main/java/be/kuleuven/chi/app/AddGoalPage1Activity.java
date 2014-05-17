@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.GoalActivityType;
+import be.kuleuven.chi.backend.RemindType;
 import be.kuleuven.chi.backend.categories.Goal;
 
 /**
@@ -71,134 +71,157 @@ public class AddGoalPage1Activity extends BaseActivity {
         initTextWatchers();
     }
 
+    /** TEXT WATCHERS **/
     private void initTextWatchers() {
         EditText nameOfGoalText = (EditText) findViewById(R.id.nameOfGoal);
+        nameOfGoalText.addTextChangedListener(getTextWatcherNameOfGoal());
+
         EditText amountOfGoalText = (EditText) findViewById(R.id.amountToSave);
+        amountOfGoalText.addTextChangedListener(getTextWatcherAmountOfGoal());
+
         EditText dueDateText = (EditText) findViewById(R.id.due_date_field);
-
-        TextWatcher nameOfGoalWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                // not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                goal.setName(charSequence.toString());
-                setOkButton();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // not used
-            }
-        };
-        TextWatcher amountOfGoalWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                // not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                try {
-                    goal.setAmountTotalNeeded(Double.parseDouble(charSequence.toString()));
+        dueDateText.addTextChangedListener(getTextWatcherDueDate());
+    }
+    private TextWatcher getTextWatcherNameOfGoal() {
+        return new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    // not used
                 }
-                catch (NumberFormatException e) {
-                    goal.setAmountTotalNeeded(Double.parseDouble("0"));
-                    // do nothing
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    goal.setName(charSequence.toString());
+                    setOkButton();
                 }
-                setOkButton();
-            }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // not used
-            }
-        };
-        TextWatcher dueDateWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                // not used
-            }
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    // not used
+                }
+            };
+    }
+    private TextWatcher getTextWatcherAmountOfGoal() {
+        return new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    // not used
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
-                findViewById(R.id.date_format_text).setVisibility(View.GONE);
-                findViewById(R.id.date_not_valid_text).setVisibility(View.GONE);
-                String date = charSequence.toString();
-
-                if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
-                    findViewById(R.id.date_format_text).setVisibility(View.GONE);
-
-                    String[] dateParts = date.split("/");
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                     try {
-                        // note: the calendar counts months starting from 0 (e.g. January = 0, February = 1)
-                        // so decrease the user input with one as the user will start counting from 1.
-                        // days of month start from 1, as the user will expect so no change needed here.
-                        Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
-                                Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
-                        if(calendar.after(new GregorianCalendar())) {
-                            findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
-                            goal.setDueDate(calendar);
-
-                            // note: if you fill in 80/5/2014, Calendar will recalculate the date to 19/7/2014,
-                            // adding all the days that are to many in the month.
-                            // checking whether the stored date equals the date in the text editor allows to check for this event.
-                            if(!charSequence.toString().equals(goal.getDueDateString())) {
-                                findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
-                                if(goalActivityType == GoalActivityType.EDIT) {
-                                    goal.setDueDate(oldGoal.getDueDate());
-                                }
-                                else {
-                                    goal.resetDueDate();
-                                }
-                            }
-                        }
-                        else {
-                            findViewById(R.id.date_no_past_text).setVisibility(View.VISIBLE);
-                        }
+                        goal.setAmountTotalNeeded(Double.parseDouble(charSequence.toString()));
                     }
                     catch (NumberFormatException e) {
-                        findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
-                        goal.resetDueDate();
+                        goal.setAmountTotalNeeded(Double.parseDouble("0"));
                         // do nothing
                     }
+                    setOkButton();
                 }
-                else {
-                    findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    // not used
                 }
-                setOkButton();
-            }
+            };
+    }
+    private TextWatcher getTextWatcherDueDate() {
+        return new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    // not used
+                }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // not used
-            }
-        };
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
+                    findViewById(R.id.date_format_text).setVisibility(View.GONE);
+                    findViewById(R.id.date_not_valid_text).setVisibility(View.GONE);
+                    String date = charSequence.toString();
 
-        nameOfGoalText.addTextChangedListener(nameOfGoalWatcher);
-        amountOfGoalText.addTextChangedListener(amountOfGoalWatcher);
-        dueDateText.addTextChangedListener(dueDateWatcher);
+                    if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
+                        findViewById(R.id.date_format_text).setVisibility(View.GONE);
+
+                        String[] dateParts = date.split("/");
+                        try {
+                            // note: the calendar counts months starting from 0 (e.g. January = 0, February = 1)
+                            // so decrease the user input with one as the user will start counting from 1.
+                            // days of month start from 1, as the user will expect so no change needed here.
+                            Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
+                                    Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
+                            if(calendar.after(new GregorianCalendar())) {
+                                findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
+                                goal.setDueDate(calendar);
+
+                                // note: if you fill in 80/5/2014, Calendar will recalculate the date to 19/7/2014,
+                                // adding all the days that are to many in the month.
+                                // checking whether the stored date equals the date in the text editor allows to check for this event.
+                                if(!charSequence.toString().equals(goal.getDueDateString())) {
+                                    findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
+                                    if(goalActivityType == GoalActivityType.EDIT) {
+                                        goal.setDueDate(oldGoal.getDueDate());
+                                    }
+                                    else {
+                                        goal.resetDueDate();
+                                    }
+                                }
+                            }
+                            else {
+                                findViewById(R.id.date_no_past_text).setVisibility(View.VISIBLE);
+                            }
+                        }
+                        catch (NumberFormatException e) {
+                            findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
+                            goal.resetDueDate();
+                            // do nothing
+                        }
+                    }
+                    else {
+                        findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
+                    }
+                    setOkButton();
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    // not used
+                }
+            };
     }
 
+    /** EDIT GOAL: FILL IN RIGHT VALUES **/
     private void initGoalValues() {
+        // name
         TextView nameOfGoal = (TextView) findViewById(R.id.nameOfGoal);
         nameOfGoal.setText(this.goal.getName());
 
+        // amount
         TextView amountToSave = (TextView) findViewById(R.id.amountToSave);
         amountToSave.setText(Double.toString(this.goal.getAmountTotalNeeded()));
 
-        CheckBox date_switch_goal = (CheckBox) findViewById(R.id.date_switch_goal);
-        if(this.goal.getDueDate() != null) {
-            date_switch_goal.setChecked(true);
+        // due date
+        CheckBox dateSwitch = (CheckBox) findViewById(R.id.date_switch_goal);
+        if(this.goal.hasDueDate()) {
+            dateSwitch.setChecked(true);
 
-            TextView due_date_field = (TextView) findViewById(R.id.due_date_field);
-            due_date_field.setText(this.goal.getDueDateString());
+            TextView dueDateField = (TextView) findViewById(R.id.due_date_field);
+            dueDateField.setText(this.goal.getDueDateString());
         }
         else {
-            date_switch_goal.setChecked(false);
+            dateSwitch.setChecked(false);
+        }
+
+        // reminder
+        CheckBox remindSwitch = (CheckBox) findViewById(R.id.remind_switch_goal);
+        if(this.goal.hasRemindSetting()) {
+            remindSwitch.setChecked(true);
+
+            int radioID = goal.getRemindType().getRadioID();
+            findViewById(radioID).setSelected(true);
+        }
+        else {
+            remindSwitch.setChecked(false);
         }
     }
 
@@ -222,42 +245,36 @@ public class AddGoalPage1Activity extends BaseActivity {
         setOkButton();
     }
 
-    private boolean reminder = false;
-
     public void remindSwitch(View remindSwitch) {
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_remind);
+        radioGroup.clearCheck();
+
         if(((CheckBox) remindSwitch).isChecked()) {
-            findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
-            reminder = true;
+            radioGroup.setVisibility(View.VISIBLE);
         }
         else {
             findViewById(R.id.radio_remind).setVisibility(View.GONE);
-            ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
-            //TODO reset remind optie van goal
             goal.resetRemind();
-            reminder = false;
+        }
+
+        setOkButton();
+    }
+
+    public void remindRadio(View radioButton) {
+        RadioGroup group = (RadioGroup) findViewById(R.id.radio_remind);
+        int id = group.getCheckedRadioButtonId();
+
+        for(RemindType remindType: RemindType.values()) {
+            if(remindType.hasRadioButton() && remindType.getRadioID() == id) {
+                goal.setRemindType(remindType);
+                goal.updateNextRemindDate();
+            }
+            // if the remindType is not found, the goal will have the 'NEVER' default.
         }
         setOkButton();
     }
 
-    // TODO registreer optie van RadioButtons en implementeer het herinneren
-
     public void okButton(View okButton) {
-        if(reminder){
-            RadioGroup group = (RadioGroup) findViewById(R.id.radio_remind);
-            int id = group.getCheckedRadioButtonId();
-            long time = 0;
-            if(id==R.id.radio_day){
-                time = TimeUnit.DAYS.toMillis(1);
-            }else if(id==R.id.radio_week){
-                time = TimeUnit.DAYS.toMillis(7);
-            }else if(id==R.id.radio_month){
-                time = TimeUnit.DAYS.toMillis(30);
-            }
-           // time = TimeUnit.MINUTES.toMillis(1);
-            goal.setMillisecondsToBeReminded(time);
-        }
-
-
         // TODO de oude goal gaat hier verloren, alle wijzigingen die je hebt aangebracht zijn permanent
         // TODO is dit wat de gebruiker verwacht? of wil hij op volgende pagina nog volledig kunnen rollbacken?
         AppContent.getInstance(this).addGoal(this.goal);
@@ -291,14 +308,17 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     private void setOkButton(){
-        if(this.goal.isValid(((CheckBox) findViewById(R.id.date_switch_goal)).isChecked())){
+        boolean dueDateRequired = ((CheckBox) findViewById(R.id.date_switch_goal)).isChecked();
+        boolean reminderRequired = ((CheckBox) findViewById(R.id.remind_switch_goal)).isChecked();
+
+        if(this.goal.isValid(dueDateRequired, reminderRequired)){
             this.enableOK(true);
         } else{
             this.enableOK(false);
         }
     }
 
-    public void enableOK(Boolean enable) {
+    private void enableOK(Boolean enable) {
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
     }

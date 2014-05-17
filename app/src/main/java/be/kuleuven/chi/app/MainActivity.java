@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         //REMIND
         if(goal.shouldRemind()){
             this.showReminder();
-            goal.updateLastReminded();
+            goal.updateNextRemindDate();
         }
 
         //GOAL gedaan

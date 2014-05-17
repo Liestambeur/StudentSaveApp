@@ -136,7 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:paddingLeft="30sp">
+                android:paddingLeft="30sp"
+                android:onClick="remindRadio">
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -144,21 +145,24 @@
                     android:checked="true"
                     android:text="@string/save_remind_month_text"
                     android:id="@+id/radio_month"
-                    android:layout_gravity="center_horizontal|left" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:onClick="remindRadio" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/save_remind_week_text"
                     android:id="@+id/radio_week"
-                    android:layout_gravity="center_horizontal|left" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:onClick="remindRadio" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/save_remind_day_text"
                     android:id="@+id/radio_day"
-                    android:layout_gravity="center_horizontal|left" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:onClick="remindRadio" />
 
             </RadioGroup>
 
