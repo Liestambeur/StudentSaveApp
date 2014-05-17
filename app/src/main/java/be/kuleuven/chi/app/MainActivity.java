@@ -64,19 +64,20 @@ public class MainActivity extends BaseActivity implements Serializable {
         if(appContent.hasCurrentGoal()){
             //TODO tekst niet hardcode, maar via String-file
             Goal goal = appContent.getCurrentGoal();
+            String currencySymbol = AppContent.getInstance(this).getCurrencySymbol();
 
             View goalview = findViewById(R.id.goal);
-            goalview.setVisibility(1);
+            goalview.setVisibility(View.VISIBLE);
 
             TextView goalName = (TextView) findViewById(R.id.goalName);
             goalName.setText(goal.getName());
 
             TextView goalAmount = (TextView) findViewById(R.id.goalAmount);
-            goalAmount.setText("€ "+String.format("%.2f",goal.getAmount()- goal.getAmountSaved())+" to go");
+            goalAmount.setText(currencySymbol + " " + String.format("%.2f",goal.getAmount()- goal.getAmountSaved())+" to go");
 
 
             TextView goalDone = (TextView) findViewById(R.id.goalDone);
-            goalDone.setText("€ "+String.format("%.2f", goal.getAmountSaved())+" done");
+            goalDone.setText(currencySymbol + " " + String.format("%.2f", goal.getAmountSaved())+" done");
 
 
             TextView goalDue = (TextView) findViewById(R.id.goalDue);

@@ -91,25 +91,40 @@ public class AppContent implements Serializable {
         return singleton;
     }
 
-    public Goal getCurrentGoal() {
-        return this.currentGoal;
+    public String getCurrencySymbol() {
+        return this.currency.getSymbol();
     }
 
+    private boolean hasGoal() {
+        return !getGoals().isEmpty();
+    }
     public void addGoal(Goal goal) {
         this.goals.add(goal);
         setCurrentGoal(goal);
         saveState();
     }
-
-    public boolean hasCurrentGoal(){
-        return getCurrentGoal()!=null;
+    public List<Goal> getGoals() {
+        return goals;
     }
-
-    public boolean hasGoal() {
-        return !getGoals().isEmpty();
+    private List<Goal> getGoalsDone(){
+        List<Goal> result = new ArrayList<Goal>();
+        for (Goal g : goals) {
+            if (g.isDone()) {
+                result.add(g);
+            }
+        }
+        return result;
     }
-
-    public void deleteGoal(Goal goal) {
+    private List<Goal> getGoalsBusy(){
+        List<Goal> result = new ArrayList<Goal>();
+        for (Goal g : goals) {
+            if (!g.isDone()) {
+                result.add(g);
+            }
+        }
+        return result;
+    }
+    private void deleteGoal(Goal goal) {
         this.goals.remove(goal);
         if (!this.goals.isEmpty()) {
             setCurrentGoal(getGoals().get(this.goals.size() - 1));
@@ -119,6 +134,41 @@ public class AppContent implements Serializable {
         saveState();
     }
 
+    public boolean hasCurrentGoal(){
+        return getCurrentGoal()!=null;
+    }
+    public Goal getCurrentGoal() {
+        return this.currentGoal;
+    }
+    public void setCurrentGoal(Goal currentGoal) {
+        this.currentGoal = currentGoal;
+    }
+    public String getPictureCurrentGoal() {
+        return this.getCurrentGoal().getPictureUrl();
+    }
+    public void setPictureCurrentGoal(String path) {
+        this.getCurrentGoal().setPicture(path);
+    }
+    public void resetPictureCurrentGoal() {
+        this.getCurrentGoal().resetPicture();
+    }
+    public void currentGoalDone(){
+        setCurrentGoal(null);
+        saveState();
+    }
+    public void deleteCurrentGoal() {
+        this.deleteGoal(this.getCurrentGoal());
+    }
+
+    public boolean hasHistory(){
+        return this.getNumberOfHistoryElements()!=0;
+    }
+    public int getNumberOfHistoryElements() {
+        return this.history.getNumberOfHistoryElements();
+    }
+    public HistoryElement getHistoryElement(int index) {
+        return this.history.getHistoryElement(index);
+    }
     public void addToHistory(HistoryElement element) {
         this.history.addToHistory(element);
         saveState();
@@ -129,50 +179,11 @@ public class AppContent implements Serializable {
      * @return
      */
     public String getWalletTotal() {
-        return (this.currency.getSymbol() + " " + String.format("%.2f", this.history.getWalletTotal()));
+        return (this.getCurrencySymbol() + " " + String.format("%.2f", this.history.getWalletTotal()));
     }
-
     public double getWalletTotalAmount() {
         return this.history.getWalletTotal();
     }
-
-    public int getNumberOfHistoryElements() {
-        return this.history.getNumberOfHistoryElements();
-    }
-
-    public HistoryElement getHistoryElement(int index) {
-        return this.history.getHistoryElement(index);
-    }
-
-    public boolean hasHistory(){
-        return this.getNumberOfHistoryElements()!=0;
-    }
-
-    public List<Goal> getGoalsDone(){
-        List<Goal> result = new ArrayList<Goal>();
-        for (Goal g : goals) {
-            if (g.isDone()) {
-                result.add(g);
-            }
-        }
-        return result;
-    }
-
-    public List<Goal> getGoalsBusy(){
-        List<Goal> result = new ArrayList<Goal>();
-        for (Goal g : goals) {
-            if (!g.isDone()) {
-                result.add(g);
-            }
-        }
-        return result;
-    }
-
-    public void currentGoalDone(){
-        setCurrentGoal(null);
-        saveState();
-    }
-
 
     public List<IncomeCategory> getIncomeCategories(){ return this.incomeCategories; }
     public int getNumberOfIncomeCategories(){ return incomeCategories.size(); }
@@ -182,11 +193,6 @@ public class AppContent implements Serializable {
     public int getNumberOfExpenseCategories(){ return expenseCategories.size(); }
     public ExpenseCategory getExpenseCategoryAt(int index){ return expenseCategories.get(index); }
 
-    public void setCurrentGoal(Goal currentGoal) {
-        this.currentGoal = currentGoal;
-    }
 
-    public List<Goal> getGoals() {
-        return goals;
-    }
+
 }

@@ -44,10 +44,13 @@ public class Goal implements Category {
         if(startDate.after(endDate)){
             return 0;
         }
-        //assert: startDate must be before endDate
-        int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
-        long endInstant = endDate.getTimeInMillis();
-        return  (int) ((endInstant - startDate.getTimeInMillis()) / MILLIS_IN_DAY);
+        else {
+            //assert: startDate must be before endDate
+            int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
+            long endInstant = endDate.getTimeInMillis();
+            return (int) ((endInstant - startDate.getTimeInMillis()) / MILLIS_IN_DAY) + 1;
+            // + 1 because you count in today
+        }
     }
 
     public boolean shouldRemind(){
@@ -150,7 +153,12 @@ public class Goal implements Category {
     }
 
     public String getDueDateString() {
-        return this.dueDate.get(Calendar.DAY_OF_MONTH) + "/" + this.dueDate.get(Calendar.MONTH) + "/" + this.dueDate.get(Calendar.YEAR);
+        // note: the calendar counts months starting from 0 (e.g. January = 0, February = 1)
+        // so decrease the user input with one as the user will start counting from 1.
+        // days of month start from 1, as the user will expect so no change needed here.
+        return this.dueDate.get(Calendar.DAY_OF_MONTH) + "/"
+                + (this.dueDate.get(Calendar.MONTH) + 1) + "/"
+                + this.dueDate.get(Calendar.YEAR);
     }
 
     public Boolean isValid(boolean dueDateRequired) {
