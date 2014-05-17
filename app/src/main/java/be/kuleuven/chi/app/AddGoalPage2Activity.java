@@ -24,7 +24,6 @@ public class AddGoalPage2Activity extends BaseActivity {
     HashMap<Integer, String> paths;
     HashMap<String, ImageButton> views;
     int goalActivityType;
-    String oldPicture;
     Goal goal;
 
     @Override
@@ -43,7 +42,6 @@ public class AddGoalPage2Activity extends BaseActivity {
 
         if(this.goalActivityType == GoalActivityType.EDIT) {
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
-            this.oldPicture = this.goal.getPictureUrl();
             initActivePicture();
         }
         // else  if(this.goalActivityType == GoalActivityType.ADD) { // no initialising necessary }
@@ -83,8 +81,8 @@ public class AddGoalPage2Activity extends BaseActivity {
     }
 
     private void initActivePicture() {
-        if(views.containsKey(oldPicture)) {
-            views.get(oldPicture).setActivated(true);
+        if(views.containsKey(this.goal.getPictureUrl())) {
+            views.get(this.goal.getPictureUrl()).setActivated(true);
         }
         else {
             views.get(getResources().getString(R.drawable.dotdotdot));
@@ -116,6 +114,11 @@ public class AddGoalPage2Activity extends BaseActivity {
     }
 
     public void okButton(View okButton) {
+        if(this.goalActivityType == GoalActivityType.EDIT) {
+            // the backup is no longer needed and can be deleted
+            AppContent.getInstance(this).deleteBackUpCurrentGoal();
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -125,6 +128,7 @@ public class AddGoalPage2Activity extends BaseActivity {
         // the goal is removed from the AppContent
         // TODO ask for confirmation of delete
         AppContent.getInstance(this).deleteCurrentGoal();
+        AppContent.getInstance(this).deleteBackUpCurrentGoal();
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -138,7 +142,8 @@ public class AddGoalPage2Activity extends BaseActivity {
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             // the picture of the goal is restored to its older value
-            this.goal.setPicture(oldPicture);
+            AppContent.getInstance(this).resetCurrentGoalToBackup();
+            AppContent.getInstance(this).deleteBackUpCurrentGoal();
         }
 
         Intent intent = new Intent(this, MainActivity.class);

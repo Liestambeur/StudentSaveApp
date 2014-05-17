@@ -26,7 +26,6 @@ import be.kuleuven.chi.backend.categories.Goal;
 public class AddGoalPage1Activity extends BaseActivity {
 
     Goal goal;
-    Goal oldGoal;
     int goalActivityType;
 
     @Override
@@ -37,8 +36,6 @@ public class AddGoalPage1Activity extends BaseActivity {
         Intent intent = getIntent();
         this.goalActivityType = intent.getIntExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
 
-        // TODO zorg dat focus niet op 'name of goal' ligt: tekst mag niet geselecteerd zijn bij opstarten
-
         if(this.goalActivityType == GoalActivityType.ADD) {
             goal = new Goal();
             this.enableOK(false);
@@ -46,8 +43,8 @@ public class AddGoalPage1Activity extends BaseActivity {
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
 
+            AppContent.getInstance(this).backupCurrentGoal();
             this.goal = AppContent.getInstance(this).getCurrentGoal();
-            this.oldGoal = AppContent.getInstance(this).getCurrentGoal().getCopy();
             initGoalValues();
             this.enableOK(true);
 
@@ -64,7 +61,6 @@ public class AddGoalPage1Activity extends BaseActivity {
             else {
                 findViewById(R.id.radio_remind).setVisibility(View.GONE);
                 ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
-                //TODO reset remind optie van goal
             }
         }
 
@@ -152,6 +148,7 @@ public class AddGoalPage1Activity extends BaseActivity {
                                     Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
                             if(calendar.after(new GregorianCalendar())) {
                                 findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
+                                Calendar backupDueDate = goal.getDueDate();
                                 goal.setDueDate(calendar);
 
                                 // note: if you fill in 80/5/2014, Calendar will recalculate the date to 19/7/2014,
@@ -160,7 +157,7 @@ public class AddGoalPage1Activity extends BaseActivity {
                                 if(!charSequence.toString().equals(goal.getDueDateString())) {
                                     findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
                                     if(goalActivityType == GoalActivityType.EDIT) {
-                                        goal.setDueDate(oldGoal.getDueDate());
+                                        goal.setDueDate(backupDueDate);
                                     }
                                     else {
                                         goal.resetDueDate();
@@ -217,12 +214,8 @@ public class AddGoalPage1Activity extends BaseActivity {
         if(this.goal.hasRemindSetting()) {
             remindSwitch.setChecked(true);
 
-
-
-            System.out.println(goal.getRemindType().toString());
             int radioID = goal.getRemindType().getRadioID();
             ((RadioGroup) findViewById(R.id.radio_remind)).check(radioID);
-            System.out.println(radioID);
         }
         else {
             remindSwitch.setChecked(false);
@@ -279,8 +272,6 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     public void okButton(View okButton) {
-        // TODO de oude goal gaat hier verloren, alle wijzigingen die je hebt aangebracht zijn permanent
-        // TODO is dit wat de gebruiker verwacht? of wil hij op volgende pagina nog volledig kunnen rollbacken?
         if(this.goalActivityType == GoalActivityType.ADD) {
             AppContent.getInstance(this).addGoal(this.goal);
         }
@@ -293,8 +284,9 @@ public class AddGoalPage1Activity extends BaseActivity {
     }
 
     public void deleteButton(View deleteButton) {
-         // the goal is removed from the AppContent
-         AppContent.getInstance(this).deleteCurrentGoal();
+        // the goal is removed from the AppContent
+        AppContent.getInstance(this).deleteCurrentGoal();
+        AppContent.getInstance(this).deleteBackUpCurrentGoal();
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -305,7 +297,8 @@ public class AddGoalPage1Activity extends BaseActivity {
         // the goal is not stored in the AppContent
         if(this.goalActivityType == GoalActivityType.EDIT) {
             // change the state of the goal back to its former state
-            this.goal.copyState(this.oldGoal);
+            AppContent.getInstance(this).resetCurrentGoalToBackup();
+            AppContent.getInstance(this).deleteBackUpCurrentGoal();
         }
 
         Intent intent = new Intent(this, MainActivity.class);

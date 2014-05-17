@@ -26,13 +26,14 @@ public class AppContent implements Serializable {
     static final long serialVersionUID=0L;
 
     private Goal currentGoal;
+    private Goal backupCurrentGoal; // used as backup when editing the current goal
     private List<Goal> goals;
     private History history;
     private Currency currency;
     private Context context;
     private List<IncomeCategory> incomeCategories;
     private List<ExpenseCategory> expenseCategories;
-    private static final String THISFILENAME = "anotherfile";
+    private static final String THISFILENAME = "anotherfile"; //TODO waarom zo'n rare naam??
     private static AppContent singleton;
 
     /* A private Constructor prevents any other class from instantiating. */
@@ -93,10 +94,12 @@ public class AppContent implements Serializable {
         return singleton;
     }
 
+    /** CURRENCY **/
     public String getCurrencySymbol() {
         return this.currency.getSymbol();
     }
 
+    /** GOALS **/
     private boolean hasGoal() {
         return !getGoals().isEmpty();
     }
@@ -136,6 +139,7 @@ public class AppContent implements Serializable {
         saveState();
     }
 
+    /** CURRENT GOAL **/
     public boolean hasCurrentGoal(){
         return hasGoal() && getCurrentGoal()!=null;
     }
@@ -153,6 +157,18 @@ public class AppContent implements Serializable {
         this.deleteGoal(this.getCurrentGoal());
     }
 
+    /** BACKUP OF CURRENT GOAL **/
+    public void backupCurrentGoal() {
+        this.backupCurrentGoal = this.currentGoal.getCopy();
+    }
+    public void resetCurrentGoalToBackup() {
+        this.currentGoal.copyState(this.backupCurrentGoal);
+    }
+    public void deleteBackUpCurrentGoal(){
+        this.backupCurrentGoal = null;
+    }
+
+    /** HISTORY **/
     public boolean hasHistory(){
         return this.getNumberOfHistoryElements()!=0;
     }
@@ -167,10 +183,7 @@ public class AppContent implements Serializable {
         saveState();
     }
 
-    /**
-     * 2 decimals only!
-     * @return
-     */
+    /** WALLET **/
     public String getWalletTotal() {
         return (this.getCurrencySymbol() + " " + String.format("%.2f", this.history.getWalletTotal()));
     }
@@ -178,10 +191,12 @@ public class AppContent implements Serializable {
         return this.history.getWalletTotal();
     }
 
+    /** INCOME CATEGORIES **/
     public List<IncomeCategory> getIncomeCategories(){ return this.incomeCategories; }
     public int getNumberOfIncomeCategories(){ return incomeCategories.size(); }
     public IncomeCategory getIncomeCategoryAt(int index){ return incomeCategories.get(index); }
 
+    /** EXPENSE CATEGORIES **/
     public List<ExpenseCategory> getExpenseCategories(){ return this.expenseCategories; }
     public int getNumberOfExpenseCategories(){ return expenseCategories.size(); }
     public ExpenseCategory getExpenseCategoryAt(int index){ return expenseCategories.get(index); }
