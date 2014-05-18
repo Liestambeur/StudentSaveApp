@@ -196,16 +196,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
-<<<<<<< HEAD
 
-    void toHistory(View view) {
-        Intent intent = new Intent(this, HistoryActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-=======
->>>>>>> 7b04063ba8f6f24596fec1bca13ee0cfc714dfaa
     public void income(View view){
         View income = findViewById(R.id.income);
         income.setPressed(true);
@@ -267,12 +258,8 @@ public class MainActivity extends BaseActivity implements Serializable {
 
     }
 
-<<<<<<< HEAD
-    void showReminder(){
-=======
     /** POPUPS **/
     public void showReminder(){
->>>>>>> 7b04063ba8f6f24596fec1bca13ee0cfc714dfaa
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
@@ -305,12 +292,8 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         dialog.show();
     }
-<<<<<<< HEAD
 
-    void showDialogGoal(){
-=======
     public void showDialogGoal(){
->>>>>>> 7b04063ba8f6f24596fec1bca13ee0cfc714dfaa
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);

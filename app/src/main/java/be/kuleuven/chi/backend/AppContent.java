@@ -30,15 +30,14 @@ public class AppContent implements Serializable {
     private List<Goal> goals;
     private History history;
     private Currency currency;
-    private Context context;
+    private static Context context;
     private List<IncomeCategory> incomeCategories;
     private List<ExpenseCategory> expenseCategories;
-    private static final String THISFILENAME = "anotherfile"; //TODO waarom zo'n rare naam??
+    private static final String THISFILENAME = "appcontentstate";
     private static AppContent singleton;
 
     /* A private Constructor prevents any other class from instantiating. */
-    private AppContent(Context context) {
-        this.context = context;
+    private AppContent() {
         this.goals = new ArrayList<Goal>();
         this.currency = Currency.EURO;
         this.history = new History();
@@ -53,12 +52,16 @@ public class AppContent implements Serializable {
         saveState();
     }
 
-    void saveState() {
+    public void saveState() {
         if(context!=null){
+            FileOutputStream fos = null;
+            ObjectOutputStream oos = null;
             try {
-                FileOutputStream fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                fos = context.openFileOutput(THISFILENAME,Context.MODE_PRIVATE);
+                oos = new ObjectOutputStream(fos);
                 oos.writeObject(this);
+                oos.flush();
+                fos.flush();
                 oos.close();
                 fos.close();
                 System.out.println("State saved.");
@@ -66,6 +69,12 @@ public class AppContent implements Serializable {
                 System.out.println("WTF?! FileNotFound");
             } catch (NullPointerException n) {
                 System.out.println("WTF?! NullPointer");
+                System.out.println(
+                        (fos==(null)?"fos!":"")
+                        +(oos==(null)?"oos!":"")
+                        +(context==(null)?"context?!":"")
+                        +(this==null?"The sky is falling! Run!":"")
+                );
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -73,7 +82,8 @@ public class AppContent implements Serializable {
     }
 
     /* Static 'instance' method */
-    public static AppContent getInstance(Context context) {
+    public static AppContent getInstance(Context theContext) {
+        context = theContext;
         if(AppContent.singleton == null) {
             //System.out.println("Singleton null");
             try{
@@ -84,11 +94,11 @@ public class AppContent implements Serializable {
             } catch(FileNotFoundException e){
                 //System.out.println(e.getCause().toString());
                 //System.out.println("Failed to load file!");
-                AppContent.singleton = new AppContent(context);
+                AppContent.singleton = new AppContent();
             } catch(Exception e){
-                //System.out.print(e.toString());
-                //System.out.println(e.getCause());
-                //System.out.println("Something is horribly wrong!");
+                System.out.println("Something is horribly wrong!");
+                System.out.print(e.toString());
+                System.out.println(e.getCause());
             }
         }
         return singleton;

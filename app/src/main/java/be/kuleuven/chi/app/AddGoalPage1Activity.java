@@ -27,16 +27,7 @@ import be.kuleuven.chi.backend.categories.Goal;
 /**
  * Created by NeleR on 16/04/2014.
  */
-<<<<<<< HEAD
-public class AddGoalPage1Activity extends BaseActivity {
-
-    private static Goal goal;
-    private Goal oldGoal;
-    private int goalActivityType;
-
-=======
 public class AddGoalPage1Activity extends AddGoalPageActivity {
->>>>>>> 7b04063ba8f6f24596fec1bca13ee0cfc714dfaa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,7 +187,6 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
             };
     }
 
-<<<<<<< HEAD
 // Een ideetje
 //    public class DatePickerFragment extends DialogFragment
 //            implements DatePickerDialog.OnDateSetListener {
@@ -224,9 +214,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         dueDateField.setText(day+"/"+month+"/"+year);
     }
 
-=======
     /** EDIT GOAL: FILL IN RIGHT VALUES **/
->>>>>>> 7b04063ba8f6f24596fec1bca13ee0cfc714dfaa
     private void initGoalValues() {
         // name
         TextView nameOfGoal = (TextView) findViewById(R.id.nameOfGoal);
@@ -350,11 +338,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         }
     }
 
-<<<<<<< HEAD
-    void enableOK(Boolean enable) {
-=======
     private void enableOK(Boolean enable) {
->>>>>>> 7b04063ba8f6f24596fec1bca13ee0cfc714dfaa
         LinearLayout ok = (LinearLayout) findViewById(R.id.ok);
         this.enableLinear(ok, enable);
     }
