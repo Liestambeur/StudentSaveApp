@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:id="@+id/imageView"
+            android:id="@+id/goalPicture"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.5"
             android:duplicateParentState="true"/>

@@ -17,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:gravity="left"
-            android:padding="10dp">
+            android:gravity="left">
 
             <EditText
                 android:id="@+id/nameOfGoal"
@@ -65,16 +64,19 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical|top">
+                android:gravity="center_vertical|top"
+                android:paddingLeft="30dp">
 
                 <EditText
                     android:id="@+id/due_date_field"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:inputType="date"
-                    android:ems="10"
                     android:visibility="gone"
-                    android:hint="@string/due_date_et"/>
+                    android:hint="@string/due_date_et"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
                 <TextView
                     android:id="@+id/date_format_text"
@@ -83,7 +85,9 @@
                     android:text="@string/date_format_text"
                     android:textColor="@color/Crimson"
                     android:textSize="12sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:layout_gravity="right"
+                    android:gravity="bottom|right" />
 
                 <TextView
                     android:id="@+id/date_no_past_text"
@@ -92,10 +96,21 @@
                     android:text="@string/date_no_past_text"
                     android:textColor="@color/Crimson"
                     android:textSize="12sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:gravity="bottom|right"
+                    android:layout_gravity="right" />
+
+                <TextView
+                    android:id="@+id/date_not_valid_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/date_not_valid_text"
+                    android:textColor="@color/Crimson"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:layout_gravity="right"
+                    android:gravity="bottom|right" />
             </LinearLayout>
-
-
 
             <!--<Space
                 android:layout_width="match_parent"
@@ -120,7 +135,9 @@
                 android:id="@+id/radio_remind"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:paddingLeft="30sp"
+                android:onClick="remindRadio">
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -128,23 +145,27 @@
                     android:checked="true"
                     android:text="@string/save_remind_month_text"
                     android:id="@+id/radio_month"
-                    android:layout_gravity="center_horizontal|left" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:onClick="remindRadio" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/save_remind_week_text"
                     android:id="@+id/radio_week"
-                    android:layout_gravity="center_horizontal|left" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:onClick="remindRadio" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/save_remind_day_text"
                     android:id="@+id/radio_day"
-                    android:layout_gravity="center_horizontal|left" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:onClick="remindRadio" />
 
             </RadioGroup>
+
 
 
         </LinearLayout>

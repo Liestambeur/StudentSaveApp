@@ -241,7 +241,7 @@ public class InputActivity extends BaseActivity {
                 if(goal != null){
                     he = new SavingElement(inputAmount, instance.getCurrentGoal());
                     instance.addToHistory(he);
-                    instance.getCurrentGoal().addAmount(inputAmount);
+                    instance.getCurrentGoal().addAmountSaved(inputAmount);
                 } else {
                     userClickedYet = false;
                     alertUser(getResources().getString(R.string.goal_not_initialized), true);

@@ -19,7 +19,7 @@ import be.kuleuven.chi.backend.GoalActivityType;
 /**
  * Created by NeleR on 16/04/2014.
  */
-public class AddGoalPage2Activity extends BaseActivity {
+public class AddGoalPage2Activity extends AddGoalPageActivity {
 
     private Map<Integer, String> paths;
     private Map<String, ImageButton> views;
@@ -40,9 +40,10 @@ public class AddGoalPage2Activity extends BaseActivity {
         fillPicturesList();
         setAllPicturesUnactivated();
 
+        this.goal = AppContent.getInstance(this).getCurrentGoal();
+
         if(this.goalActivityType == GoalActivityType.EDIT) {
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
-            this.oldPicture = AppContent.getInstance(this).getPictureCurrentGoal();
             initActivePicture();
         }
         // else  if(this.goalActivityType == GoalActivityType.ADD) { // no initialising necessary }
@@ -82,8 +83,8 @@ public class AddGoalPage2Activity extends BaseActivity {
     }
 
     private void initActivePicture() {
-        if(views.containsKey(oldPicture)) {
-            views.get(oldPicture).setActivated(true);
+        if(views.containsKey(this.goal.getPictureUrl())) {
+            views.get(this.goal.getPictureUrl()).setActivated(true);
         }
         else {
             views.get(getResources().getString(R.drawable.dotdotdot));
@@ -101,33 +102,30 @@ public class AddGoalPage2Activity extends BaseActivity {
         // unselect a selected picture
         if(picture.isActivated()) {
             setAllPicturesUnactivated();
-            AppContent.getInstance(this).resetPictureCurrentGoal();
+            this.goal.resetPicture();
         }
         // select an unselected picture
         else{
             setAllPicturesUnactivated();
             picture.setActivated(true);
-            AppContent.getInstance(this).setPictureCurrentGoal(paths.get(picture.getId()));
+            this.goal.setPicture(paths.get(picture.getId()));
 
-            //NULLPOINTER
-           // AppContent.getInstance(this).getCurrentGoal().setPicture(pictures.get(drawable));
         }
     }
 
     public void okButton(View okButton) {
+        if(this.goalActivityType == GoalActivityType.EDIT) {
+            // the backup is no longer needed and can be deleted
+            AppContent.getInstance(this).deleteBackUpCurrentGoal();
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
     public void deleteButton(View deleteButton) {
-        // the goal is removed from the AppContent
-        // TODO ask for confirmation of delete
-        AppContent.getInstance(this).deleteCurrentGoal();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        showDeleteConfirmation();
     }
 
     public void cancelButton(View cancelButton) {
@@ -137,7 +135,8 @@ public class AddGoalPage2Activity extends BaseActivity {
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
             // the picture of the goal is restored to its older value
-            AppContent.getInstance(this).setPictureCurrentGoal(oldPicture);
+            AppContent.getInstance(this).resetCurrentGoalToBackup();
+            AppContent.getInstance(this).deleteBackUpCurrentGoal();
         }
 
         Intent intent = new Intent(this, MainActivity.class);
@@ -174,11 +173,8 @@ public class AddGoalPage2Activity extends BaseActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            AppContent.getInstance(this).setPictureCurrentGoal(picturePath);
-
+            this.goal.setPicture(picturePath);
         }
-
-
     }
 
     private void enableOK(Boolean enable){
