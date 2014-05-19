@@ -16,7 +16,7 @@ import be.kuleuven.chi.backend.categoryElements.CategoryElement;
 /**
  * Created by joren on 4/6/14.
  */
-public class CategoryElementAdapter extends ArrayAdapter<CategoryElement> {
+class CategoryElementAdapter extends ArrayAdapter<CategoryElement> {
     private final String type;
     private Context mContext;
     private int layoutResourceId;

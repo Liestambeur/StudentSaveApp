@@ -7,7 +7,7 @@ import android.text.Spanned;
  * Created by Lies on 21/04/14.
  */
 
-public class InputFilterMinMax implements InputFilter {
+class InputFilterMinMax implements InputFilter {
 
     private double min, max;
 

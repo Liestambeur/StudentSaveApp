@@ -9,7 +9,7 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
 /**
  * Created by Lies on 3/04/14.
  */
-public class History implements Serializable{
+class History implements Serializable{
 
     private List<HistoryElement> history;
 

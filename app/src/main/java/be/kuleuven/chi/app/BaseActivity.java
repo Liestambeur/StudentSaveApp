@@ -12,7 +12,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 /**
  * Created by Lies on 6/04/14.
  */
-public class BaseActivity extends Activity{
+class BaseActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class BaseActivity extends Activity{
         }
     }
 
-    public void enableLinear(LinearLayout view, Boolean enable){
+    void enableLinear(LinearLayout view, Boolean enable){
         for(int i = 0; i<view.getChildCount();i++){
             view.getChildAt(i).setEnabled(enable);
         }

@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.GoalActivityType;
@@ -20,8 +21,12 @@ import be.kuleuven.chi.backend.GoalActivityType;
  */
 public class AddGoalPage2Activity extends AddGoalPageActivity {
 
-    HashMap<Integer, String> paths;
-    HashMap<String, ImageButton> views;
+    private Map<Integer, String> paths;
+    private Map<String, ImageButton> views;
+    private int goalActivityType;
+    private String oldPicture;
+
+   // Drawable oldPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

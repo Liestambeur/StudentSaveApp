@@ -1,6 +1,7 @@
 package be.kuleuven.chi.backend.historyElements;
 
 import be.kuleuven.chi.app.R;
+import be.kuleuven.chi.backend.AppContent;
 import be.kuleuven.chi.backend.categories.Goal;
 
 /**
@@ -9,12 +10,12 @@ import be.kuleuven.chi.backend.categories.Goal;
 public class SavingElement extends HistoryElement {
 
     public SavingElement(double amount, Goal goal){
-        // TODO naam juist formuleren -> zonder hard coded string!
-        super(-amount, goal, "Savings for" + " " + goal.getName());
+        super(-amount, goal, AppContent.getString(R.string.saving_long, goal.getName()));
     }
 
     @Override
     public int getTypePictureId() {
         return R.drawable.save;
     }
+
 }

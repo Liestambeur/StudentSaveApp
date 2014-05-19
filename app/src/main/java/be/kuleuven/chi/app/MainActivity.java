@@ -26,8 +26,8 @@ public class MainActivity extends BaseActivity implements Serializable {
 
     static final long serialVersionUID = 0L;
 
-    AppContent appContent;
-    Context context;
+    private AppContent appContent;
+    private Context context;
 //
 //    @Override
 //    protected void onResume(){
@@ -196,6 +196,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         startActivity(intent);
         finish();
     }
+
     public void income(View view){
         View income = findViewById(R.id.income);
         income.setPressed(true);
@@ -291,6 +292,7 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         dialog.show();
     }
+
     public void showDialogGoal(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
