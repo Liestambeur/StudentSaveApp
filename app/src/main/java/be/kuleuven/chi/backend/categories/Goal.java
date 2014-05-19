@@ -88,7 +88,7 @@ public class Goal implements Category {
         return (int) ((getAmountSaved()*100)/ getAmountTotalNeeded());
     }
     public boolean isDone(){
-        return amountSaved>= amountTotalNeeded;
+        return amountSaved >= amountTotalNeeded;
     }
 
     /** PICTURE **/
