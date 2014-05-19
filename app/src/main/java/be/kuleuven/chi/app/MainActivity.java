@@ -129,11 +129,17 @@ public class MainActivity extends BaseActivity implements Serializable {
         progress.setProgress(goal.getPercent());
 
         ImageView im = (ImageView) findViewById(R.id.goalPicture);
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
-        Bitmap bm = BitmapFactory.decodeStream(inputStream);
-        im.setImageBitmap(bm);
 
-        //im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
+        String path = goal.getPictureUrl();
+        Bitmap bm;
+        if(path.startsWith(String.valueOf('/'))){
+            bm = BitmapFactory.decodeFile(path);
+        } else{
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+            bm = BitmapFactory.decodeStream(inputStream);
+        }
+
+        im.setImageBitmap(bm);
         return goal;
     }
     private void checkGoalPopUps(Goal goal) {
@@ -211,7 +217,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         expense.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.EXPENSE.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(), InputActivityType.EXPENSE.name());
         startActivity(intent);
         finish();
     }
@@ -320,14 +326,14 @@ public class MainActivity extends BaseActivity implements Serializable {
         dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            dialog.dismiss();
-            appContent.currentGoalDone();
+                dialog.dismiss();
+                appContent.currentGoalDone();
 
-            View goalview = findViewById(R.id.goal);
-            goalview.setVisibility(View.INVISIBLE);
-            View addgoal = findViewById(R.id.addgoal);
-            addgoal.setVisibility(View.VISIBLE);
-            enableButtonSave(false);
+                View goalview = findViewById(R.id.goal);
+                goalview.setVisibility(View.INVISIBLE);
+                View addgoal = findViewById(R.id.addgoal);
+                addgoal.setVisibility(View.VISIBLE);
+                enableButtonSave(false);
             }
         });
 
