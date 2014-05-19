@@ -149,7 +149,7 @@ public class InputActivity extends BaseActivity {
                         enableOK(false);
                     } else if(v > togo) {
                         amount_warning.setText(R.string.amount_over_left);
-                        amount_warning.append(" € "+String.valueOf(togo));
+                        amount_warning.append(AppContent.getInstance(InputActivity.this).getCurrencySymbol() + " " + String.valueOf(togo));
                         amount_warning.setVisibility(View.VISIBLE);
                         enableOK(false);
                     } else {

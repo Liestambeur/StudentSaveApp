@@ -17,6 +17,7 @@ import be.kuleuven.chi.backend.categories.ExpenseCategory;
 import be.kuleuven.chi.backend.categories.Goal;
 import be.kuleuven.chi.backend.categories.IncomeCategory;
 import be.kuleuven.chi.backend.historyElements.HistoryElement;
+import be.kuleuven.chi.backend.historyElements.UndoSavingElement;
 
 /**
  * Created by Lies on 3/04/14.
@@ -130,6 +131,8 @@ public class AppContent implements Serializable {
         return result;
     }
     private void deleteGoal(Goal goal) {
+        addToHistory(new UndoSavingElement(goal));
+
         this.goals.remove(goal);
         if (!this.goals.isEmpty()) {
             setCurrentGoal(getGoals().get(this.goals.size() - 1));
@@ -203,4 +206,7 @@ public class AppContent implements Serializable {
 
 
 
+//    public static String getString(int id, String... parameters) {
+//        return context.getResources().getString(id, parameters);
+//    }
 }
