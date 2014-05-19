@@ -144,17 +144,21 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
         finish();
     }
 
-    public void externalGoalPicture(View dotdotdotPicture) {
-        Intent intent = new Intent(this, ExternalPicutureActivity.class);
-        startActivity(intent);
-        finish();
+    private static int RESULT_LOAD_IMAGE = 1;
 
-//        Intent i = new Intent(
-//                Intent.ACTION_PICK,
-//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//
-//        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    public void externalGoalPicture(View dotdotdotPicture) {
+//        Intent intent = new Intent(this, ExternalPicutureActivity.class);
+ //       startActivity(intent);
+  //      finish();
+
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i,RESULT_LOAD_IMAGE);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
