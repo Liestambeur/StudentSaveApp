@@ -61,8 +61,8 @@ class HistoryElementAdapter extends ArrayAdapter {
         HistoryElement historyElement = getItem(index);
 
         getPicture( convertView, R.id.historyType, historyElement.getTypePictureId());
-        getTitle(   convertView, R.id.historyTitle, historyElement.getCategoryName());
-        getSubTitle(convertView, R.id.historyCategoryAndDate, historyElement.getTitle(), historyElement.getDateName());
+        getTitle(   convertView, R.id.history_category, historyElement.getCategoryName());
+        getSubTitle(convertView, R.id.history_subtitle, historyElement.getTitle(), historyElement.getDateName());
         getAmount(  convertView, R.id.historyAmount, historyElement.getAmountName());
     }
 
