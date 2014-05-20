@@ -24,7 +24,8 @@
             android:layout_gravity="center_vertical|left"
             android:gravity="center_vertical"
             android:contentDescription="@string/history_image_desc"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_launcher"
+            android:onClick="toHistory"/>
 
         <TextView
             android:id="@+id/historyTitlePrev"
@@ -35,7 +36,8 @@
             android:singleLine="true"
             android:text="Hele lange categorie naam met een staartje"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:maxWidth="250dp" />
+            android:maxWidth="250dp"
+            android:onClick="toHistory"/>
 
     </LinearLayout>
 
@@ -51,6 +53,7 @@
         android:id="@+id/historyAmountPrev"
         android:textIsSelectable="true"
         android:singleLine="true"
-        android:maxLength="6" />
+        android:maxLength="6"
+        android:onClick="toHistory"/>
 
 </RelativeLayout>
