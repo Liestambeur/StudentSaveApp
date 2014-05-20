@@ -8,6 +8,9 @@ import be.kuleuven.chi.backend.categories.Category;
  * Created by joren on 4/6/14.
  */
 public class CategoryElement implements Serializable {
+
+    static final long serialVersionUID = 0L;
+
     private final Category category;
 
     public CategoryElement(Category cat) {

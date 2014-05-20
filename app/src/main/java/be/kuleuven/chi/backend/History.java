@@ -11,6 +11,8 @@ import be.kuleuven.chi.backend.historyElements.HistoryElement;
  */
 class History implements Serializable{
 
+    static final long serialVersionUID = 0L;
+
     private List<HistoryElement> history;
 
     public History(){

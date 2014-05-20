@@ -11,6 +11,8 @@ import be.kuleuven.chi.backend.categories.Category;
  */
 public abstract class HistoryElement implements Serializable {
 
+    static final long serialVersionUID = 0L;
+
     private double amount;
     private Category category;
     private String title;
