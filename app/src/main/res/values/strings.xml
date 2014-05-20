@@ -127,6 +127,10 @@
     <string name="amount_something_wrong">There\'s something wrong with that amount…</string>
     <string name="save_money">Save money for your goal</string>
     <string name="history_type">History Type</string>
+    <string name="savetitle">Save Money</string>
+    <string name="expensetitle">Input Expense</string>
+    <string name="incometitle">Input Income</string>
+    <string name="title_activity_edit_goal">Edit Goal</string>
 
 
 </resources>

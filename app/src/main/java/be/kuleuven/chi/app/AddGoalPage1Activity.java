@@ -33,10 +33,12 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         this.goalActivityType = intent.getIntExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
 
         if(this.goalActivityType == GoalActivityType.ADD) {
+            setTitle(R.string.title_activity_add_goal);
             goal = new Goal();
             this.enableOK(false);
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
+            setTitle(R.string.title_activity_edit_goal);
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
 
             AppContent.getInstance(this).backupCurrentGoal();

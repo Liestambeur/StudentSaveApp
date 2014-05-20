@@ -88,7 +88,6 @@ public class InputActivity extends BaseActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
@@ -96,9 +95,7 @@ public class InputActivity extends BaseActivity {
                 } catch (NumberFormatException e) {
                     setInputAmount(Double.parseDouble("0"));
                 }
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -108,6 +105,7 @@ public class InputActivity extends BaseActivity {
 
         //Save Screen
         if(inputActivityType.equals(InputActivityType.SAVE.name())){
+            setTitle(R.string.savetitle);
             categoryList.setVisibility(View.INVISIBLE);
             nameText.setVisibility(View.INVISIBLE);
             nameText.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0));
@@ -164,11 +162,14 @@ public class InputActivity extends BaseActivity {
             };
             amountText.removeTextChangedListener(amountWatcher);
 
-        }
-        if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
+        } else if(inputActivityType.equals(InputActivityType.EXPENSE.name())){
+            setTitle(R.string.expensetitle);
             EditText et = (EditText) findViewById(R.id.enter_amount_et);
             double available = appContent.getWalletTotalAmount();
             et.setFilters(new InputFilter[]{ new InputFilterMinMax(0, available)});
+        } else {
+            //In that case it should be income and there is no further set-up
+            setTitle(R.string.incometitle);
         }
 
         amountText.addTextChangedListener(amountWatcher);
@@ -267,8 +268,8 @@ public class InputActivity extends BaseActivity {
     }
 
     void backToMain(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //startActivity(intent);
         finish(); //Deze moet er wel staan, als de gebruiker klaar is met ingeven
                   //wil je niet terug komen naar deze activity om het "aan te passen" of
                   //wat dan ook want dat is niet ondersteund
