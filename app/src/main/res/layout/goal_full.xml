@@ -95,6 +95,7 @@
 
         <ProgressBar
             style="@style/tallerBarStyle"
+            android:progressDrawable="@drawable/progress_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/progressBar"

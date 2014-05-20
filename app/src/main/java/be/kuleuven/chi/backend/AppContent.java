@@ -17,6 +17,7 @@ import be.kuleuven.chi.backend.categories.ExpenseCategory;
 import be.kuleuven.chi.backend.categories.Goal;
 import be.kuleuven.chi.backend.categories.IncomeCategory;
 import be.kuleuven.chi.backend.historyElements.HistoryElement;
+import be.kuleuven.chi.backend.historyElements.UndoSavingElement;
 
 /**
  * Created by Lies on 3/04/14.
@@ -130,7 +131,7 @@ public class AppContent implements Serializable {
         }
         return result;
     }
-    private List<Goal> getGoalsBusy(){
+    public List<Goal> getGoalsBusy(){
         List<Goal> result = new ArrayList<Goal>();
         for (Goal g : goals) {
             if (!g.isDone()) {
@@ -140,6 +141,8 @@ public class AppContent implements Serializable {
         return result;
     }
     private void deleteGoal(Goal goal) {
+        addToHistory(new UndoSavingElement(goal));
+
         this.goals.remove(goal);
         if (!this.goals.isEmpty()) {
             setCurrentGoal(getGoals().get(this.goals.size() - 1));
@@ -160,6 +163,7 @@ public class AppContent implements Serializable {
         this.currentGoal = currentGoal;
     }
     public void currentGoalDone(){
+
         setCurrentGoal(null);
         saveState();
     }
@@ -211,4 +215,13 @@ public class AppContent implements Serializable {
     public int getNumberOfExpenseCategories(){ return expenseCategories.size(); }
     public ExpenseCategory getExpenseCategoryAt(int index){ return expenseCategories.get(index); }
 
+    public static String getString(int id, String... parameters) {
+        if(context != null) {
+            return context.getResources().getString(id, parameters);
+        }
+        else {
+            // TODO wat dan?
+            return "";
+        }
+    }
 }

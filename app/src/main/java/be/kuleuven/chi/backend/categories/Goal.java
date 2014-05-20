@@ -88,7 +88,7 @@ public class Goal implements Category {
         return (int) ((getAmountSaved()*100)/ getAmountTotalNeeded());
     }
     public boolean isDone(){
-        return amountSaved>= amountTotalNeeded;
+        return amountSaved >= amountTotalNeeded;
     }
 
     /** PICTURE **/
@@ -152,6 +152,7 @@ public class Goal implements Category {
     }
     public void setRemindType(RemindType remindType) {
         this.remindType = remindType;
+        this.updateNextRemindDate();
     }
     public Calendar getNextRemindDate() {
         return this.nextRemindDate;
@@ -160,7 +161,8 @@ public class Goal implements Category {
         this.nextRemindDate = nextRemindDate;
     }
     public boolean shouldRemind(){
-        return hasRemindSetting() && this.nextRemindDate.after(new GregorianCalendar());
+        Calendar now = new GregorianCalendar();
+        return hasRemindSetting() && now.after(this.nextRemindDate);
     }
     public void resetRemind(){
         this.remindType = RemindType.NEVER;

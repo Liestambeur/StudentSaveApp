@@ -19,9 +19,9 @@ public abstract class HistoryElement implements Serializable {
 
     HistoryElement(double amount, Category category, String title){
         this.date = new GregorianCalendar();
-        this.amount=amount;
-        this.category=category;
-        this.title=title;
+        this.amount = amount;
+        this.category = category;
+        this.title = title;
     }
 
     public double getAmount() {
@@ -59,7 +59,12 @@ public abstract class HistoryElement implements Serializable {
     }
 
     public String getDateName() {
-        return this.date.get(Calendar.DAY_OF_MONTH) + "/" + this.date.get(Calendar.MONTH) + "/" + this.date.get(Calendar.YEAR);
+        // note: the calendar counts months starting from 0 (e.g. January = 0, February = 1)
+        // so decrease the user input with one as the user will start counting from 1.
+        // days of month start from 1, as the user will expect so no change needed here.
+        return this.date.get(Calendar.DAY_OF_MONTH) + "/"
+                + (this.date.get(Calendar.MONTH) + 1) + "/"
+                + this.date.get(Calendar.YEAR);
     }
 
     /**

@@ -33,7 +33,7 @@
     <string name="done">done</string>
 
     <string name="goal_done_title">Congratulations!</string>
-    <string name="goal_done_text">You have saved enough money to reach your goal. Enjoy %1$s !</string>
+    <string name="goal_done_text">You have saved enough money to reach your goal. Enjoy \"%1$s\"!</string>
 
     <string name="goal_reminder_title">Reminder</string>
     <string name="goal_reminder_text">Don\'t forget to save for %1$s</string>
@@ -68,22 +68,26 @@
     <string name="no_pictures_yet">We are sorry: adding your own picture is not possible yet. Please check our next versions for this functionality.</string>
 
     <string name="delete_confirmation_title">Are you sure?</string>
-    <string name="delete_confirmation">Your goal will be permanently deleted. All your savings for %1$s will go back into your wallet.</string>
+    <string name="delete_confirmation">Your goal will be permanently deleted. All your savings for \"%1$s\" will go back into your wallet.</string>
+    <string name="delete_goal_title">Delete goal \"%1$s\"</string>
 
-    <string name="car_picture_desc">auto</string>
-    <string name="shopping_picture_desc">shopping</string>
-    <string name="beer_picture_desc">bier</string>
-    <string name="suitcase_picture_desc">valies</string>
-    <string name="piggybank_picture_desc">spaarvarken</string>
-    <string name="multimedia_picture_desc">multimedia</string>
-    <string name="guitar_picture_desc">gitaar</string>
-    <string name="gifts_picture_desc">cadeaus</string>
-    <string name="dotdotdot_picture_desc">punten</string>
+    <string name="car_picture_desc">Possible picture for a goal: car</string>
+    <string name="shopping_picture_desc">Possible picture for a goal: shopping bags</string>
+    <string name="beer_picture_desc">Possible picture for a goal: beer</string>
+    <string name="suitcase_picture_desc">Possible picture for a goal: suitcase</string>
+    <string name="piggybank_picture_desc">Possible picture for a goal: piggy bank</string>
+    <string name="multimedia_picture_desc">Possible picture for a goal: multimedia devices</string>
+    <string name="guitar_picture_desc">Possible picture for a goal: guitar</string>
+    <string name="gifts_picture_desc">Possible picture for a goal: gifts</string>
+    <string name="dotdotdot_picture_desc">Possible picture for a goal: choose an external picture of your own</string>
 
     <!-- Save Activity -->
     <string name="save_for_goal_text">Save money for your goal</string>
     <string name="pick_category">Pick a category below:</string>
     <string name="enter_amount">Enter amount</string>
+    <string name="undo_saving">Undo savings %1$s</string>
+    <string name="undo_saving_long">Delete goal \"%1$s\"</string>
+    <string name="saving_long">Savings for goal \"%1$s\"</string>
 
     <!-- Input -->
     <string-array name="income_categories">
@@ -109,6 +113,7 @@
     <!-- History Activity -->
     <string name="wallet_text">Wallet</string>
     <string name="saving_for_text">Savings for</string>
+    <string name="history_image_desc">Image representing the type of history element</string>
 
     <!-- Input Activity -->
     <string name="title_activity_input">Input</string>

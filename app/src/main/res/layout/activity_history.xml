@@ -21,13 +21,13 @@
 
     <ListView
         android:layout="@layout/history_row"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.9"
         android:fastScrollEnabled="true"
+        android:weightSum="3"
         android:headerDividersEnabled="false"
         android:id="@+id/fullHistoryList"
         android:choiceMode="none" />
-
 </LinearLayout>

@@ -61,10 +61,15 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         this.appContent = AppContent.getInstance(this);
 
+        System.out.println("a@@@@@@@@@@@@@@@@@@@@@@@ "+this.appContent);
+
         if(this.appContent.hasCurrentGoal()){
             fillInGoalView(appContent.getCurrentGoal());
-            for(Goal goal: AppContent.getInstance(this).getGoals()) {
+            for(Goal goal: AppContent.getInstance(this).getGoalsBusy()) {
                 checkGoalPopUps(goal);
+            }
+            if(this.appContent.getCurrentGoal().isDone()){
+                this.showDialogGoal();
             }
         }
         else{
@@ -129,11 +134,17 @@ public class MainActivity extends BaseActivity implements Serializable {
         progress.setProgress(goal.getPercent());
 
         ImageView im = (ImageView) findViewById(R.id.goalPicture);
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
-        Bitmap bm = BitmapFactory.decodeStream(inputStream);
-        im.setImageBitmap(bm);
 
-        //im.setImageDrawable(getResources().getDrawable(goal.getPicture()));
+        String path = goal.getPictureUrl();
+        Bitmap bm;
+        if(path.startsWith(String.valueOf('/'))){
+            bm = BitmapFactory.decodeFile(path);
+        } else{
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+            bm = BitmapFactory.decodeStream(inputStream);
+        }
+
+        im.setImageBitmap(bm);
         return goal;
     }
     private void checkGoalPopUps(Goal goal) {
@@ -142,9 +153,6 @@ public class MainActivity extends BaseActivity implements Serializable {
             goal.updateNextRemindDate();
         }
 
-        if(goal.isDone()){
-            this.showDialogGoal();
-        }
     }
 
     private void fillInHistoryView() {
@@ -158,20 +166,20 @@ public class MainActivity extends BaseActivity implements Serializable {
         listPreviewHistory.setWeightSum(3);
         HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_row_preview);
 
-        for(int i=0;i<3;i++) {
-            View v;
-            if(appContent.getNumberOfHistoryElements()<=i){
-                v = new LinearLayout(this);
-            } else{
-                v = adapter.getView(i, null, null);
+        for(int i = 0; i < 3; i++) {
+            View view;
+            if(appContent.getNumberOfHistoryElements() <= i) {
+                view = new LinearLayout(this);
             }
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
-            v.setLayoutParams(param);
+            else {
+                view = adapter.getView(i, null, null);
+            }
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
+            view.setLayoutParams(param);
 
-            listPreviewHistory.addView(v);
-            v.setClickable(true);
-            v.setOnClickListener(new View.OnClickListener() {
+            listPreviewHistory.addView(view);
+            view.setClickable(true);
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     toHistory(view);
@@ -211,7 +219,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         expense.setPressed(true);
 
         Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.EXPENSE.name());
+        intent.putExtra(getResources().getText(R.string.input_activity_type).toString(), InputActivityType.EXPENSE.name());
         startActivity(intent);
         finish();
     }
@@ -309,6 +317,8 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         // buttons
         dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
+
+        dialog.setCanceledOnTouchOutside(false);
 //
 //        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
 //        if(draw==null){
@@ -320,14 +330,14 @@ public class MainActivity extends BaseActivity implements Serializable {
         dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            dialog.dismiss();
-            appContent.currentGoalDone();
+                dialog.dismiss();
+                appContent.currentGoalDone();
 
-            View goalview = findViewById(R.id.goal);
-            goalview.setVisibility(View.INVISIBLE);
-            View addgoal = findViewById(R.id.addgoal);
-            addgoal.setVisibility(View.VISIBLE);
-            enableButtonSave(false);
+                View goalview = findViewById(R.id.goal);
+                goalview.setVisibility(View.INVISIBLE);
+                View addgoal = findViewById(R.id.addgoal);
+                addgoal.setVisibility(View.VISIBLE);
+                enableButtonSave(false);
             }
         });
 
