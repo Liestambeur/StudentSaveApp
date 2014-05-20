@@ -19,9 +19,9 @@ public abstract class HistoryElement implements Serializable {
 
     HistoryElement(double amount, Category category, String title){
         this.date = new GregorianCalendar();
-        this.amount=amount;
-        this.category=category;
-        this.title=title;
+        this.amount = amount;
+        this.category = category;
+        this.title = title;
     }
 
     public double getAmount() {

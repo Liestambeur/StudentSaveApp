@@ -166,20 +166,20 @@ public class MainActivity extends BaseActivity implements Serializable {
         listPreviewHistory.setWeightSum(3);
         HistoryElementAdapterPreview adapter = new HistoryElementAdapterPreview(this,R.layout.history_row_preview);
 
-        for(int i=0;i<3;i++) {
-            View v;
-            if(appContent.getNumberOfHistoryElements()<=i){
-                v = new LinearLayout(this);
-            } else{
-                v = adapter.getView(i, null, null);
+        for(int i = 0; i < 3; i++) {
+            View view;
+            if(appContent.getNumberOfHistoryElements() <= i) {
+                view = new LinearLayout(this);
             }
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
-            v.setLayoutParams(param);
+            else {
+                view = adapter.getView(i, null, null);
+            }
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1.0f);
+            view.setLayoutParams(param);
 
-            listPreviewHistory.addView(v);
-            v.setClickable(true);
-            v.setOnClickListener(new View.OnClickListener() {
+            listPreviewHistory.addView(view);
+            view.setClickable(true);
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     toHistory(view);

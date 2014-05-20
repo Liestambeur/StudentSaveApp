@@ -31,10 +31,10 @@ public enum RemindType {
         @Override
         public Calendar nextRemindDate(Calendar now) {
             // remind exactly one year from now
-            //return new GregorianCalendar(now.YEAR + 1, now.MONTH, now.DAY_OF_MONTH, now.HOUR_OF_DAY, now.MINUTE, now.SECOND);
+            //return new GregorianCalendar(now.get(Calendar.YEAR) + 1, now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), now.get(Calendar.SECOND);
 
             // remind the first day of the next year
-            return new GregorianCalendar(now.YEAR, Calendar.JANUARY, 1);
+            return new GregorianCalendar(now.get(Calendar.YEAR), Calendar.JANUARY, 1);
         }
 
         @Override
@@ -52,10 +52,10 @@ public enum RemindType {
         @Override
         public Calendar nextRemindDate(Calendar now) {
             // remind exactly one month from now
-            //return new GregorianCalendar(now.YEAR, now.MONTH + 1, now.DAY_OF_MONTH, now.HOUR_OF_DAY, now.MINUTE, now.SECOND);
+            //return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), now.get(Calendar.SECOND);
 
             // remind the first day of the next month
-            return new GregorianCalendar(now.YEAR, now.MONTH + 1, 1);
+            return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH) + 1, 1);
         }
 
         @Override
@@ -73,10 +73,10 @@ public enum RemindType {
         @Override
         public Calendar nextRemindDate(Calendar now) {
             // remind exactly one week from now
-            //return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH + 7, now.HOUR_OF_DAY, now.MINUTE, now.SECOND);
+            //return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH) + 7, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), now.get(Calendar.SECOND);
 
             // remind the first day of the week
-            Calendar newCalendar = new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH);
+            Calendar newCalendar = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
             newCalendar.setFirstDayOfWeek(Calendar.MONDAY);
             if(!now.after(newCalendar)) {
                 newCalendar.add(Calendar.WEEK_OF_YEAR,1);
@@ -99,10 +99,10 @@ public enum RemindType {
         @Override
         public Calendar nextRemindDate(Calendar now) {
             // remind exactly one day from now
-            //return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH + 1, now.HOUR_OF_DAY, now.MINUTE, now.SECOND);
+            //return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH) + 1, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), now.get(Calendar.SECOND);
 
             // remind the first hour of the next day
-            return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH + 1);
+            return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH) + 1);
         }
 
         @Override
@@ -120,10 +120,10 @@ public enum RemindType {
         @Override
         public Calendar nextRemindDate(Calendar now) {
             // remind exactly one hour from now
-            //return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH, now.HOUR_OF_DAY + 1, now.MINUTE, now.SECOND);
+            //return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY) + 1, now.get(Calendar.MINUTE), now.get(Calendar.SECOND);
 
             // remind the first minute of the next hour
-            return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH, now.HOUR_OF_DAY + 1, 0);
+            return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY) + 1, 0);
         }
 
         @Override
@@ -141,10 +141,10 @@ public enum RemindType {
         @Override
         public Calendar nextRemindDate(Calendar now) {
             // remind exactly one minute from now
-            //return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH, now.HOUR_OF_DAY, now.MINUTE + 1, now.SECOND);
+            //return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE) + 1, now.get(Calendar.SECOND);
 
             // remind the first second of the next minute
-            return new GregorianCalendar(now.YEAR, now.MONTH, now.DAY_OF_MONTH, now.HOUR_OF_DAY, now.MINUTE + 1);
+            return new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE) + 1);
         }
 
         @Override
