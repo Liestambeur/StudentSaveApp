@@ -37,6 +37,8 @@ public class AddGoalPageActivity extends BaseActivity {
             public void onClick(View v) {
                 // just close the popup and do nothing when 'cancel' is clicked
                 dialog.dismiss();
+                sendTracking("deleteconfirmation: clicked cancel");
+
             }
         });
 
@@ -49,6 +51,9 @@ public class AddGoalPageActivity extends BaseActivity {
                 content.deleteCurrentGoal();
                 content.deleteBackUpCurrentGoal();
                 dialog.dismiss();
+
+                sendTracking("deleteconfirmation: clicked delete");
+
 
                 Intent intent = new Intent(AddGoalPageActivity.this, MainActivity.class);
                 startActivity(intent);

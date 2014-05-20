@@ -212,12 +212,15 @@ public class InputActivity extends BaseActivity {
 
 
     public void cancelButton(View view) {
+        sendTracking("clicked on cancel in input");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
     }
 
     public void okButton(View view) {
+        sendTracking("clicked on ok in input");
+
         // TODO Minder vuil maken
         inputName = (inputName==null || inputName=="")?"":inputName;
         selectedItem = selectedItem==null?"Other":selectedItem;
