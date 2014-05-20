@@ -121,7 +121,7 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     public void deleteButton(View deleteButton) {
@@ -141,7 +141,7 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     private static int RESULT_LOAD_IMAGE = 1;

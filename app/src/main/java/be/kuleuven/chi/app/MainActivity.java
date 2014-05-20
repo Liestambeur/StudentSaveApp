@@ -195,14 +195,14 @@ public class MainActivity extends BaseActivity implements Serializable {
         Intent intent = new Intent(this, AddGoalPage1Activity.class);
         intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
     public void editGoal(View view){
         //Intent intent = new Intent(this, AddGoalActivity.class);
         Intent intent = new Intent(this, AddGoalPage1Activity.class);
         intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.EDIT);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     public void income(View view){
@@ -212,7 +212,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         Intent intent = new Intent(this, InputActivity.class);
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.INCOME.name());
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
     public void expense(View view){
         View expense = findViewById(R.id.expense);
@@ -221,7 +221,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         Intent intent = new Intent(this, InputActivity.class);
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(), InputActivityType.EXPENSE.name());
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
     public void save(View view){
         View save = findViewById(R.id.save);
@@ -230,12 +230,12 @@ public class MainActivity extends BaseActivity implements Serializable {
         Intent intent = new Intent(this, InputActivity.class);
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.SAVE.name());
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
     public void toHistory(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     /** ENABLE BUTTONS /**/
