@@ -317,6 +317,8 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         // buttons
         dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
+
+        dialog.setCanceledOnTouchOutside(false);
 //
 //        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
 //        if(draw==null){
