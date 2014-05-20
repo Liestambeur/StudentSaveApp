@@ -9,13 +9,21 @@
     android:background="@drawable/button_edge_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+    <ImageButton
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="right|top"
+        android:id="@+id/full_history_hint"
+        android:src="@drawable/punten"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:tint="@color/LightSteelBlue"
+        android:onClick="editGoal" />
 
     <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/previewWalletTotal"
-        android:layout_weight="0.3"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textAlignment="center"
         android:text="@string/wallet_text"
@@ -26,9 +34,8 @@
     <LinearLayout
         android:id="@+id/listPreviewHistory"
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:weightSum="3"
         android:onClick="toHistory">
     </LinearLayout>

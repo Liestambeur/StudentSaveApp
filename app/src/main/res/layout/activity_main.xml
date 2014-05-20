@@ -147,8 +147,6 @@
                 android:layout_gravity="center_vertical|bottom"
                 android:layout_weight="0.2"
                 android:gravity="center_horizontal|bottom"/>
-            <!--android:tint="@drawable/selector_icon_tint"-->
-
 
         </LinearLayout>
 
