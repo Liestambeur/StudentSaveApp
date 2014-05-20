@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
-
+    android:weightSum="1"
+    android:background="@color/White">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -111,11 +111,6 @@
                     android:layout_gravity="right"
                     android:gravity="bottom|right" />
             </LinearLayout>
-
-            <!--<Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:id="@+id/space3" />-->
 
             <CheckBox
                 android:layout_width="match_parent"

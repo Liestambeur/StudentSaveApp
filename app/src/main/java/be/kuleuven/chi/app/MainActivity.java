@@ -13,11 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.Fields;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.Tracker;
-
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -29,7 +24,6 @@ import be.kuleuven.chi.backend.categories.Goal;
 public class MainActivity extends BaseActivity implements Serializable {
 
     static final long serialVersionUID = 0L;
-
     private AppContent appContent;
 
     @Override
@@ -38,24 +32,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         appContent = AppContent.getInstance(this);
         onCreateBody();
     }
-//
-//    @Override
-//    protected void onPause(){
-//        super.onPause();
-//        appContent.saveState();
-//    }
-//
-//    @Override
-//    public void onStop(){
-//        super.onStop();
-//        appContent.saveState();
-//    }
-//
-//    @Override
-//    public void onStart(){
-//        super.onStart();
-//        appContent = AppContent.getInstance(this);
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
