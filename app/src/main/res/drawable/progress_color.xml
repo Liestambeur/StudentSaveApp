@@ -20,9 +20,9 @@
         <shape>
             <corners android:radius="5dip" />
             <gradient
-                android:startColor="@color/GhostWhite"
-                android:centerColor="@color/GhostWhite"
-                android:endColor="@color/GhostWhite"
+                android:startColor="@color/White"
+                android:centerColor="@color/White"
+                android:endColor="@color/White"
                 android:centerY="0.5"
                 android:angle="270"
                 />
