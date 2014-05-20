@@ -1,7 +1,6 @@
 package be.kuleuven.chi.app;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +26,7 @@ public class MainActivity extends BaseActivity implements Serializable {
     static final long serialVersionUID = 0L;
 
     private AppContent appContent;
-    private Context context;
+
 //
 //    @Override
 //    protected void onResume(){
@@ -56,7 +55,6 @@ public class MainActivity extends BaseActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
         setContentView(R.layout.activity_main);
 
         this.appContent = AppContent.getInstance(this);
@@ -73,8 +71,8 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
         }
         else{
-            View addgoal = findViewById(R.id.addgoal);
-            addgoal.setVisibility(View.VISIBLE);
+            View addGoal = findViewById(R.id.addgoal);
+            addGoal.setVisibility(View.VISIBLE);
             this.enableButtonSave(false);
         }
 
@@ -281,13 +279,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         Bitmap bm = BitmapFactory.decodeStream(inputStream);
         image.setImageBitmap(bm);
 
-        //Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
-        //if(draw==null){
-        //    image.setImageResource(R.drawable.ic_launcher);
-        //} else{
-        //    image.setImageDrawable(draw);
-        //}
-
         // buttons
         dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
 
@@ -298,13 +289,16 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
         });
 
-        dialog.show();
+        if(!MainActivity.this.isFinishing()){
+            dialog.show();
+        }
     }
 
     public void showDialogGoal(){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
+        dialog.setCanceledOnTouchOutside(false);
 
         // set the dialog text and image
         dialog.setTitle(getResources().getString(R.string.goal_done_title));
@@ -318,54 +312,23 @@ public class MainActivity extends BaseActivity implements Serializable {
         // buttons
         dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
 
-        dialog.setCanceledOnTouchOutside(false);
-//
-//        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
-//        if(draw==null){
-//            image.setImageResource(R.drawable.ic_launcher);
-//        } else{
-//            image.setImageDrawable(draw);
-//        }
-
         dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
                 appContent.currentGoalDone();
 
-                View goalview = findViewById(R.id.goal);
-                goalview.setVisibility(View.INVISIBLE);
-                View addgoal = findViewById(R.id.addgoal);
-                addgoal.setVisibility(View.VISIBLE);
+                View goalView = findViewById(R.id.goal);
+                goalView.setVisibility(View.INVISIBLE);
+                View addGoal = findViewById(R.id.addgoal);
+                addGoal.setVisibility(View.VISIBLE);
                 enableButtonSave(false);
             }
         });
 
-        dialog.show();
-    }
-/*
-    // constant for identifying the dialog
-    private static final int DIALOG_ALERT = 10;
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DIALOG_ALERT:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("This ends the activity");
-                builder.setCancelable(false);
-                builder.setPositiveButton("I agree", new OkOnClickListener());
-                AlertDialog dialog = builder.create();
-                dialog.show();
+        if(!MainActivity.this.isFinishing()){
+            dialog.show();
         }
-        return super.onCreateDialog(id);
     }
-
-    private final class OkOnClickListener implements
-            DialogInterface.OnClickListener {
-        public void onClick(DialogInterface dialog, int which) {
-            MainActivity.this.finish();
-        }
-    }*/
 
 }
