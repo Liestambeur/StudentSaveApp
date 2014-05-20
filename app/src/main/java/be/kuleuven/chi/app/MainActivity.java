@@ -1,7 +1,6 @@
 package be.kuleuven.chi.app;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +26,7 @@ public class MainActivity extends BaseActivity implements Serializable {
     static final long serialVersionUID = 0L;
 
     private AppContent appContent;
-    private Context context;
+
 //
 //    @Override
 //    protected void onResume(){
@@ -56,7 +55,6 @@ public class MainActivity extends BaseActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
         setContentView(R.layout.activity_main);
 
         this.appContent = AppContent.getInstance(this);
@@ -73,8 +71,8 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
         }
         else{
-            View addgoal = findViewById(R.id.addgoal);
-            addgoal.setVisibility(View.VISIBLE);
+            View addGoal = findViewById(R.id.addgoal);
+            addGoal.setVisibility(View.VISIBLE);
             this.enableButtonSave(false);
         }
 
@@ -281,13 +279,6 @@ public class MainActivity extends BaseActivity implements Serializable {
         Bitmap bm = BitmapFactory.decodeStream(inputStream);
         image.setImageBitmap(bm);
 
-        //Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
-        //if(draw==null){
-        //    image.setImageResource(R.drawable.ic_launcher);
-        //} else{
-        //    image.setImageDrawable(draw);
-        //}
-
         // buttons
         dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
 
@@ -298,7 +289,9 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
         });
 
-        dialog.show();
+        if(MainActivity.this!= null && !MainActivity.this.isFinishing()){
+            dialog.show();
+        }
     }
 
     public void showDialogGoal(){
@@ -317,13 +310,6 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         // buttons
         dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
-//
-//        Drawable draw = getResources().getDrawable(appContent.getCurrentGoal().getPicture());
-//        if(draw==null){
-//            image.setImageResource(R.drawable.ic_launcher);
-//        } else{
-//            image.setImageDrawable(draw);
-//        }
 
         dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -331,15 +317,17 @@ public class MainActivity extends BaseActivity implements Serializable {
                 dialog.dismiss();
                 appContent.currentGoalDone();
 
-                View goalview = findViewById(R.id.goal);
-                goalview.setVisibility(View.INVISIBLE);
-                View addgoal = findViewById(R.id.addgoal);
-                addgoal.setVisibility(View.VISIBLE);
+                View goalView = findViewById(R.id.goal);
+                goalView.setVisibility(View.INVISIBLE);
+                View addGoal = findViewById(R.id.addgoal);
+                addGoal.setVisibility(View.VISIBLE);
                 enableButtonSave(false);
             }
         });
 
-        dialog.show();
+        if(MainActivity.this!= null && !MainActivity.this.isFinishing()){
+            dialog.show();
+        }
     }
 /*
     // constant for identifying the dialog

@@ -1,8 +1,5 @@
 package be.kuleuven.chi.app;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -61,6 +57,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
             else {
                 findViewById(R.id.radio_remind).setVisibility(View.GONE);
                 ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
+                goal.resetRemind();
             }
         }
 
@@ -173,6 +170,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                             goal.resetDueDate();
                             // do nothing
                         }
+                        setOkButton();
                     }
                     else {
                         findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);

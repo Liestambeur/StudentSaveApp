@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/savemoney"
+        android:text="@string/save_money"
         android:id="@+id/saveForGoalText"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.1" />

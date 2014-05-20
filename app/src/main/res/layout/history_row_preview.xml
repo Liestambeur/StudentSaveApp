@@ -19,10 +19,10 @@
         <ImageView
             android:id="@+id/historyTypePrev"
             android:layout_width="25dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginRight="6dip"
             android:layout_gravity="center_vertical|left"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/history_image_desc"
             android:src="@drawable/ic_launcher"
             android:onClick="toHistory"/>
@@ -51,7 +51,6 @@
         android:textStyle="bold"
         android:text="200000000000000000000000000000000000"
         android:id="@+id/historyAmountPrev"
-        android:textIsSelectable="true"
         android:singleLine="true"
         android:maxLength="6"
         android:onClick="toHistory"/>

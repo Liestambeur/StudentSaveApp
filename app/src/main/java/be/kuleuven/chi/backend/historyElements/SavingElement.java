@@ -9,8 +9,6 @@ import be.kuleuven.chi.backend.categories.Goal;
  */
 public class SavingElement extends HistoryElement {
 
-    static final long serialVersionUID=0L;
-
     public SavingElement(double amount, Goal goal){
         super(-amount, goal, AppContent.getString(R.string.saving_long, goal.getName()));
     }
