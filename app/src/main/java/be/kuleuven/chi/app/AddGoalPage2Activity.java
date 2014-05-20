@@ -91,13 +91,6 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_goal, menu);
-        return true;
-    }
-
     public void chooseGoalPicture(View picture) {
         // unselect a selected picture
         if(picture.isActivated()) {
