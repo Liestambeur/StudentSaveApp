@@ -18,7 +18,7 @@
         android:scaleType="fitCenter"
         android:background="@null"
         android:tint="@color/LightSteelBlue"
-        android:onClick="editGoal" />
+        android:onClick="toHistory" />
 
     <TextView
         android:layout_width="match_parent"
