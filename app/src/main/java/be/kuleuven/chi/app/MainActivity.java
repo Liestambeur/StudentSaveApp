@@ -13,6 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
+
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -68,6 +73,7 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
             if(this.appContent.getCurrentGoal().isDone()){
                 this.showDialogGoal();
+                sendTracking("Goal done");
             }
         }
         else{
@@ -149,6 +155,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         if(goal.shouldRemind()){
             this.showReminder();
             goal.updateNextRemindDate();
+            sendTracking("Reminded");
         }
 
     }
@@ -194,6 +201,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on add goal");
     }
     public void editGoal(View view){
         //Intent intent = new Intent(this, AddGoalActivity.class);
@@ -201,6 +209,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.EDIT);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on edit goal");
     }
 
     public void income(View view){
@@ -211,6 +220,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.INCOME.name());
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on income");
     }
     public void expense(View view){
         View expense = findViewById(R.id.expense);
@@ -220,6 +230,8 @@ public class MainActivity extends BaseActivity implements Serializable {
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(), InputActivityType.EXPENSE.name());
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on expense");
+
     }
     public void save(View view){
         View save = findViewById(R.id.save);
@@ -229,11 +241,15 @@ public class MainActivity extends BaseActivity implements Serializable {
         intent.putExtra(getResources().getText(R.string.input_activity_type).toString(),InputActivityType.SAVE.name());
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on save");
+
     }
     public void toHistory(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on history");
+
     }
 
     /** ENABLE BUTTONS /**/

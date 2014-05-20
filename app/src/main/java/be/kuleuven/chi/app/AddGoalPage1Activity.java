@@ -33,10 +33,12 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         this.goalActivityType = intent.getIntExtra(getResources().getText(R.string.goal_activity_type).toString(), GoalActivityType.ADD);
 
         if(this.goalActivityType == GoalActivityType.ADD) {
+            setTitle(R.string.title_activity_add_goal);
             goal = new Goal();
             this.enableOK(false);
         }
         else if(this.goalActivityType == GoalActivityType.EDIT) {
+            setTitle(R.string.title_activity_edit_goal);
             findViewById(R.id.delete).setVisibility(View.VISIBLE);
 
             AppContent.getInstance(this).backupCurrentGoal();
@@ -285,10 +287,14 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
 
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on ok in first goal view");
+
     }
 
     public void deleteButton(View deleteButton) {
         showDeleteConfirmation();
+        sendTracking("clicked on delete in first goal view");
+
     }
 
     public void cancelButton(View cancelButton) {
@@ -302,6 +308,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+        sendTracking("clicked on cancel in first goal view");
     }
 
     private void setOkButton(){
