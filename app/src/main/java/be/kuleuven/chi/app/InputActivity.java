@@ -213,12 +213,15 @@ public class InputActivity extends BaseActivity {
 
 
     public void cancelButton(View view) {
+        sendTracking("clicked on cancel in input");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
     }
 
     public void okButton(View view) {
+        sendTracking("clicked on ok in input");
+
         // TODO Minder vuil maken
         inputName = (inputName==null || inputName=="")?"":inputName;
         selectedItem = selectedItem==null?"Other":selectedItem;
@@ -242,7 +245,7 @@ public class InputActivity extends BaseActivity {
                 if(goal != null){
                     he = new SavingElement(inputAmount, instance.getCurrentGoal());
                     instance.addToHistory(he);
-                    instance.getCurrentGoal().addAmountSaved(inputAmount);
+                    instance.addAmountSavedCurrentGoal(inputAmount);
                 } else {
                     userClickedYet = false;
                     alertUser(getResources().getString(R.string.goal_not_initialized), true);

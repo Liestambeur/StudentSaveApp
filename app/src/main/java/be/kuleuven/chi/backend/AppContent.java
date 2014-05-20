@@ -224,4 +224,20 @@ public class AppContent implements Serializable {
             return "";
         }
     }
+
+    public void setPictureCurrentGoal(String path){
+        currentGoal.setPicture(path);
+        this.saveState();
+    }
+
+    public void addAmountSavedCurrentGoal(double amount){
+        currentGoal.addAmountSaved(amount);
+        this.saveState();
+    }
+
+    public void resetPicture() {
+        currentGoal.resetPicture();
+        this.saveState();
+    }
+
 }

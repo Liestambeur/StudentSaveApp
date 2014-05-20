@@ -102,14 +102,13 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
         // unselect a selected picture
         if(picture.isActivated()) {
             setAllPicturesUnactivated();
-            this.goal.resetPicture();
+            AppContent.getInstance(this).resetPicture();
         }
         // select an unselected picture
         else{
             setAllPicturesUnactivated();
             picture.setActivated(true);
-            this.goal.setPicture(paths.get(picture.getId()));
-
+            AppContent.getInstance(this).setPictureCurrentGoal(paths.get(picture.getId()));
         }
     }
 
@@ -122,10 +121,13 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on ok in second goalpage");
+
     }
 
     public void deleteButton(View deleteButton) {
         showDeleteConfirmation();
+        sendTracking("clicked on delete in second goalpage");
     }
 
     public void cancelButton(View cancelButton) {
@@ -142,6 +144,8 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         //finish(); verwijderd voor back button gedrag
+        sendTracking("clicked on cancel in second goalpage");
+
     }
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -156,6 +160,8 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(i,RESULT_LOAD_IMAGE);
+        sendTracking("external goal clicked");
+
     }
 
 
@@ -177,7 +183,7 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            this.goal.setPicture(picturePath);
+            AppContent.getInstance(this).setPictureCurrentGoal(picturePath);
         }
     }
 
