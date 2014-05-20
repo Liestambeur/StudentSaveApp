@@ -25,5 +25,7 @@ public enum Currency implements Serializable {
         }
     };
 
+    static final long serialVersionUID = 0L;
+
     public abstract String getSymbol();
 }

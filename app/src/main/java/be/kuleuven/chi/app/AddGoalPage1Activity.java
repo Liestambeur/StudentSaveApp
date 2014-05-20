@@ -223,13 +223,6 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_goal, menu);
-        return true;
-    }
-
     public void dateSwitch(View dateSwitch) {
         if(((CheckBox) dateSwitch).isChecked()) {
             findViewById(R.id.due_date_field).setVisibility(View.VISIBLE);

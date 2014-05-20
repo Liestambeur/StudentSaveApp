@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public interface Category extends Serializable {
 
+    static final long serialVersionUID = 0L;
+
     public String getName();
 
 }
