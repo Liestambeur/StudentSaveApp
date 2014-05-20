@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
 
 /**
  * Created by Lies on 6/04/14.
@@ -57,5 +60,18 @@ class BaseActivity extends Activity{
         } else{
             view.setAlpha(new Float(0.6));
         }
+    }
+
+    public void sendTracking(String name){
+        Tracker v3EasyTracker = EasyTracker.getInstance(this);
+
+        // Set the screen name on the tracker so that it is used in all hits sent from this screen.
+        v3EasyTracker.set(Fields.SCREEN_NAME, name);
+
+        // Send a screenview.
+        v3EasyTracker.send(MapBuilder
+                .createAppView()
+                .build()
+        );
     }
 }
