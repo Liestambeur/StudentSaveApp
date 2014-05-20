@@ -289,7 +289,7 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
         });
 
-        if(MainActivity.this!= null && !MainActivity.this.isFinishing()){
+        if(!MainActivity.this.isFinishing()){
             dialog.show();
         }
     }
@@ -298,6 +298,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
+        dialog.setCanceledOnTouchOutside(false);
 
         // set the dialog text and image
         dialog.setTitle(getResources().getString(R.string.goal_done_title));
@@ -325,33 +326,9 @@ public class MainActivity extends BaseActivity implements Serializable {
             }
         });
 
-        if(MainActivity.this!= null && !MainActivity.this.isFinishing()){
+        if(!MainActivity.this.isFinishing()){
             dialog.show();
         }
     }
-/*
-    // constant for identifying the dialog
-    private static final int DIALOG_ALERT = 10;
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DIALOG_ALERT:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("This ends the activity");
-                builder.setCancelable(false);
-                builder.setPositiveButton("I agree", new OkOnClickListener());
-                AlertDialog dialog = builder.create();
-                dialog.show();
-        }
-        return super.onCreateDialog(id);
-    }
-
-    private final class OkOnClickListener implements
-            DialogInterface.OnClickListener {
-        public void onClick(DialogInterface dialog, int which) {
-            MainActivity.this.finish();
-        }
-    }*/
 
 }
