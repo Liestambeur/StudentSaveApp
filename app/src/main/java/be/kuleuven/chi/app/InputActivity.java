@@ -214,7 +214,7 @@ public class InputActivity extends BaseActivity {
     public void cancelButton(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     public void okButton(View view) {
@@ -241,7 +241,7 @@ public class InputActivity extends BaseActivity {
                 if(goal != null){
                     he = new SavingElement(inputAmount, instance.getCurrentGoal());
                     instance.addToHistory(he);
-                    instance.getCurrentGoal().addAmountSaved(inputAmount);
+                    instance.addAmountSavedCurrentGoal(inputAmount);
                 } else {
                     userClickedYet = false;
                     alertUser(getResources().getString(R.string.goal_not_initialized), true);
@@ -269,7 +269,9 @@ public class InputActivity extends BaseActivity {
     void backToMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        finish(); //Deze moet er wel staan, als de gebruiker klaar is met ingeven
+                  //wil je niet terug komen naar deze activity om het "aan te passen" of
+                  //wat dan ook want dat is niet ondersteund
     }
 
     void dismissAd(boolean backToMain){

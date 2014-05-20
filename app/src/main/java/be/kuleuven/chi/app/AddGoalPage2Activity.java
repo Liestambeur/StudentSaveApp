@@ -102,14 +102,13 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
         // unselect a selected picture
         if(picture.isActivated()) {
             setAllPicturesUnactivated();
-            this.goal.resetPicture();
+            AppContent.getInstance(this).resetPicture();
         }
         // select an unselected picture
         else{
             setAllPicturesUnactivated();
             picture.setActivated(true);
-            this.goal.setPicture(paths.get(picture.getId()));
-
+            AppContent.getInstance(this).setPictureCurrentGoal(paths.get(picture.getId()));
         }
     }
 
@@ -121,7 +120,7 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     public void deleteButton(View deleteButton) {
@@ -141,7 +140,7 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -177,7 +176,7 @@ public class AddGoalPage2Activity extends AddGoalPageActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            this.goal.setPicture(picturePath);
+            AppContent.getInstance(this).setPictureCurrentGoal(picturePath);
         }
     }
 

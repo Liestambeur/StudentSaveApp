@@ -284,7 +284,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
         intent.putExtra(getResources().getText(R.string.goal_activity_type).toString(), this.goalActivityType);
 
         startActivity(intent);
-        finish();
+        //finish(); verwijderd voor back button gedrag
     }
 
     public void deleteButton(View deleteButton) {
