@@ -21,6 +21,7 @@ public class Goal implements Category {
     private Calendar dueDate;
     private RemindType remindType;
     private Calendar nextRemindDate;
+    private Calendar dueDatePassedReminder; // when your deadline is over, you are reminded of that every day
     //TODO when adding a variable, don't forget to change to copy methods!
 
     public Goal(){
@@ -31,6 +32,7 @@ public class Goal implements Category {
         this.dueDate = null;
         this.remindType = RemindType.NEVER;
         this.nextRemindDate = new GregorianCalendar();
+        this.dueDatePassedReminder = null;
     }
 
     /** NAME **/
@@ -110,13 +112,13 @@ public class Goal implements Category {
         return this.dueDate;
     }
     public void setDueDate(Calendar newDate) {
-        if(newDate != null && newDate.after(new GregorianCalendar())) {
-            // the given date is a valid dueDate
-            this.dueDate = newDate;
-        }
+        // the given date is a valid dueDate
+        this.dueDate = newDate;
+        this.dueDatePassedReminder = null;
     }
     public void resetDueDate() {
         this.dueDate = null;
+        this.dueDatePassedReminder = null;
     }
     public String getDueDateString() {
         // note: the calendar counts months starting from 0 (e.g. January = 0, February = 1)
@@ -141,6 +143,32 @@ public class Goal implements Category {
             return (int) ((endInstant - startDate.getTimeInMillis()) / MILLIS_IN_DAY) + 1;
             // + 1 because you count in today
         }
+    }
+
+
+    public Calendar getDueDatePassedReminder() {
+        return dueDatePassedReminder;
+    }
+    public void setDueDatePassedReminder(Calendar dueDatePassedReminder) {
+        this.dueDatePassedReminder = dueDatePassedReminder;
+    }
+    public boolean shouldRemindOfDeadline() {
+        if(hasDueDate() && daysLeft() <= 0) {
+            Calendar now = new GregorianCalendar();
+            if(dueDatePassedReminder == null || now.after(this.dueDatePassedReminder)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            this.dueDatePassedReminder = null;
+            return false;
+        }
+    }
+    public void updateDeadlinePassedReminder() {
+        this.dueDatePassedReminder = (RemindType.DAILY).nextRemindDate(new GregorianCalendar());
     }
 
     /** REMINDING **/
@@ -192,6 +220,7 @@ public class Goal implements Category {
         copy.setDueDate(this.dueDate);
         copy.setRemindType(this.remindType);
         copy.setNextRemindDate(this.nextRemindDate);
+        copy.setDueDatePassedReminder(this.dueDatePassedReminder);
 
         return copy;
     }
@@ -203,6 +232,7 @@ public class Goal implements Category {
         this.dueDate = goal.getDueDate();
         this.remindType = goal.getRemindType();
         this.nextRemindDate = goal.getNextRemindDate();
+        this.dueDatePassedReminder = goal.getDueDatePassedReminder();
     }
 
 

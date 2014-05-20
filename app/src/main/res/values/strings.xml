@@ -39,6 +39,9 @@
     <string name="goal_reminder_title">Reminder</string>
     <string name="goal_reminder_text">Don\'t forget to save for %1$s</string>
 
+    <string name="goal_deadline_passed_title">Your deadline has passed</string>
+    <string name="goal_deadline_passed_text">You can set a new deadline for \"%1$s\" or collect needed money soon.</string>
+
     <plurals name="days_left">
         <item quantity="one">day left</item>
         <item quantity="other">days left</item>
@@ -60,7 +63,7 @@
     <string name="goal_date_on_text">Yes</string>
     <string name="goal_date_off_text">No</string>
     <string name="due_date_et">DD/MM/YYYY</string>
-    <string name="date_format_text">The format should be DD/MM/YYYY</string>
+    <string name="date_format_text">The format should\nbe DD/MM/YYYY</string>
     <string name="date_no_past_text">This is a date in the past!</string>
     <string name="date_not_valid_text">This is not a valid date</string>
 

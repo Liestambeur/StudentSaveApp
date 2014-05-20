@@ -134,7 +134,6 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                     findViewById(R.id.date_format_text).setVisibility(View.GONE);
                     findViewById(R.id.date_not_valid_text).setVisibility(View.GONE);
 
-                    goal.resetDueDate();
                     String date = charSequence.toString();
 
                     if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
@@ -147,21 +146,25 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                             // days of month start from 1, as the user will expect so no change needed here.
                             Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
                                     Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
+                            String dateString = Integer.valueOf(dateParts[0]) + "/" + Integer.valueOf(dateParts[1]) + "/" + Integer.valueOf(dateParts[2]);
 
-                            if(calendar.after(new GregorianCalendar())) {
+                            if(goal.hasDueDate() && dateString.equals(goal.getDueDateString())) {
+                                // this date is the same as the one currently set; keep it that way
+                            }
+                            else if(calendar.after(new GregorianCalendar())) {
                                 findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
                                 goal.setDueDate(calendar);
 
                                 // note: if you fill in 80/5/2014, Calendar will recalculate the date to 19/7/2014,
                                 // adding all the days that are to many in the month.
                                 // checking whether the stored date equals the date in the text editor allows to check for this event.
-                                String dateString = Integer.valueOf(dateParts[0]) + "/" + Integer.valueOf(dateParts[1]) + "/" + Integer.valueOf(dateParts[2]);
                                 if(!dateString.equals(goal.getDueDateString())) {
                                     findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
                                     goal.resetDueDate();
                                 }
                             }
                             else {
+                                goal.resetDueDate();
                                 findViewById(R.id.date_no_past_text).setVisibility(View.VISIBLE);
                             }
                         }
@@ -172,6 +175,7 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                         }
                     }
                     else {
+                        goal.resetDueDate();
                         findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
                     }
                     setOkButton();

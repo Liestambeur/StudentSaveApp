@@ -48,13 +48,15 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         if(this.appContent.hasCurrentGoal()){
             fillInGoalView(appContent.getCurrentGoal());
+            if(appContent.getCurrentGoal().isDone()){
+                this.showGoalDone(appContent.getCurrentGoal());
+                sendTracking("Goal done");
+            }
+
             for(Goal goal: AppContent.getInstance(this).getGoalsBusy()) {
                 checkGoalPopUps(goal);
             }
-            if(this.appContent.getCurrentGoal().isDone()){
-                this.showDialogGoal();
-                sendTracking("Goal done");
-            }
+
         }
         else{
             View addGoal = findViewById(R.id.addgoal);
@@ -90,8 +92,8 @@ public class MainActivity extends BaseActivity implements Serializable {
     private Goal fillInGoalView(Goal goal) {
         String currencySymbol = AppContent.getInstance(this).getCurrencySymbol();
 
-        View goalview = findViewById(R.id.goal);
-        goalview.setVisibility(View.VISIBLE);
+        View goalView = findViewById(R.id.goal);
+        goalView.setVisibility(View.VISIBLE);
 
         TextView goalName = (TextView) findViewById(R.id.goalName);
         goalName.setText(goal.getName());
@@ -133,11 +135,16 @@ public class MainActivity extends BaseActivity implements Serializable {
     }
     private void checkGoalPopUps(Goal goal) {
         if(goal.shouldRemind()){
-            this.showReminder();
+            this.showReminder(goal);
             goal.updateNextRemindDate();
             sendTracking("Reminded");
         }
 
+        if(goal.shouldRemindOfDeadline()){
+            this.showDeadlineGoalPassed(goal);
+            goal.updateDeadlinePassedReminder();
+            sendTracking("Deadline goal passed");
+        }
     }
 
     private void fillInHistoryView() {
@@ -257,11 +264,10 @@ public class MainActivity extends BaseActivity implements Serializable {
             //savei.setColorFilter(Color.GRAY);
             save.setAlpha(0.6f);
         }
-
     }
 
     /** POPUPS **/
-    public void showReminder(){
+    public void showReminder(Goal goal){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
@@ -269,9 +275,9 @@ public class MainActivity extends BaseActivity implements Serializable {
         // set the dialog text and image
         dialog.setTitle(getResources().getString(R.string.goal_reminder_title));
         TextView text = (TextView) dialog.findViewById(R.id.popup_text);
-        text.setText(getResources().getString(R.string.goal_reminder_text,appContent.getCurrentGoal().getName()));
+        text.setText(getResources().getString(R.string.goal_reminder_text,goal.getName()));
         ImageView image = (ImageView) dialog.findViewById(R.id.popup_image);
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(appContent.getCurrentGoal().getPictureUrl());
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
         Bitmap bm = BitmapFactory.decodeStream(inputStream);
         image.setImageBitmap(bm);
 
@@ -290,7 +296,7 @@ public class MainActivity extends BaseActivity implements Serializable {
         }
     }
 
-    public void showDialogGoal(){
+    public void showGoalDone(Goal goal){
         // custom dialog
         final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
         dialog.setContentView(R.layout.popup);
@@ -299,9 +305,9 @@ public class MainActivity extends BaseActivity implements Serializable {
         // set the dialog text and image
         dialog.setTitle(getResources().getString(R.string.goal_done_title));
         TextView text = (TextView) dialog.findViewById(R.id.popup_text);
-        text.setText(getResources().getString(R.string.goal_done_text,appContent.getCurrentGoal().getName()));
+        text.setText(getResources().getString(R.string.goal_done_text,goal.getName()));
         ImageView image = (ImageView) dialog.findViewById(R.id.popup_image);
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(appContent.getCurrentGoal().getPictureUrl());
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
         Bitmap bm = BitmapFactory.decodeStream(inputStream);
         image.setImageBitmap(bm);
 
@@ -319,6 +325,35 @@ public class MainActivity extends BaseActivity implements Serializable {
                 View addGoal = findViewById(R.id.addgoal);
                 addGoal.setVisibility(View.VISIBLE);
                 enableButtonSave(false);
+            }
+        });
+
+        if(!MainActivity.this.isFinishing()){
+            dialog.show();
+        }
+    }
+
+    private void showDeadlineGoalPassed(Goal goal) {
+        // custom dialog
+        final Dialog dialog = new Dialog(this, R.style.myBackgroundStyle);
+        dialog.setContentView(R.layout.popup);
+
+        // set the dialog text and image
+        dialog.setTitle(getResources().getString(R.string.goal_deadline_passed_title));
+        TextView text = (TextView) dialog.findViewById(R.id.popup_text);
+        text.setText(getResources().getString(R.string.goal_deadline_passed_text,goal.getName()));
+        ImageView image = (ImageView) dialog.findViewById(R.id.popup_image);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(goal.getPictureUrl());
+        Bitmap bm = BitmapFactory.decodeStream(inputStream);
+        image.setImageBitmap(bm);
+
+        // buttons
+        dialog.findViewById(R.id.popup_ok).setVisibility(View.VISIBLE);
+
+        dialog.findViewById(R.id.popup_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
 
