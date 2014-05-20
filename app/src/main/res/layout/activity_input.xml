@@ -2,7 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/White">
 
     <TextView
         android:layout_width="match_parent"
@@ -91,7 +92,7 @@
             android:id="@+id/ok_cancel"
             android:visibility="visible"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             layout="@layout/ok_cancel"/>
 
