@@ -131,7 +131,7 @@ public class AppContent implements Serializable {
         }
         return result;
     }
-    private List<Goal> getGoalsBusy(){
+    public List<Goal> getGoalsBusy(){
         List<Goal> result = new ArrayList<Goal>();
         for (Goal g : goals) {
             if (!g.isDone()) {
@@ -163,6 +163,7 @@ public class AppContent implements Serializable {
         this.currentGoal = currentGoal;
     }
     public void currentGoalDone(){
+
         setCurrentGoal(null);
         saveState();
     }

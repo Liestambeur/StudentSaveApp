@@ -22,6 +22,8 @@
 
         <ImageButton
             android:id="@+id/popup_image_ok"
+            android:duplicateParentState="true"
+            android:clickable="false"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:background="@null"
@@ -34,10 +36,11 @@
 
         <TextView
             android:id="@+id/popup_text_ok"
+            android:duplicateParentState="true"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/ok_button"
-            android:clickable="true"
+            android:clickable="false"
             android:background="@null"
             android:singleLine="true"
             android:textSize="30sp"
@@ -58,6 +61,8 @@
 
         <ImageButton
             android:id="@+id/popup_image_delete"
+            android:duplicateParentState="true"
+            android:clickable="false"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:background="@null"
@@ -71,6 +76,8 @@
 
         <TextView
             android:id="@+id/popup_text_delete"
+            android:duplicateParentState="true"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/delete_button"
@@ -94,6 +101,8 @@
 
         <ImageButton
             android:id="@+id/popup_image_cancel"
+            android:duplicateParentState="true"
+            android:clickable="false"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:background="@null"
@@ -106,6 +115,8 @@
 
         <TextView
             android:id="@+id/popup_text_cancel"
+            android:duplicateParentState="true"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/cancel_button"

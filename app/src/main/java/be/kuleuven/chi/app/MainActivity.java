@@ -61,10 +61,15 @@ public class MainActivity extends BaseActivity implements Serializable {
 
         this.appContent = AppContent.getInstance(this);
 
+        System.out.println("a@@@@@@@@@@@@@@@@@@@@@@@ "+this.appContent);
+
         if(this.appContent.hasCurrentGoal()){
             fillInGoalView(appContent.getCurrentGoal());
-            for(Goal goal: AppContent.getInstance(this).getGoals()) {
+            for(Goal goal: AppContent.getInstance(this).getGoalsBusy()) {
                 checkGoalPopUps(goal);
+            }
+            if(this.appContent.getCurrentGoal().isDone()){
+                this.showDialogGoal();
             }
         }
         else{
@@ -148,9 +153,6 @@ public class MainActivity extends BaseActivity implements Serializable {
             goal.updateNextRemindDate();
         }
 
-        if(goal.isDone()){
-            this.showDialogGoal();
-        }
     }
 
     private void fillInHistoryView() {
