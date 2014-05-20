@@ -131,6 +131,8 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                     findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
                     findViewById(R.id.date_format_text).setVisibility(View.GONE);
                     findViewById(R.id.date_not_valid_text).setVisibility(View.GONE);
+
+                    goal.resetDueDate();
                     String date = charSequence.toString();
 
                     if(date.matches("\\d{1,2}/\\d{1,2}/\\d{4}")) {
@@ -143,22 +145,18 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                             // days of month start from 1, as the user will expect so no change needed here.
                             Calendar calendar = new GregorianCalendar(Integer.valueOf(dateParts[2]),
                                     Integer.valueOf(dateParts[1]) - 1, Integer.valueOf(dateParts[0]));
+
                             if(calendar.after(new GregorianCalendar())) {
                                 findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
-                                Calendar backupDueDate = goal.getDueDate();
                                 goal.setDueDate(calendar);
 
                                 // note: if you fill in 80/5/2014, Calendar will recalculate the date to 19/7/2014,
                                 // adding all the days that are to many in the month.
                                 // checking whether the stored date equals the date in the text editor allows to check for this event.
-                                if(!charSequence.toString().equals(goal.getDueDateString())) {
+                                String dateString = Integer.valueOf(dateParts[0]) + "/" + Integer.valueOf(dateParts[1]) + "/" + Integer.valueOf(dateParts[2]);
+                                if(!dateString.equals(goal.getDueDateString())) {
                                     findViewById(R.id.date_not_valid_text).setVisibility(View.VISIBLE);
-                                    if(goalActivityType == GoalActivityType.EDIT) {
-                                        goal.setDueDate(backupDueDate);
-                                    }
-                                    else {
-                                        goal.resetDueDate();
-                                    }
+                                    goal.resetDueDate();
                                 }
                             }
                             else {
@@ -170,7 +168,6 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                             goal.resetDueDate();
                             // do nothing
                         }
-                        setOkButton();
                     }
                     else {
                         findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
@@ -183,33 +180,6 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
                     // not used
                 }
             };
-    }
-
-// Een ideetje
-//    public class DatePickerFragment extends DialogFragment
-//            implements DatePickerDialog.OnDateSetListener {
-//
-//        @Override
-//        public Dialog onCreateDialog(Bundle savedInstanceState) {
-//            // Use the current date as the default date in the picker
-//            final Calendar c = Calendar.getInstance();
-//            int year = c.get(Calendar.YEAR);
-//            int month = c.get(Calendar.MONTH);
-//            int day = c.get(Calendar.DAY_OF_MONTH);
-//
-//            // Create a new instance of DatePickerDialog and return it
-//            return new DatePickerDialog(getActivity(), this, year, month, day);
-//        }
-//
-//        public void onDateSet(DatePicker view, int year, int month, int day) {
-//            populateDateField(year,month,day);
-//            goal.setDueDate(new GregorianCalendar(year,month,day));
-//        }
-//    }
-
-    private void populateDateField(int year, int month, int day) {
-        TextView dueDateField = (TextView) findViewById(R.id.due_date_field);
-        dueDateField.setText(day+"/"+month+"/"+year);
     }
 
     /** EDIT GOAL: FILL IN RIGHT VALUES **/
@@ -257,25 +227,34 @@ public class AddGoalPage1Activity extends AddGoalPageActivity {
     public void dateSwitch(View dateSwitch) {
         if(((CheckBox) dateSwitch).isChecked()) {
             findViewById(R.id.due_date_field).setVisibility(View.VISIBLE);
-            findViewById(R.id.date_format_text).setVisibility(View.VISIBLE);
+            if(goal.hasDueDate()) {
+                ((EditText) findViewById(R.id.due_date_field)).setText(goal.getDueDateString());
+            }
+            else {
+                ((EditText) findViewById(R.id.due_date_field)).setText("");
+                ((EditText) findViewById(R.id.due_date_field)).setHint(R.string.due_date_et);
+                findViewById(R.id.date_format_text).setVisibility(View.GONE);
+            }
+
         }
         else {
             findViewById(R.id.due_date_field).setVisibility(View.GONE);
             findViewById(R.id.date_format_text).setVisibility(View.GONE);
+            findViewById(R.id.date_no_past_text).setVisibility(View.GONE);
+            findViewById(R.id.date_not_valid_text).setVisibility(View.GONE);
             goal.resetDueDate();
         }
         setOkButton();
     }
 
     public void remindSwitch(View remindSwitch) {
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_remind);
-        radioGroup.clearCheck();
-
         if(((CheckBox) remindSwitch).isChecked()) {
-            radioGroup.setVisibility(View.VISIBLE);
+            findViewById(R.id.radio_remind).setVisibility(View.VISIBLE);
+            ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
         }
         else {
             findViewById(R.id.radio_remind).setVisibility(View.GONE);
+            ((RadioGroup) findViewById(R.id.radio_remind)).clearCheck();
             goal.resetRemind();
         }
 
