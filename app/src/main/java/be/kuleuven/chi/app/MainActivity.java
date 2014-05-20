@@ -32,12 +32,12 @@ public class MainActivity extends BaseActivity implements Serializable {
 
     private AppContent appContent;
 
-//
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//        appContent = AppContent.getInstance(this);
-//    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        appContent = AppContent.getInstance(this);
+        onCreateBody();
+    }
 //
 //    @Override
 //    protected void onPause(){
@@ -60,6 +60,10 @@ public class MainActivity extends BaseActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreateBody();
+    }
+
+    protected void onCreateBody(){
         setContentView(R.layout.activity_main);
 
         this.appContent = AppContent.getInstance(this);
